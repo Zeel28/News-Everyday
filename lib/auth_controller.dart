@@ -25,8 +25,7 @@ class AuthController extends GetxController {
       print("Login Page");
       Get.offAll(() => const WelcomeScreen());
     } else {
-      // Get.offAll(() => HomePage(email: user.email));
-      Get.offAll(() => HomePage(email: user.email));
+      Get.offAll(() => HomePage());
     }
   }
 

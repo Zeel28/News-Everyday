@@ -42,6 +42,9 @@ dependencies:
   firebase_core:
   fluttertoast: ^8.1.2
   flutter_svg: ^1.1.0
+  google_nav_bar: ^5.0.6
+  http: ^0.13.5
+  webview_flutter: ^3.0.4
 
 dev_dependencies:
   flutter_test:
@@ -74,6 +77,7 @@ flutter:
   assets:
     - assets/images/
     - assets/icons/
+    - assets/icons/profile_page/
     - assets/lottiefile/
   # assets:
   #   - images/a_dot_burr.jpeg
