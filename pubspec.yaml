@@ -40,6 +40,7 @@ dependencies:
   lottie: ^2.2.0
   firebase_auth: ^4.1.4
   firebase_core:
+  fluttertoast: ^8.1.2
   flutter_svg: ^1.1.0
 
 dev_dependencies:

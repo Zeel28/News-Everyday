@@ -5,18 +5,18 @@ import '../../../theme/colors.dart';
 import '../../Login/login_screen.dart';
 
 class SignUpForm extends StatelessWidget {
-  const SignUpForm({
-    Key? key,
-  }) : super(key: key);
+  // const SignUpForm({
+  //   Key? key,
+  // }) : super(key: key);
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-
     var emailController = TextEditingController();
     var passwordController = TextEditingController();
 
-
     return Form(
+      key: _formKey,
       child: Column(
         children: [
           TextFormField(
@@ -25,10 +25,16 @@ class SignUpForm extends StatelessWidget {
             textInputAction: TextInputAction.next,
             cursorColor: primaryColor,
             onSaved: (email) {},
-            decoration: InputDecoration(
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Please enter email ';
+              }
+              return null;
+            },
+            decoration: const InputDecoration(
               hintText: "Your email",
               prefixIcon: Padding(
-                padding: const EdgeInsets.all(defaultPadding),
+                padding: EdgeInsets.all(defaultPadding),
                 child: Icon(Icons.person),
               ),
             ),
@@ -40,10 +46,16 @@ class SignUpForm extends StatelessWidget {
               textInputAction: TextInputAction.done,
               obscureText: true,
               cursorColor: primaryColor,
-              decoration: InputDecoration(
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please enter Password ';
+                }
+                return null;
+              },
+              decoration: const InputDecoration(
                 hintText: "Your password",
                 prefixIcon: Padding(
-                  padding: const EdgeInsets.all(defaultPadding),
+                  padding: EdgeInsets.all(defaultPadding),
                   child: Icon(Icons.lock),
                 ),
               ),
@@ -51,7 +63,12 @@ class SignUpForm extends StatelessWidget {
           ),
           const SizedBox(height: defaultPadding / 2),
           ElevatedButton(
-            onPressed: () {AuthController.instance.register(emailController.text.trim(), passwordController.text.trim());},
+            onPressed: () {
+              AuthController.instance.register(
+                  emailController.text.trim(), passwordController.text.trim());
+              if (_formKey.currentState!.validate()) {
+              }
+            },
             child: Text(
               "Sign up".toUpperCase(),
               style: TextStyle(fontSize: 16),

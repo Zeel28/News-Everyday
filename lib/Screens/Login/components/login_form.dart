@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
-
+import 'package:news_everyday/Screens/Home/Home_page.dart';
 import '../../../auth_controller.dart';
 import '../../../components/already_have_an_account_acheck.dart';
 import '../../../theme/colors.dart';
+import '../../../widgets/roundbutton.dart';
 import '../../Signup/signup_screen.dart';
 
 class LoginForm extends StatelessWidget {
-  const LoginForm({
-    Key? key,
-  }) : super(key: key);
+  final _formKey = GlobalKey<FormState>();
+
+  bool loading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -16,6 +17,7 @@ class LoginForm extends StatelessWidget {
     var passwordController = TextEditingController();
 
     return Form(
+      key: _formKey,
       child: Column(
         children: [
           TextFormField(
@@ -24,10 +26,16 @@ class LoginForm extends StatelessWidget {
             textInputAction: TextInputAction.next,
             cursorColor: primaryColor,
             onSaved: (email) {},
-            decoration: InputDecoration(
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Please enter email ';
+              }
+              return null;
+            },
+            decoration: const InputDecoration(
               hintText: "Your email",
               prefixIcon: Padding(
-                padding: const EdgeInsets.all(defaultPadding),
+                padding: EdgeInsets.all(defaultPadding),
                 child: Icon(Icons.person),
               ),
             ),
@@ -39,10 +47,16 @@ class LoginForm extends StatelessWidget {
               textInputAction: TextInputAction.done,
               obscureText: true,
               cursorColor: primaryColor,
-              decoration: InputDecoration(
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please enter Password ';
+                }
+                return null;
+              },
+              decoration: const InputDecoration(
                 hintText: "Your password",
                 prefixIcon: Padding(
-                  padding: const EdgeInsets.all(defaultPadding),
+                  padding: EdgeInsets.all(defaultPadding),
                   child: Icon(Icons.lock),
                 ),
               ),
@@ -50,12 +64,19 @@ class LoginForm extends StatelessWidget {
           ),
           const SizedBox(height: defaultPadding),
           ElevatedButton(
-            onPressed: () {AuthController.instance.login(emailController.text.trim(), passwordController.text.trim());},
+            onPressed: () {
+              if (_formKey.currentState!.validate()) {
+
+              }
+              AuthController.instance.login(
+                  emailController.text.trim(), passwordController.text.trim(),context);
+            },
             child: Text(
               "Login".toUpperCase(),
-              style: TextStyle(fontSize: 16),
+              style: const TextStyle(fontSize: 16),
             ),
           ),
+
           const SizedBox(height: defaultPadding),
           AlreadyHaveAnAccountCheck(
             press: () {
@@ -63,7 +84,7 @@ class LoginForm extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context) {
-                    return SignUpScreen();
+                    return  SignUpScreen();
                   },
                 ),
               );
