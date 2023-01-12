@@ -15,7 +15,7 @@ class SignUpScreenTopImage extends StatelessWidget {
           margin: EdgeInsets.only(left: 75,top: 30),
           child: const Text(
             "Signup",
-            style: TextStyle(fontWeight: FontWeight.bold,fontSize: 35,color: kPrimaryColor),
+            style: TextStyle(fontWeight: FontWeight.bold,fontSize: 35,color: primaryColor),
           ),
         ),
         SizedBox(height: defaultPadding),

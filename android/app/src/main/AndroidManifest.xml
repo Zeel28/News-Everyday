@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.caribbean.news_everyday">
    <application
-        android:label="news_everyday"
+        android:label="News Everyday"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

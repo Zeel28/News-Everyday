@@ -23,7 +23,7 @@ class WelcomeImage extends StatelessWidget {
           margin: EdgeInsets.only(left: 50,bottom: 25),
           child: const Text(
             "NEWS EVERYDAY",
-            style: TextStyle(fontWeight: FontWeight.bold,fontSize: 33,color: kPrimaryColor),
+            style: TextStyle(fontWeight: FontWeight.bold,fontSize: 33,color: primaryColor),
           ),
         ),
         SizedBox(height: defaultPadding * 4),

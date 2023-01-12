@@ -29,11 +29,11 @@ class Background extends StatelessWidget {
                 width: 120,
               ),
             ),
-            // Positioned(
-            //   bottom: 0,
-            //   right: 0,
-            //   child: Image.asset(bottomImage, width: 120),
-            // ),
+            Positioned(
+              bottom: 0,
+              right: 0,
+              child: Image.asset(bottomImage, width: 120),
+            ),
             SafeArea(child: child),
           ],
         ),

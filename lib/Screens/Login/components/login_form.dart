@@ -22,7 +22,7 @@ class LoginForm extends StatelessWidget {
             controller: emailController,
             keyboardType: TextInputType.emailAddress,
             textInputAction: TextInputAction.next,
-            cursorColor: kPrimaryColor,
+            cursorColor: primaryColor,
             onSaved: (email) {},
             decoration: InputDecoration(
               hintText: "Your email",
@@ -38,7 +38,7 @@ class LoginForm extends StatelessWidget {
               controller: passwordController,
               textInputAction: TextInputAction.done,
               obscureText: true,
-              cursorColor: kPrimaryColor,
+              cursorColor: primaryColor,
               decoration: InputDecoration(
                 hintText: "Your password",
                 prefixIcon: Padding(

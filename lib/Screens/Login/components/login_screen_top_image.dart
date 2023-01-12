@@ -15,7 +15,7 @@ class LoginScreenTopImage extends StatelessWidget {
           margin: EdgeInsets.only(left: 75,top: 30),
           child: const Text(
             "Login",
-            style: TextStyle(fontWeight: FontWeight.bold,fontSize: 35,color: kPrimaryColor),
+            style: TextStyle(fontWeight: FontWeight.bold,fontSize: 35,color: primaryColor),
           ),
         ),
         Row(
