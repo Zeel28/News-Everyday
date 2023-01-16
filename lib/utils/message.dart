@@ -37,7 +37,7 @@ class MessageDialog{
     });
   }
 
-  void alertDialog(context,String mainTitle, String subTitle, String buttonText){
+  alertDialog(context,String mainTitle, String subTitle, String buttonText){
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(

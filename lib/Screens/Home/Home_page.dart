@@ -30,7 +30,7 @@ class _HomePageState extends State<HomePage> {
         child: pages.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+        margin: const EdgeInsets.fromLTRB(18,0,18,10),
         padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),

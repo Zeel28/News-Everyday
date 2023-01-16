@@ -7,14 +7,10 @@ import 'package:news_everyday/Screens/error_page.dart';
 import 'package:news_everyday/auth_controller.dart';
 import 'package:news_everyday/theme/colors.dart';
 
-Future<void> main() async {
+Future<void> main()
+async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp().then((value) => Get.put(AuthController()));
-  WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp,
-    DeviceOrientation.portraitDown,
-  ]);
   runApp(const MyApp());
 }
 

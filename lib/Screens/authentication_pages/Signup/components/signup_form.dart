@@ -5,9 +5,6 @@ import '../../../../theme/colors.dart';
 import '../../Login/login_screen.dart';
 
 class SignUpForm extends StatelessWidget {
-  // const SignUpForm({
-  //   Key? key,
-  // }) : super(key: key);
   final _formKey = GlobalKey<FormState>();
 
   @override

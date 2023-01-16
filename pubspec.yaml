@@ -45,6 +45,9 @@ dependencies:
   google_nav_bar: ^5.0.6
   http: ^0.13.5
   webview_flutter: ^3.0.4
+  slide_to_act: ^2.0.1
+  google_sign_in: ^5.4.3
+  smooth_page_indicator: ^1.0.0+2
 
 dev_dependencies:
   flutter_test:

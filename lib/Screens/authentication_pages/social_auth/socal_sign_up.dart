@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:news_everyday/auth_controller.dart';
 import 'package:news_everyday/utils/message.dart';
 
 import 'or_divider.dart';
@@ -38,7 +39,7 @@ class SocalSignUp extends StatelessWidget {
             SocalIcon(
               iconSrc: "assets/icons/google.svg",
               press: () {
-                MessageDialog().alertDialog(context, "Coming Soon", "This features under production", "Okay");
+                AuthController().signInWithGoogle();
               },
             ),
           ],
