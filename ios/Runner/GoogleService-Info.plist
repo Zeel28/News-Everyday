@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>1092367710878-bethnf5b95g5095t7eqku7mtkeo4eq4u.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.1092367710878-bethnf5b95g5095t7eqku7mtkeo4eq4u</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>1092367710878-03hjg4vuc14cg26qgn3fa4c122mcsro4.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAeEW5iautagvAdr6gocHxRHvSEvK-jX-c</string>
+	<key>GCM_SENDER_ID</key>
+	<string>1092367710878</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.caribbean.newsEveryday</string>
+	<key>PROJECT_ID</key>
+	<string>thenews-everyday</string>
+	<key>STORAGE_BUCKET</key>
+	<string>thenews-everyday.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:1092367710878:ios:b270dd1e7584be4785598f</string>
+</dict>
+</plist>
