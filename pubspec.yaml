@@ -39,7 +39,7 @@ dependencies:
   get:
   lottie: ^2.2.0
   firebase_auth: ^4.1.4
-  firebase_core:
+  firebase_core: ^2.4.1
   fluttertoast: ^8.1.2
   flutter_svg: ^1.1.0
   google_nav_bar: ^5.0.6

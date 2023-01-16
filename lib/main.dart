@@ -1,4 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -7,10 +8,11 @@ import 'package:news_everyday/Screens/error_page.dart';
 import 'package:news_everyday/auth_controller.dart';
 import 'package:news_everyday/theme/colors.dart';
 
-Future<void> main()
-async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp().then((value) => Get.put(AuthController()));
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  ).then((value) => Get.put(AuthController()));
   runApp(const MyApp());
 }
 
