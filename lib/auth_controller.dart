@@ -20,7 +20,7 @@ class AuthController extends GetxController {
     ever(_user, _initialScreen);
   }
 
- final bool loading= false;
+  final bool loading = false;
 
   _initialScreen(User? user) {
     if (user == null) {
@@ -37,16 +37,18 @@ class AuthController extends GetxController {
           email: email, password: password);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
-        MessageDialog().snackbarGetCut("Account creation failed", "Please enter Strong Password");
+        MessageDialog().snackbarGetCut(
+            "Account creation failed", "Please enter Strong Password");
       } else if (e.code == 'email-already-in-use') {
-        MessageDialog().snackbarGetCut("Account creation failed", "The account already exists for that email.");
+        MessageDialog().snackbarGetCut("Account creation failed",
+            "The account already exists for that email.");
       }
-    } catch(e){
+    } catch (e) {
       MessageDialog().snackbarGetCut("Account creation failed", "");
     }
   }
 
-  Future<void> login(String email, password,context) async {
+  Future<void> login(String email, password, context) async {
     try {
       await auth.signInWithEmailAndPassword(email: email, password: password);
     } on FirebaseAuthException catch (e) {
@@ -56,8 +58,8 @@ class AuthController extends GetxController {
       } else if (e.code == 'wrong-password') {
         MessageDialog().snackbarGetCut("Login Failed", "Wrong password ");
       }
-    } catch(e){
-        MessageDialog().snackbarGetCut("Login Failed", "");
+    } catch (e) {
+      MessageDialog().snackbarGetCut("Login Failed", "");
     }
   }
 
@@ -66,7 +68,8 @@ class AuthController extends GetxController {
     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 
     // Obtain the auth details from the request
-    final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+    final GoogleSignInAuthentication? googleAuth =
+        await googleUser?.authentication;
 
     // Create a new credential
     final credential = GoogleAuthProvider.credential(
