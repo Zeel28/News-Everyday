@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "1092367710878-03hjg4vuc14cg26qgn3fa4c122mcsro4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.caribbean.news_everyday",
+            "certificate_hash": "35b70beaa3776570ff1765d6f0412349b5fdc8e1"
+          }
+        },
+        {
           "client_id": "1092367710878-g7ilq6vjugh09f7g58hljjls07ui1vgd.apps.googleusercontent.com",
           "client_type": 3
         }
