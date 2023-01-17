@@ -7,14 +7,14 @@ import 'intro_page_1.dart';
 import 'intro_page_2.dart';
 import 'intro_page_3.dart';
 
-class OnBoardingScreen extends StatefulWidget {
-  const OnBoardingScreen({Key? key}) : super(key: key);
+class OnBoardingScreen2 extends StatefulWidget {
+  const OnBoardingScreen2({Key? key}) : super(key: key);
 
   @override
-  State<OnBoardingScreen> createState() => _OnBoardingScreenState();
+  State<OnBoardingScreen2> createState() => _OnBoardingScreen2State();
 }
 
-class _OnBoardingScreenState extends State<OnBoardingScreen> {
+class _OnBoardingScreen2State extends State<OnBoardingScreen2> {
   // controller to keep track of which page we're on
   final PageController _controller = PageController();
 
@@ -36,7 +36,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
         imgPath: "assets/lottiefile/Intro_media_engagement.json",
         detection:
             "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. "),
-    ];
+  ];
   int _curr = 0;
 
   @override

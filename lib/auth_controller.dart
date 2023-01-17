@@ -1,10 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:news_everyday/Screens/%20introduction_screens/onboarding_screen.dart';
 import 'package:news_everyday/Screens/Home/Home_page.dart';
 import 'package:news_everyday/Screens/Welcome/welcome_screen.dart';
 import 'package:news_everyday/utils/message.dart';
+
+import 'Screens/introduction_screens/onboarding_screen.dart';
 
 class AuthController extends GetxController {
   static AuthController instance = Get.find();
@@ -25,7 +26,7 @@ class AuthController extends GetxController {
   _initialScreen(User? user) {
     if (user == null) {
       print("Login Page");
-      Get.offAll(() => const OnBoardingScreen());
+      Get.offAll(() => const OnBoardingScreen2());
     } else {
       Get.offAll(() => HomePage());
     }
