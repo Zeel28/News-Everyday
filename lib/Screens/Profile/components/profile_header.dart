@@ -1,11 +1,17 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:news_everyday/Screens/Home/Home_page.dart';
+import 'package:percent_indicator/circular_percent_indicator.dart';
 
 import '../../../theme/colors.dart';
 
 class ProfileHeaderSection extends StatelessWidget {
-  const ProfileHeaderSection({
+   ProfileHeaderSection({
     super.key,
   });
+
+
+  final user = FirebaseAuth.instance.currentUser;
 
   @override
   Widget build(BuildContext context) {
@@ -19,11 +25,11 @@ class ProfileHeaderSection extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              CircleAvatar(minRadius: 37,),
+              CircleAvatar(minRadius: 37,backgroundImage: NetworkImage(user!.photoURL.toString()),),
               SizedBox(width: 20,),
               Column(
                 children: [
-                  Text("Zeel Bhanderi"),
+                  Text(user!.displayName.toString()),
                   Text("@zeel_bhander")
                 ],
               )
@@ -42,7 +48,7 @@ class ProfileHeaderSection extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.mail_rounded),
             title: Text(
-              "zeelbhanderi28@gmail.com",
+              user!.email.toString(),
               style: TextStyle(
                   color: primaryColor,
                   fontWeight: FontWeight.w400,

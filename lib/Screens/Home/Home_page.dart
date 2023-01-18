@@ -7,6 +7,12 @@ import '../Search/Search_Page.dart';
 import '../../api/Views/home.dart';
 
 class HomePage extends StatefulWidget {
+
+
+  HomePage({
+    Key? key,
+  }) : super(key: key);
+
   @override
   State<HomePage> createState() => _HomePageState();
 }
@@ -20,17 +26,15 @@ class _HomePageState extends State<HomePage> {
     ProfileScreen(),
   ];
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-
       body: Center(
         child: pages.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: Container(
-        margin: const EdgeInsets.fromLTRB(18,0,18,10),
+        margin: const EdgeInsets.fromLTRB(18, 0, 18, 10),
         padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),

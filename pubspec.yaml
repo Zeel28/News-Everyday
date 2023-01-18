@@ -44,6 +44,7 @@ dependencies:
   flutter_svg: ^1.1.0
   google_nav_bar: ^5.0.6
   http: ^0.13.5
+  percent_indicator: ^4.0.0
   webview_flutter: ^3.0.4
   slide_to_act: ^2.0.1
   google_sign_in: ^5.4.3

@@ -1,4 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import '../../../../auth_controller.dart';
 import '../../../../components/already_have_an_account_acheck.dart';
 import '../../../../theme/colors.dart';
@@ -62,11 +65,11 @@ class LoginForm extends StatelessWidget {
           ),
           const SizedBox(height: defaultPadding),
           ElevatedButton(
-            onPressed: () {
+            onPressed: () async {
               if (_formKey.currentState!.validate()) {
 
               }
-              AuthController.instance.login(
+              AuthController.instance.signIn(
                   emailController.text.trim(), passwordController.text.trim(),context);
             },
             child: Text(
@@ -78,14 +81,7 @@ class LoginForm extends StatelessWidget {
           const SizedBox(height: defaultPadding),
           AlreadyHaveAnAccountCheck(
             press: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) {
-                    return  SignUpScreen();
-                  },
-                ),
-              );
+              Get.offAll(() => SignUpScreen());
             },
           ),
         ],

@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:news_everyday/Screens/Home/Home_page.dart';
-import 'package:news_everyday/Screens/Welcome/welcome_screen.dart';
 import 'package:news_everyday/utils/message.dart';
 
 import 'Screens/introduction_screens/onboarding_screen.dart';
@@ -21,18 +20,21 @@ class AuthController extends GetxController {
     ever(_user, _initialScreen);
   }
 
-  final bool loading = false;
 
-  _initialScreen(User? user) {
+  _initialScreen(User? user) async {
     if (user == null) {
       print("Login Page");
       Get.offAll(() => const OnBoardingScreen2());
     } else {
+      final name = user.displayName;
+      final email = user.email;
+      final photoUrl = user.photoURL;
+      print("{$name and $email and }");
       Get.offAll(() => HomePage());
     }
   }
 
-  Future<void> register(String email, password) async {
+  Future<void> signUp(String email, password) async {
     try {
       await auth.createUserWithEmailAndPassword(
           email: email, password: password);
@@ -49,7 +51,8 @@ class AuthController extends GetxController {
     }
   }
 
-  Future<void> login(String email, password, context) async {
+
+  Future<void> signIn(String email, password, context) async {
     try {
       await auth.signInWithEmailAndPassword(email: email, password: password);
     } on FirebaseAuthException catch (e) {
@@ -64,8 +67,28 @@ class AuthController extends GetxController {
     }
   }
 
-
+  //TODO: Sign out
   Future<void> loginOut() async {
     await auth.signOut();
   }
+}
+class SocialAuth{
+  //TODO: Google SignIn
+  Future<UserCredential> signInWithGoogle() async {
+    // Trigger the authentication flow
+    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+    // Obtain the auth details from the request
+    final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+
+    // Create a new credential
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth?.accessToken,
+      idToken: googleAuth?.idToken,
+    );
+
+    // Once signed in, return the UserCredential
+    return await FirebaseAuth.instance.signInWithCredential(credential);
+  }
+
 }

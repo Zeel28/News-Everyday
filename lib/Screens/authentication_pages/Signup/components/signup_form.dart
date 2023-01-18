@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import '../../../../auth_controller.dart';
 import '../../../../components/already_have_an_account_acheck.dart';
 import '../../../../theme/colors.dart';
@@ -61,10 +63,9 @@ class SignUpForm extends StatelessWidget {
           const SizedBox(height: defaultPadding / 2),
           ElevatedButton(
             onPressed: () {
-              AuthController.instance.register(
+              if (_formKey.currentState!.validate()) {}
+              AuthController.instance.signUp(
                   emailController.text.trim(), passwordController.text.trim());
-              if (_formKey.currentState!.validate()) {
-              }
             },
             child: Text(
               "Sign up".toUpperCase(),
@@ -75,14 +76,7 @@ class SignUpForm extends StatelessWidget {
           AlreadyHaveAnAccountCheck(
             login: false,
             press: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) {
-                    return LoginScreen();
-                  },
-                ),
-              );
+              Get.offAll(() => LoginScreen());
             },
           ),
         ],

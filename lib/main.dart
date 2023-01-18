@@ -21,6 +21,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    WidgetsFlutterBinding.ensureInitialized();
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Auth',
@@ -36,6 +43,7 @@ class MyApp extends StatelessWidget {
             minimumSize: const Size(double.infinity, 56),
           ),
         ),
+
         inputDecorationTheme: const InputDecorationTheme(
           filled: true,
           fillColor: primaryLightColor,
