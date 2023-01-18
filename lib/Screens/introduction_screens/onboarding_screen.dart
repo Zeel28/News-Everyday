@@ -2,10 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:news_everyday/Screens/Welcome/welcome_screen.dart';
 import 'package:news_everyday/theme/colors.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-
-import 'intro_page_1.dart';
-import 'intro_page_2.dart';
-import 'intro_page_3.dart';
+import 'components/intro_page.dart';
 
 class OnBoardingScreen2 extends StatefulWidget {
   const OnBoardingScreen2({Key? key}) : super(key: key);
@@ -22,20 +19,38 @@ class _OnBoardingScreen2State extends State<OnBoardingScreen2> {
   bool onLastPage = false;
   final List<Widget> _list = <Widget>[
     IntroPage(
-        mainText: "1",
-        imgPath: "assets/lottiefile/Intro_media_engagement.json",
-        detection:
-            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. "),
+        bgColor: Colors.blue[50],
+        mainTextColor: primaryColor,
+        detectionTextColor: primaryColor,
+        mainText: "Media Engagement",
+        assetImage: const AssetImage("assets/images/media_engagement.gif"),
+        detectionText:
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and "),
     IntroPage(
-        mainText: "2",
-        imgPath: "assets/lottiefile/Intro_media_engagement.json",
-        detection:
-            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. "),
+        bgColor: Colors.green[300],
+        mainText: "Article",
+        mainTextColor: Colors.white,
+    detectionTextColor: Colors.white,
+        assetImage: const AssetImage("assets/images/articles_scrolling.gif"),
+        detectionText:
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and ",
+    ),
     IntroPage(
-        mainText: "3",
-        imgPath: "assets/lottiefile/Intro_media_engagement.json",
-        detection:
-            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. "),
+        bgColor: Colors.grey[100],
+        mainTextColor: primaryColor,
+        detectionTextColor: primaryColor,
+        mainText: "Breaking news",
+        assetImage: const AssetImage("assets/images/breaking_news.gif"),
+        detectionText:
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and "),
+    IntroPage(
+        bgColor: Colors.purple[50],
+        mainTextColor: primaryColor,
+        detectionTextColor: primaryColor,
+        mainText: "Global News",
+        assetImage: const AssetImage("assets/images/global_news.gif"),
+        detectionText:
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and "),
   ];
   int _curr = 0;
 
@@ -45,15 +60,15 @@ class _OnBoardingScreen2State extends State<OnBoardingScreen2> {
       body: Stack(
         children: [
           PageView(
-            children: _list,
             scrollDirection: Axis.horizontal,
             controller: _controller,
             onPageChanged: (value) {
               setState(() {
                 _curr = value;
-                onLastPage = (value == 2);
+                onLastPage = (value == 3);
               });
             },
+            children: _list,
           ),
           Container(
             alignment: const Alignment(0, 0.85),
@@ -62,7 +77,7 @@ class _OnBoardingScreen2State extends State<OnBoardingScreen2> {
               children: [
                 MaterialButton(
                   onPressed: () {
-                    _controller.jumpToPage(2);
+                    _controller.jumpToPage(3);
                   },
                   shape: const CircleBorder(),
                   padding: const EdgeInsets.all(13),
@@ -71,7 +86,7 @@ class _OnBoardingScreen2State extends State<OnBoardingScreen2> {
                 ),
                 SmoothPageIndicator(
                   controller: _controller,
-                  count: 3,
+                  count: 4,
                   effect: const WormEffect(
                     activeDotColor: primaryColor,
                     dotColor: primaryColor,

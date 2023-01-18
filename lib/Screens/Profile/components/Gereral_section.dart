@@ -38,17 +38,17 @@ class GeneralMenuList extends StatelessWidget {
           decoration: BoxDecoration(
             color: Colors.grey[50],
             borderRadius: BorderRadius.circular(40),
-            boxShadow: const [
+            boxShadow: [
               BoxShadow(
-                  color: Colors.grey,
+                  color: Colors.grey.shade500,
                   offset: Offset(4.0, 4.0),
-                  blurRadius: 5.0,
-                  spreadRadius: 0.5),
+                  blurRadius: 15.0,
+                  spreadRadius: 0.0),
               BoxShadow(
                   color: Colors.white,
                   offset: Offset(-4.0, -4.0),
-                  blurRadius: 5.0,
-                  spreadRadius: 0.5),
+                  blurRadius: 15.0,
+                  spreadRadius: 0.0),
             ],
           ),
           child: ListTile(

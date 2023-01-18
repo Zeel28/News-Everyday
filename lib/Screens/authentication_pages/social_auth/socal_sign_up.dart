@@ -39,7 +39,7 @@ class SocalSignUp extends StatelessWidget {
             SocalIcon(
               iconSrc: "assets/icons/google.svg",
               press: () {
-                AuthController().signInWithGoogle();
+
               },
             ),
           ],
