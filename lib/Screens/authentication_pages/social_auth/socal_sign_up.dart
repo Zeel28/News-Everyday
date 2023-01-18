@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:news_everyday/auth_controller.dart';
 import 'package:news_everyday/utils/message.dart';
 
@@ -39,6 +41,9 @@ class SocalSignUp extends StatelessWidget {
             SocalIcon(
               iconSrc: "assets/icons/google.svg",
               press: () {
+                                                print("Googleww");
+                signInWithGoogle();
+                                                print("jiih");
 
               },
             ),
@@ -46,5 +51,21 @@ class SocalSignUp extends StatelessWidget {
         ),
       ],
     );
+  }
+  Future<UserCredential> signInWithGoogle() async {
+    // Trigger the authentication flow
+    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+    // Obtain the auth details from the request
+    final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+
+    // Create a new credential
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth?.accessToken,
+      idToken: googleAuth?.idToken,
+    );
+
+    // Once signed in, return the UserCredential
+    return await FirebaseAuth.instance.signInWithCredential(credential);
   }
 }

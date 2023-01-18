@@ -14,11 +14,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "1092367710878-03hjg4vuc14cg26qgn3fa4c122mcsro4.apps.googleusercontent.com",
+          "client_id": "1092367710878-460orhvol75bcmvnirvepsmka6sjl2k0.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.caribbean.news_everyday",
-            "certificate_hash": "35b70beaa3776570ff1765d6f0412349b5fdc8e1"
+            "certificate_hash": "aa38bb46234e54fcf0d5b380a16410b5a1b1c68e"
           }
         },
         {
@@ -37,6 +37,13 @@
             {
               "client_id": "1092367710878-g7ilq6vjugh09f7g58hljjls07ui1vgd.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "1092367710878-bethnf5b95g5095t7eqku7mtkeo4eq4u.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.caribbean.newsEveryday"
+              }
             }
           ]
         }
