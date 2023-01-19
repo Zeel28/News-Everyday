@@ -53,6 +53,8 @@ dependencies:
   smooth_page_indicator: ^1.0.0+2
   #OTP text field
   flutter_otp_text_field: ^1.1.1
+  #url_launcher:
+  open_mail_app: ^0.4.5
 
 dev_dependencies:
   flutter_test:
