@@ -4,9 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:news_everyday/Screens/authentication_pages/phonenumber/verifty_otp.dart';
+import 'package:news_everyday/auth_controller.dart';
 import 'package:news_everyday/utils/message.dart';
 
 import '../../../theme/colors.dart';
+import '../../Home/Home_page.dart';
 
 class LoginWithPhoneNumber extends StatefulWidget {
   const LoginWithPhoneNumber({Key? key}) : super(key: key);
@@ -16,7 +18,6 @@ class LoginWithPhoneNumber extends StatefulWidget {
 }
 
 class _LoginWithPhoneNumberState extends State<LoginWithPhoneNumber> {
-
   //form validation
   final _formKey = GlobalKey<FormState>();
 
@@ -115,7 +116,7 @@ class _LoginWithPhoneNumberState extends State<LoginWithPhoneNumber> {
                     children: [
                       TextFormField(
                         controller: phoneNumberController,
-                        keyboardType: TextInputType.number,
+                        keyboardType: TextInputType.text,
                         maxLines: 1,
                         cursorColor: primaryColor,
                         validator: (value) {
@@ -130,10 +131,12 @@ class _LoginWithPhoneNumberState extends State<LoginWithPhoneNumber> {
                         ),
                         decoration: InputDecoration(
                           enabledBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(color: Colors.black12),
+                              borderSide:
+                              const BorderSide(color: Colors.black12),
                               borderRadius: BorderRadius.circular(10)),
                           focusedBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(color: Colors.black12),
+                              borderSide:
+                              const BorderSide(color: Colors.black12),
                               borderRadius: BorderRadius.circular(10)),
                           prefixIcon: countryCodePicker(context),
                         ),
@@ -147,58 +150,27 @@ class _LoginWithPhoneNumberState extends State<LoginWithPhoneNumber> {
                           onPressed: () {
                             if (countryCode != null) {
                               finalPhonenumber =
-                                  "${countryCode!.dialCode} ${phoneNumberController.text.trim()}";
+                              "${countryCode!.dialCode} ${phoneNumberController.text.trim()}";
                               if (_formKey.currentState!.validate()) {
-                                setState(() {
-                                  loading = true;
-                                });
-                                _auth.verifyPhoneNumber(
-                                  phoneNumber: finalPhonenumber,
-                                  verificationCompleted: (phoneAuthCredential) {
-                                    setState(() {
-                                      loading = false;
-                                    });
-                                  },
-                                  verificationFailed: (error) {
-                                    MessageDialog()
-                                        .snackbarGetCut(error.toString(), "");
-                                    setState(() {
-                                      loading = false;
-                                    });
-                                  },
-                                  codeSent: (String verificationId,
-                                      int? forceResendingToken) {
-                                    Get.offAll(() => OtpVerifictionScreen(
-                                        verificationId: verificationId));
-                                    setState(() {
-                                      loading = false;
-                                    });
-                                  },
-                                  codeAutoRetrievalTimeout: (verificationId) {
-                                    MessageDialog().snackbarGetCut(
-                                        verificationId.toString(), "");
-                                    setState(() {
-                                      loading = false;
-                                    });
-                                  },
-                                );
-                              }
-                              else {
+                                AuthController.instance.phoneAuthentication(
+                                    finalPhonenumber.trim());
+                              } else {
                                 MessageDialog().snackbarGetCut(
                                     "Please Enter phone-number", "");
                               }
                             } else {
                               MessageDialog().snackbarGetCut(
-                                  "Please select a country code", "Enter phone umber");
+                                  "Please select a country code",
+                                  "& Enter phone umber");
                             }
                           },
                           style: ButtonStyle(
                             foregroundColor:
-                                MaterialStateProperty.all<Color>(Colors.white),
+                            MaterialStateProperty.all<Color>(Colors.white),
                             backgroundColor:
-                                MaterialStateProperty.all<Color>(primaryColor),
-                            shape:
-                                MaterialStateProperty.all<RoundedRectangleBorder>(
+                            MaterialStateProperty.all<Color>(primaryColor),
+                            shape: MaterialStateProperty.all<
+                                RoundedRectangleBorder>(
                               RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(24.0),
                               ),
@@ -206,16 +178,16 @@ class _LoginWithPhoneNumberState extends State<LoginWithPhoneNumber> {
                           ),
                           child: Padding(
                             padding: EdgeInsets.all(14.0),
-                            child: loading
+                            child: AuthController.isLoading
                                 ? CircularProgressIndicator(
-                                    strokeWidth: 3,
-                                    color: Colors.white,
-                                  )
+                              strokeWidth: 3,
+                              color: Colors.white,
+                            )
                                 : Text(
-                                    "Send",
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 20),
-                                  ),
+                              "Send",
+                              style: TextStyle(
+                                  color: Colors.white, fontSize: 20),
+                            ),
                           ),
                         ),
                       ),
@@ -226,9 +198,10 @@ class _LoginWithPhoneNumberState extends State<LoginWithPhoneNumber> {
             ],
           ),
         ),
-      ),
+      )
     );
   }
+
   Container countryCodePicker(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
@@ -265,5 +238,14 @@ class _LoginWithPhoneNumberState extends State<LoginWithPhoneNumber> {
         ],
       ),
     );
+  }
+}
+
+class OTPController extends GetxController {
+  static OTPController get instance => Get.find();
+
+  void verifyOTP(String otp) async {
+    var isVerified = await AuthController.instance.verifyOTP(otp);
+    isVerified ? Get.offAll(HomePage()) : Get.back();
   }
 }

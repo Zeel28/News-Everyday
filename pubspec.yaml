@@ -49,7 +49,10 @@ dependencies:
   webview_flutter: ^3.0.4
   slide_to_act: ^2.0.1
   google_sign_in: ^5.4.3
+  #onboarding screen
   smooth_page_indicator: ^1.0.0+2
+  #OTP text field
+  flutter_otp_text_field: ^1.1.1
 
 dev_dependencies:
   flutter_test:

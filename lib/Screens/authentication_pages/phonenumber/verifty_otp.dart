@@ -1,32 +1,29 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:lottie/lottie.dart';
+import 'package:news_everyday/Screens/authentication_pages/phonenumber/numeric_pad.dart';
 
 import '../../../theme/colors.dart';
 import '../../Home/Home_page.dart';
 
-class OtpVerifictionScreen extends StatefulWidget {
-  final String verificationId;
-  const OtpVerifictionScreen({Key? key, required this.verificationId}) : super(key: key);
+class OTPScreen extends StatefulWidget {
+  const OTPScreen({Key? key}) : super(key: key);
 
   @override
-  State<OtpVerifictionScreen> createState() => _OtpVerifictionScreenState();
+  State<OTPScreen> createState() => _OTPScreenState();
 }
 
-class _OtpVerifictionScreenState extends State<OtpVerifictionScreen> {
-
-  bool loading = false;
-  final _auth = FirebaseAuth.instance;
-  final smsCodeController = TextEditingController();
-
+class _OTPScreenState extends State<OTPScreen> {
   @override
   Widget build(BuildContext context) {
+    var otp;
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: Color(0xfff7f6fb),
+      backgroundColor: const Color(0xfff7f6fb),
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(vertical: 24, horizontal: 32),
+          padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 18),
           child: Column(
             children: [
               Align(
@@ -40,32 +37,32 @@ class _OtpVerifictionScreenState extends State<OtpVerifictionScreen> {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 18,
               ),
               Container(
                 width: 200,
                 height: 200,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: primaryLightColor,
                   shape: BoxShape.circle,
                 ),
                 child: Lottie.asset("assets/lottiefile/otp.json"),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 24,
               ),
-              Text(
+              const Text(
                 'Verification',
                 style: TextStyle(
                     fontSize: 22,
                     fontWeight: FontWeight.bold,
                     color: primaryColor),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
-              Text(
+              const Text(
                 "Please enter the OTP sent on your registered Phone number",
                 style: TextStyle(
                   fontSize: 14,
@@ -74,65 +71,51 @@ class _OtpVerifictionScreenState extends State<OtpVerifictionScreen> {
                 ),
                 textAlign: TextAlign.center,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 28,
               ),
               Container(
-                padding: EdgeInsets.all(18),
+                padding: EdgeInsets.all(12),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Column(
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        _textFieldOTP(first: true, last: false),
-                        _textFieldOTP(first: false, last: false),
-                        _textFieldOTP(first: false, last: false),
-                        _textFieldOTP(first: false, last: true),
-                      ],
+                    OtpTextField(
+                      numberOfFields: 6,
+                      borderColor: primaryColor,
+                      cursorColor: primaryColor,
+                      fieldWidth: 42,
+                      textStyle: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                      showFieldAsBox: true,
+                      // borderWidth: 4.0,
+                      filled: true,
+                      borderRadius: BorderRadius.circular(10),
+                      fillColor: primaryLightColor,
+                      onSubmit: (String verificationCode) {
+                        otp = verificationCode;
+                        print("otp");
+                        OTPController.instance.verifyOTP(otp);
+                      },
                     ),
-                    SizedBox(
-                      height: 22,
-                    ),
-                    TextFormField(
-                      controller: smsCodeController,
-                      decoration:
-                      const InputDecoration(hintText: "6 digit code"),
-                    ),
-                    SizedBox(
+                    const SizedBox(
                       height: 22,
                     ),
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
-                        onPressed: () async {
-                          setState(() {
-                            loading = true;
-                          });
-                          final credential = PhoneAuthProvider.credential(
-                              verificationId: widget.verificationId,
-                              smsCode: smsCodeController.text.toString());
-                          try {
-                            await _auth.signInWithCredential(credential);
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => HomePage(),
-                                ));
-                          } catch (e) {
-                            loading = false;
-                          }
+                        onPressed: () {
+                          print("dfggg");
+                          OTPController.instance.verifyOTP(otp);
                         },
                         style: ButtonStyle(
                           foregroundColor:
-                          MaterialStateProperty.all<Color>(Colors.white),
+                              MaterialStateProperty.all<Color>(Colors.white),
                           backgroundColor:
-                          MaterialStateProperty.all<Color>(primaryColor),
+                              MaterialStateProperty.all<Color>(primaryColor),
                           shape:
-                          MaterialStateProperty.all<RoundedRectangleBorder>(
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
                             RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(24.0),
                             ),
@@ -140,15 +123,9 @@ class _OtpVerifictionScreenState extends State<OtpVerifictionScreen> {
                         ),
                         child: Padding(
                           padding: EdgeInsets.all(14.0),
-                          child: loading
-                              ? CircularProgressIndicator(
-                            strokeWidth: 3,
-                            color: Colors.white,
-                          )
-                              : Text(
+                          child: Text(
                             "Verify",
-                            style: TextStyle(
-                                color: Colors.white, fontSize: 20),
+                            style: TextStyle(color: Colors.white, fontSize: 20),
                           ),
                         ),
                       ),
@@ -156,10 +133,10 @@ class _OtpVerifictionScreenState extends State<OtpVerifictionScreen> {
                   ],
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 18,
               ),
-              Text(
+              const Text(
                 "Didn't you receive any code?",
                 style: TextStyle(
                   fontSize: 14,
@@ -168,10 +145,10 @@ class _OtpVerifictionScreenState extends State<OtpVerifictionScreen> {
                 ),
                 textAlign: TextAlign.center,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 18,
               ),
-              Text(
+              const Text(
                 "Resend New Code",
                 style: TextStyle(
                   fontSize: 18,
@@ -181,41 +158,6 @@ class _OtpVerifictionScreenState extends State<OtpVerifictionScreen> {
                 textAlign: TextAlign.center,
               ),
             ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _textFieldOTP({required bool first, last}) {
-    return Container(
-      height: 50,
-      child: AspectRatio(
-        aspectRatio: 1.0,
-        child: TextField(
-          autofocus: true,
-          onChanged: (value) {
-            if (value.length == 1 && last == false) {
-              FocusScope.of(context).nextFocus();
-            }
-            if (value.length == 0 && first == false) {
-              FocusScope.of(context).previousFocus();
-            }
-          },
-          showCursor: false,
-          readOnly: false,
-          textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-          keyboardType: TextInputType.number,
-          maxLength: 1,
-          decoration: InputDecoration(
-            counter: Offstage(),
-            enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(width: 2, color: Colors.black12),
-                borderRadius: BorderRadius.circular(12)),
-            focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(width: 2, color: primaryColor),
-                borderRadius: BorderRadius.circular(12)),
           ),
         ),
       ),
