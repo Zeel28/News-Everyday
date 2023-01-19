@@ -24,7 +24,7 @@ class MessageDialog{
         backgroundColor: Colors.redAccent,
         snackPosition: SnackPosition.BOTTOM,
         titleText: Text(
-            title, style: const TextStyle(color: Colors.white)),
+            title, style: const TextStyle(color: Colors.white,fontSize: 18,fontWeight: FontWeight.w500)),
         messageText: Text(
           message, style: const TextStyle(color: Colors.white),)
 
