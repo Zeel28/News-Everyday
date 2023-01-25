@@ -3,14 +3,14 @@ import '../controller/fetchNews.dart';
 import '../model/news_art.dart';
 import 'widget/NewsContainer.dart';
 
-class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
+class NewsFeed extends StatefulWidget {
+  const NewsFeed({Key? key}) : super(key: key);
 
   @override
-  State<Home> createState() => _HomeState();
+  State<NewsFeed> createState() => _NewsFeedState();
 }
 
-class _HomeState extends State<Home> {
+class _NewsFeedState extends State<NewsFeed> {
   bool isLoading = true;
   late NewsArt newsArt;
 

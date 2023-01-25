@@ -4,14 +4,14 @@ import 'package:news_everyday/theme/colors.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'components/intro_page.dart';
 
-class OnBoardingScreen2 extends StatefulWidget {
-  const OnBoardingScreen2({Key? key}) : super(key: key);
+class OnBoardingScreen extends StatefulWidget {
+  const OnBoardingScreen({Key? key}) : super(key: key);
 
   @override
-  State<OnBoardingScreen2> createState() => _OnBoardingScreen2State();
+  State<OnBoardingScreen> createState() => _OnBoardingScreenState();
 }
 
-class _OnBoardingScreen2State extends State<OnBoardingScreen2> {
+class _OnBoardingScreenState extends State<OnBoardingScreen> {
   // controller to keep track of which page we're on
   final PageController _controller = PageController();
 

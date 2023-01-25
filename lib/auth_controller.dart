@@ -2,13 +2,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:news_everyday/Screens/Home/Home_page.dart';
-import 'package:news_everyday/Screens/Welcome/welcome_screen.dart';
-import 'package:news_everyday/Screens/authentication_pages/Signup/email_verification.dart';
+import 'package:news_everyday/Screens/introduction_screens/onboarding_screen.dart';
 import 'package:news_everyday/utils/message.dart';
-
-import 'Screens/authentication_pages/phonenumber/numeric_pad.dart';
 import 'Screens/authentication_pages/phonenumber/verifty_otp.dart';
-import 'Screens/introduction_screens/onboarding_screen.dart';
 
 class AuthController extends GetxController {
   static var isLoading = false;
@@ -31,18 +27,15 @@ class AuthController extends GetxController {
   _initialScreen(User? user) async {
     if (user == null) {
       print("Login Page");
-      Get.offAll(() => const WelcomeScreen());
+      Get.offAll(() => const OnBoardingScreen());
     } else {
       print(user);
       final name = user.displayName;
       final email = user.email;
       final photoUrl = user.photoURL;
       print("{$name and $email and }");
-      if (user.emailVerified == false) {
-        Get.offAll(() => EmailVerificationScreen());
-      } else {
-        Get.offAll(() => HomePage());
-      }
+
+        Get.offAll(() => Dashboard());
     }
   }
 

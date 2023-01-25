@@ -3,25 +3,26 @@ import 'package:flutter/material.dart';
 import '../../theme/colors.dart';
 import '../Favorite/Favorite_page.dart';
 import '../Profile/Profile_page.dart';
-import '../Search/Search_Page.dart';
 import '../../api/Views/home.dart';
+import '../discover_screen.dart';
+import '../home_screen.dart';
 
-class HomePage extends StatefulWidget {
+class Dashboard extends StatefulWidget {
 
-
-  HomePage({
+  const Dashboard({
     Key? key,
   }) : super(key: key);
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<Dashboard> createState() => _DashboardState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _DashboardState extends State<Dashboard> {
   int _selectedIndex = 0;
   static List<Widget> pages = <Widget>[
-    SerchScreen(),
-    Home(),
+    HomeScreen(),
+    DiscoverScreen(),
+    NewsFeed(),
     FavoriteScreen(),
     ProfileScreen(),
   ];
@@ -35,7 +36,7 @@ class _HomePageState extends State<HomePage> {
       ),
       bottomNavigationBar: Container(
         margin: const EdgeInsets.fromLTRB(18, 0, 18, 10),
-        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
           color: primaryColor,
@@ -55,6 +56,10 @@ class _HomePageState extends State<HomePage> {
             GButton(
               icon: Icons.search,
               text: "Search",
+            ),
+            GButton(
+              icon: Icons.search,
+              text: "Feed",
             ),
             GButton(
               icon: Icons.favorite_outline_sharp,

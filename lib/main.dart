@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
 
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Auth',
+      title: 'News Everyday',
       theme: ThemeData(
         primaryColor: primaryColor,
         scaffoldBackgroundColor: Colors.white,
