@@ -1,11 +1,8 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:lottie/lottie.dart';
 import 'package:news_everyday/Screens/authentication_pages/phonenumber/numeric_pad.dart';
-
 import '../../../theme/colors.dart';
-import '../../Home/Home_page.dart';
 
 class OTPScreen extends StatefulWidget {
   const OTPScreen({Key? key}) : super(key: key);

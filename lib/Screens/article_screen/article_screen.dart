@@ -1,18 +1,14 @@
-
 import 'package:flutter/material.dart';
-
-import '../api/model/article_model.dart';
-import '../widgets/custom_tag.dart';
-import '../widgets/image_container.dart';
+import '../../api/model/article_model.dart';
+import '../../widgets/custom_tag.dart';
+import '../../widgets/image_container.dart';
 
 class ArticleScreen extends StatelessWidget {
-  const ArticleScreen({Key? key}) : super(key: key);
-
-  static const routeName = '/article';
-
+  ArticleScreen({Key? key,required this.article,}) : super(key: key);
+  
+  final Article article;
   @override
   Widget build(BuildContext context) {
-    final article = ModalRoute.of(context)!.settings.arguments as Article;
     return ImageContainer(
         width: double.infinity,
         imageUrl: article.imageUrl,

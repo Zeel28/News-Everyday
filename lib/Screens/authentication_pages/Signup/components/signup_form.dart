@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import '../../../../auth_controller.dart';
+import '../../../../firebase/auth_controller.dart';
 import '../../../../components/already_have_an_account_acheck.dart';
 import '../../../../theme/colors.dart';
 import '../../Login/login_screen.dart';

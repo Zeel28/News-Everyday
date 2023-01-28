@@ -10,12 +10,9 @@ class FetchNews{
 
   static List sourcesId = [
     "abc-news",
-
     "bbc-news",
     "bbc-sport",
-
     "business-insider",
-
     "engadget",
     "entertainment-weekly",
     "espn",
@@ -64,11 +61,11 @@ class FetchNews{
     List articles = body_data["articles"];
     // print(articles);
     // print(body_data);
-print("**************************************************");
+// print("**************************************************");
     final _Newrandom = new Random();
     var myArticle = articles[_random.nextInt(articles.length)];
-    print(myArticle);
-    print("****************************************************************");
+    // print(myArticle);
+    // print("****************************************************************");
 
     return NewsArt.fromAPItoApp(myArticle);
 

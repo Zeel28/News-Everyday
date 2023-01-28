@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:news_everyday/auth_controller.dart';
+import 'package:news_everyday/firebase/auth_controller.dart';
 import 'package:news_everyday/theme/colors.dart';
 import 'components/Gereral_section.dart';
 import 'components/feedback_section.dart';

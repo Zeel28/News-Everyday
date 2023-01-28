@@ -1,12 +1,11 @@
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:flutter/material.dart';
-import '../../theme/colors.dart';
-import '../Favorite/Favorite_page.dart';
-import '../Profile/Profile_page.dart';
-import '../../api/Views/home.dart';
-import '../discover_screen.dart';
-import '../home_screen.dart';
-
+import '../theme/colors.dart';
+import 'Discover/discover_screen.dart';
+import 'Favorite/Favorite_page.dart';
+import 'Profile/Profile_page.dart';
+import '../api/Views/newsfeed.dart';
+import 'home_screen/home_screen.dart';
 class Dashboard extends StatefulWidget {
 
   const Dashboard({
@@ -35,7 +34,7 @@ class _DashboardState extends State<Dashboard> {
         child: pages.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: Container(
-        margin: const EdgeInsets.fromLTRB(18, 0, 18, 10),
+        margin: const EdgeInsets.fromLTRB(15, 0, 15, 8),
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
@@ -45,7 +44,7 @@ class _DashboardState extends State<Dashboard> {
           backgroundColor: primaryColor,
           color: primaryLightColor,
           activeColor: primaryColor,
-          gap: 8,
+          gap: 2,
           padding: const EdgeInsets.all(10),
           tabBackgroundColor: primaryLightColor,
           tabs: const [
@@ -55,10 +54,10 @@ class _DashboardState extends State<Dashboard> {
             ),
             GButton(
               icon: Icons.search,
-              text: "Search",
+              text: "Discover",
             ),
             GButton(
-              icon: Icons.search,
+              icon: Icons.splitscreen_sharp,
               text: "Feed",
             ),
             GButton(

@@ -1,7 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:news_everyday/Screens/Home/Home_page.dart';
-import 'package:percent_indicator/circular_percent_indicator.dart';
 
 import '../../../theme/colors.dart';
 

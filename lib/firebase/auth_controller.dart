@@ -1,10 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:news_everyday/Screens/Home/Home_page.dart';
 import 'package:news_everyday/Screens/introduction_screens/onboarding_screen.dart';
 import 'package:news_everyday/utils/message.dart';
-import 'Screens/authentication_pages/phonenumber/verifty_otp.dart';
+import '../Screens/dashboard.dart';
+import '../Screens/authentication_pages/phonenumber/verifty_otp.dart';
 
 class AuthController extends GetxController {
   static var isLoading = false;
@@ -30,13 +31,29 @@ class AuthController extends GetxController {
       Get.offAll(() => const OnBoardingScreen());
     } else {
       print(user);
-      final name = user.displayName;
-      final email = user.email;
-      final photoUrl = user.photoURL;
-      print("{$name and $email and }");
-
-        Get.offAll(() => Dashboard());
+    UserInfo? zx;
+      addUser(user,zx);
+      Get.offAll(() => Dashboard());
     }
+  }
+
+  Future<void> addUser(User user, UserInfo? zx) {
+    CollectionReference zeel = FirebaseFirestore.instance.collection('users_information');
+    // String id = DateTime.now().millisecondsSinceEpoch.toString();
+    return zeel
+        .doc(user.uid)
+        .set({
+          'id': user.uid,
+          'full_name': user.displayName,
+          'email': user.email,
+          'emailVerified': user.emailVerified,
+          'phoneNumber': user.phoneNumber,
+          'photoURL': user.photoURL,
+          'providerId': zx?.providerId.toString(),
+          'uid': user.uid
+        })
+        .then((value) {print("User Added/////////////////////////");})
+        .onError((error, stackTrace) {print("Failed to add user: $error");});
   }
 
   //TODO: Email and Password Signup

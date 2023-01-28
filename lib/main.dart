@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:news_everyday/Screens/Welcome/welcome_screen.dart';
 import 'package:news_everyday/Screens/error_page.dart';
-import 'package:news_everyday/auth_controller.dart';
+import 'package:news_everyday/firebase/auth_controller.dart';
 import 'package:news_everyday/theme/colors.dart';
 
 Future<void> main() async {
@@ -57,6 +57,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
+      // initialRoute: '/',
       onUnknownRoute: (RouteSettings settings) {
         return MaterialPageRoute<void>(
             settings: settings,

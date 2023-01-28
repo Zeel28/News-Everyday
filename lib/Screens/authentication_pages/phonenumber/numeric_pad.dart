@@ -3,12 +3,10 @@ import 'package:fl_country_code_picker/fl_country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:news_everyday/Screens/authentication_pages/phonenumber/verifty_otp.dart';
-import 'package:news_everyday/auth_controller.dart';
+import 'package:news_everyday/firebase/auth_controller.dart';
 import 'package:news_everyday/utils/message.dart';
-
 import '../../../theme/colors.dart';
-import '../../Home/Home_page.dart';
+import '../../dashboard.dart';
 
 class LoginWithPhoneNumber extends StatefulWidget {
   const LoginWithPhoneNumber({Key? key}) : super(key: key);
@@ -116,7 +114,7 @@ class _LoginWithPhoneNumberState extends State<LoginWithPhoneNumber> {
                     children: [
                       TextFormField(
                         controller: phoneNumberController,
-                        keyboardType: TextInputType.text,
+                        keyboardType: TextInputType.number,
                         maxLines: 1,
                         cursorColor: primaryColor,
                         validator: (value) {

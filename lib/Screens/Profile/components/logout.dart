@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:news_everyday/theme/colors.dart';
 import 'package:slide_to_act/slide_to_act.dart';
 
-import '../../../auth_controller.dart';
+import '../../../firebase/auth_controller.dart';
 
 class LogoutButton extends StatefulWidget {
   const LogoutButton({Key? key}) : super(key: key);

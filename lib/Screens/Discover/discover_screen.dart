@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
-
-import '../api/model/article_model.dart';
-import '../widgets/image_container.dart';
-import 'article_screen.dart';
+import '../../api/model/article_model.dart';
+import '../../widgets/image_container.dart';
+import '../article_screen/article_screen.dart';
 
 class DiscoverScreen extends StatelessWidget {
   const DiscoverScreen({Key? key}) : super(key: key);
 
-  static const routeName = '/discover';
-
   @override
   Widget build(BuildContext context) {
-    List<String> tabs = ['Health', 'Politics', 'Art', 'Food', 'Science'];
+    List<String> tabs = ['Business', 'Entertainment', 'General', 'Science', 'Sports','Technology'];
 
     return DefaultTabController(
       initialIndex: 0,
@@ -71,9 +68,7 @@ class _CategoryNews extends StatelessWidget {
                       itemBuilder: (context, index) {
                         return InkWell(
                           onTap: () {
-                            Navigator.pushNamed(
-                                context, ArticleScreen.routeName,
-                                arguments: articles[index]);
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => ArticleScreen(article: articles[index],),));
                           },
                           child: Row(
                             children: [
