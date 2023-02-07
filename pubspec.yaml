@@ -37,19 +37,26 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   get:
+  #lottie Image
   lottie: ^2.2.0
   firebase_auth: ^4.1.4
   firebase_core: ^2.4.1
   fluttertoast: ^8.1.2
   flutter_svg: ^1.1.0
-  google_nav_bar: ^5.0.6
-  http: ^0.13.5
-  percent_indicator: ^4.0.0
-  fl_country_code_picker: ^0.0.4
-  webview_flutter: ^3.0.4
   slide_to_act: ^2.0.1
-  google_sign_in: ^5.4.3
+  webview_flutter: ^3.0.4
+  percent_indicator: ^4.0.0
+  #Bottom Navbar
+  google_nav_bar: ^5.0.6
+  #API
+  http: ^0.13.5
+  #Cuntry Code Picker
+  fl_country_code_picker: ^0.0.4
   equatable:
+  #Google SignIn(Firebase)
+  google_sign_in: ^5.4.3
+  #check Internet connectivity
+  connectivity_plus: ^3.0.2
   #firestore
   cloud_firestore: ^4.3.1
   #onboarding screen
@@ -58,7 +65,9 @@ dependencies:
   flutter_otp_text_field: ^1.1.1
   #url_launcher:
   open_mail_app: ^0.4.5
-
+  splash_screen_view:
+  url_launcher: ^6.1.6
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -107,17 +116,9 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
-  #   - family: Trajan Pro
-  #     fonts:
-  #       - asset: fonts/TrajanPro.ttf
-  #       - asset: fonts/TrajanPro_Bold.ttf
-  #         weight: 700
-  #
+  fonts:
+    - family: ODR
+      fonts:
+        - asset: assets/fonts/OpelikaDemoRegular.ttf
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

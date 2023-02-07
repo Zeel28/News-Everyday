@@ -90,6 +90,22 @@ class AuthController extends GetxController {
     }
   }
 
+  //TODO: Forgot Password
+  // Future<void> forgotPassword(String email, password, context) async {
+  //   try {
+  //     await _auth.
+  //   } on FirebaseAuthException catch (e) {
+  //     if (e.code == 'user-not-found') {
+  //       MessageDialog().snackbarGetCut(
+  //           "Login Failed", "Check your email or create an account.");
+  //     } else if (e.code == 'wrong-password') {
+  //       MessageDialog().snackbarGetCut("Login Failed", "Wrong password ");
+  //     }
+  //   } catch (e) {
+  //     MessageDialog().snackbarGetCut("Login Failed", "");
+  //   }
+  // }
+
   //TODO: Phone number Authentication
   Future<void> phoneAuthentication(String phoneNo) async {
     await _auth.verifyPhoneNumber(

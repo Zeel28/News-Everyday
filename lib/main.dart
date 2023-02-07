@@ -1,18 +1,16 @@
 import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
+import 'package:news_everyday/Screens/Welcome/welcome_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:news_everyday/Screens/Welcome/welcome_screen.dart';
 import 'package:news_everyday/Screens/error_page.dart';
-import 'package:news_everyday/firebase/auth_controller.dart';
+import 'package:news_everyday/splash_screen.dart';
 import 'package:news_everyday/theme/colors.dart';
+
+import 'firebase/auth_controller.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  ).then((value) => Get.put(AuthController()));
   runApp(const MyApp());
 }
 
@@ -21,7 +19,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     WidgetsFlutterBinding.ensureInitialized();
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
@@ -43,7 +40,6 @@ class MyApp extends StatelessWidget {
             minimumSize: const Size(double.infinity, 56),
           ),
         ),
-
         inputDecorationTheme: const InputDecorationTheme(
           filled: true,
           fillColor: primaryLightColor,
@@ -58,12 +54,15 @@ class MyApp extends StatelessWidget {
         ),
       ),
       // initialRoute: '/',
+
       onUnknownRoute: (RouteSettings settings) {
         return MaterialPageRoute<void>(
             settings: settings,
             builder: (BuildContext context) => const ErrorPage404());
       },
-      home: const WelcomeScreen(),
+      home: SplashScreen(),
     );
   }
 }
+
+

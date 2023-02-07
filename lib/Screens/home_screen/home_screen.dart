@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:news_everyday/Screens/Profile/Profile_page.dart';
 import '../../api/model/article_model.dart';
 import 'components/breakingnews.dart';
 import 'components/channels.dart';
@@ -16,7 +17,9 @@ class HomeScreen extends StatelessWidget {
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileScreen(),));
+          },
           icon: Icon(Icons.menu),
           color: Colors.white,
         ),

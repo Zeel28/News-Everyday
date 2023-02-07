@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:news_everyday/theme/colors.dart';
 import 'package:news_everyday/responsive.dart';
-import '../../../components/background.dart';
+import '../components/background.dart';
 import 'components/sign_up_top_image.dart';
 import 'components/signup_form.dart';
 import '../social_auth/socal_sign_up.dart';

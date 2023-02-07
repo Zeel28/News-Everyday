@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import '../../../../firebase/auth_controller.dart';
-import '../../../../components/already_have_an_account_acheck.dart';
+
 import '../../../../theme/colors.dart';
 import '../../Login/login_screen.dart';
+import '../../components/already_have_an_account_acheck.dart';
 
 class SignUpForm extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
@@ -60,6 +61,7 @@ class SignUpForm extends StatelessWidget {
               ),
             ),
           ),
+          Text("By signing up, you agree to the Terms and Conditions and Privacy Policy"),
           const SizedBox(height: defaultPadding / 2),
           ElevatedButton(
             onPressed: () {
