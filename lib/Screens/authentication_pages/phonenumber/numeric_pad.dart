@@ -153,11 +153,11 @@ class _LoginWithPhoneNumberState extends State<LoginWithPhoneNumber> {
                                 AuthController.instance.phoneAuthentication(
                                     finalPhonenumber.trim());
                               } else {
-                                MessageDialog().snackbarGetCut(
+                                MessageDialog().snackBarGetCut(
                                     "Please Enter phone-number", "");
                               }
                             } else {
-                              MessageDialog().snackbarGetCut(
+                              MessageDialog().snackBarGetCut(
                                   "Please select a country code",
                                   "& Enter phone umber");
                             }

@@ -27,34 +27,34 @@ class AuthController extends GetxController {
 
   _initialScreen(User? user) async {
     if (user == null) {
-      print("Login Page");
+      // print("Login Page");
       Get.offAll(() => const OnBoardingScreen());
     } else {
-      print(user);
-    UserInfo? zx;
-      addUser(user,zx);
+      // print(user);
+    // UserInfo? zx;
+      // addUser(user,zx);
       Get.offAll(() => Dashboard());
     }
   }
 
-  Future<void> addUser(User user, UserInfo? zx) {
-    CollectionReference zeel = FirebaseFirestore.instance.collection('users_information');
-    // String id = DateTime.now().millisecondsSinceEpoch.toString();
-    return zeel
-        .doc(user.uid)
-        .set({
-          'id': user.uid,
-          'full_name': user.displayName,
-          'email': user.email,
-          'emailVerified': user.emailVerified,
-          'phoneNumber': user.phoneNumber,
-          'photoURL': user.photoURL,
-          'providerId': zx?.providerId.toString(),
-          'uid': user.uid
-        })
-        .then((value) {print("User Added/////////////////////////");})
-        .onError((error, stackTrace) {print("Failed to add user: $error");});
-  }
+  // Future<void> addUser(User user, UserInfo? zx) {
+  //   CollectionReference zeel = FirebaseFirestore.instance.collection('users_information');
+  //   // String id = DateTime.now().millisecondsSinceEpoch.toString();
+  //   return zeel
+  //       .doc(user.uid)
+  //       .set({
+  //         'id': user.uid,
+  //         'full_name': user.displayName,
+  //         'email': user.email,
+  //         'emailVerified': user.emailVerified,
+  //         'phoneNumber': user.phoneNumber,
+  //         'photoURL': user.photoURL,
+  //         'providerId': zx?.providerId.toString(),
+  //         'uid': user.uid
+  //       })
+  //       .then((value) {print("User Added/////////////////////////");})
+  //       .onError((error, stackTrace) {print("Failed to add user: $error");});
+  // }
 
   //TODO: Email and Password Signup
   Future<void> signUp(String email, password) async {
@@ -63,14 +63,14 @@ class AuthController extends GetxController {
           email: email, password: password);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
-        MessageDialog().snackbarGetCut(
+        MessageDialog().snackBarGetCut(
             "Account creation failed", "Please enter Strong Password");
       } else if (e.code == 'email-already-in-use') {
-        MessageDialog().snackbarGetCut("Account creation failed",
+        MessageDialog().snackBarGetCut("Account creation failed",
             "The account already exists for that email.");
       }
     } catch (e) {
-      MessageDialog().snackbarGetCut("Account creation failed", "");
+      MessageDialog().snackBarGetCut("Account creation failed", "");
     }
   }
 
@@ -80,13 +80,13 @@ class AuthController extends GetxController {
       await _auth.signInWithEmailAndPassword(email: email, password: password);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
-        MessageDialog().snackbarGetCut(
+        MessageDialog().snackBarGetCut(
             "Login Failed", "Check your email or create an account.");
       } else if (e.code == 'wrong-password') {
-        MessageDialog().snackbarGetCut("Login Failed", "Wrong password ");
+        MessageDialog().snackBarGetCut("Login Failed", "Wrong password ");
       }
     } catch (e) {
-      MessageDialog().snackbarGetCut("Login Failed", "");
+      MessageDialog().snackBarGetCut("Login Failed", "");
     }
   }
 
@@ -116,12 +116,12 @@ class AuthController extends GetxController {
       },
       verificationFailed: (error) {
         if (error.code == 'invalid-phone-number') {
-          MessageDialog().snackbarGetCut(
+          MessageDialog().snackBarGetCut(
               "The provided phone number is not valid.",
               "Please enter valid phone number");
         } else {
           MessageDialog()
-              .snackbarGetCut("Error", "Something went wrong. Try again!");
+              .snackBarGetCut("Error", "Something went wrong. Try again!");
         }
       },
       codeSent: (verificationId, forceResendingToken) {
@@ -130,7 +130,7 @@ class AuthController extends GetxController {
       },
       codeAutoRetrievalTimeout: (verificationId) {
         this.verificationId.value = verificationId;
-        MessageDialog().snackbarGetCut(verificationId.toString(), "");
+        MessageDialog().snackBarGetCut(verificationId.toString(), "");
       },
     );
   }

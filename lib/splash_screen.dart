@@ -2,7 +2,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:news_everyday/Screens/introduction_screens/onboarding_screen.dart';
 import 'package:news_everyday/utils/message.dart';
 import 'package:splash_screen_view/SplashScreenView.dart';
 
@@ -30,7 +29,10 @@ class SplashScreen extends StatelessWidget {
     );
   }
 }
+
 class App extends StatelessWidget {
+  const App({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,11 +40,12 @@ class App extends StatelessWidget {
         future: Firebase.initializeApp().then((value) => Get.put(AuthController())),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
-            MessageDialog().snackbarGetCut("Error", "Something Went Wrong");
+            MessageDialog().snackBarGetCut("Error", "Something Went Wrong");
           }
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator(),);
         },
       ),
     );
   }
 }
+

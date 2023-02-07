@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../responsive.dart';
+import '../../../responsive/responsive.dart';
 import '../components/background.dart';
 import '../social_auth/socal_sign_up.dart';
 import 'components/login_form.dart';

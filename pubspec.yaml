@@ -41,7 +41,6 @@ dependencies:
   lottie: ^2.2.0
   firebase_auth: ^4.1.4
   firebase_core: ^2.4.1
-  fluttertoast: ^8.1.2
   flutter_svg: ^1.1.0
   slide_to_act: ^2.0.1
   webview_flutter: ^3.0.4
@@ -55,8 +54,6 @@ dependencies:
   equatable:
   #Google SignIn(Firebase)
   google_sign_in: ^5.4.3
-  #check Internet connectivity
-  connectivity_plus: ^3.0.2
   #firestore
   cloud_firestore: ^4.3.1
   #onboarding screen
@@ -67,7 +64,7 @@ dependencies:
   open_mail_app: ^0.4.5
   splash_screen_view:
   url_launcher: ^6.1.6
-  
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
