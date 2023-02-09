@@ -39,7 +39,7 @@ dependencies:
   get:
   #lottie Image
   lottie: ^2.2.0
-  firebase_auth: ^4.1.4
+  firebase_auth: ^4.2.5
   firebase_core: ^2.4.1
   flutter_svg: ^1.1.0
   slide_to_act: ^2.0.1
@@ -63,7 +63,6 @@ dependencies:
   #url_launcher:
   open_mail_app: ^0.4.5
   splash_screen_view:
-  url_launcher: ^6.1.6
 
 dev_dependencies:
   flutter_test:

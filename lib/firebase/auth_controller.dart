@@ -1,7 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:news_everyday/Screens/authentication_pages/Forgot_screen/forgot_password.dart';
+import 'package:news_everyday/Screens/authentication_pages/Login/login_screen.dart';
 import 'package:news_everyday/Screens/introduction_screens/onboarding_screen.dart';
 import 'package:news_everyday/utils/message.dart';
 import '../Screens/dashboard.dart';
@@ -31,30 +34,31 @@ class AuthController extends GetxController {
       Get.offAll(() => const OnBoardingScreen());
     } else {
       // print(user);
-    // UserInfo? zx;
-      // addUser(user,zx);
+      UserInfo? zx;
+      addUser(user,zx);
       Get.offAll(() => Dashboard());
     }
   }
 
-  // Future<void> addUser(User user, UserInfo? zx) {
-  //   CollectionReference zeel = FirebaseFirestore.instance.collection('users_information');
-  //   // String id = DateTime.now().millisecondsSinceEpoch.toString();
-  //   return zeel
-  //       .doc(user.uid)
-  //       .set({
-  //         'id': user.uid,
-  //         'full_name': user.displayName,
-  //         'email': user.email,
-  //         'emailVerified': user.emailVerified,
-  //         'phoneNumber': user.phoneNumber,
-  //         'photoURL': user.photoURL,
-  //         'providerId': zx?.providerId.toString(),
-  //         'uid': user.uid
-  //       })
-  //       .then((value) {print("User Added/////////////////////////");})
-  //       .onError((error, stackTrace) {print("Failed to add user: $error");});
-  // }
+  Future<void> addUser(User user, UserInfo? zx) {
+    CollectionReference zeel = FirebaseFirestore.instance.collection('users_information');
+    return zeel
+        .doc(user.uid)
+        .set({
+          'id': user.uid,
+          'full_name': user.displayName,
+          'email': user.email,
+          'emailVerified': user.emailVerified,
+          'phoneNumber': user.phoneNumber,
+          'photoURL': user.photoURL,
+          'providerId': zx?.providerId.toString(),
+          'uid': user.uid
+        })
+        .then((value) {
+      MessageDialog().snackBarGetCut("Your account is ready to use", "", backgroundColor: Colors.greenAccent);
+    })
+        .onError((error, stackTrace) {print("Failed to add user: $error");});
+  }
 
   //TODO: Email and Password Signup
   Future<void> signUp(String email, password) async {
@@ -91,20 +95,35 @@ class AuthController extends GetxController {
   }
 
   //TODO: Forgot Password
-  // Future<void> forgotPassword(String email, password, context) async {
-  //   try {
-  //     await _auth.
-  //   } on FirebaseAuthException catch (e) {
-  //     if (e.code == 'user-not-found') {
-  //       MessageDialog().snackbarGetCut(
-  //           "Login Failed", "Check your email or create an account.");
-  //     } else if (e.code == 'wrong-password') {
-  //       MessageDialog().snackbarGetCut("Login Failed", "Wrong password ");
-  //     }
-  //   } catch (e) {
-  //     MessageDialog().snackbarGetCut("Login Failed", "");
-  //   }
-  // }
+  Future<void> forgotPassword(String email, context) async {
+    try {
+      await _auth
+          .sendPasswordResetEmail(email: email)
+          .then((value) => MessageDialog().alertDialog(
+                context,
+                "Reset password email sent",
+                "You should soon receive an email allowing you to reset your password. Please make sure to check your spam and trash if you can't find the email.",
+                "Login",
+                disMissible: false,
+                () {
+                  Get.off(() => LoginScreen());
+                },
+              ))
+          .catchError((e) {
+        MessageDialog().snackBarGetCut("Error", e);
+      });
+    }on FirebaseAuthException catch (e) {
+      if (e.code == 'invalid-email') {
+        MessageDialog().snackBarGetCut("Invalid Email",
+            "Please Enter Valid Email Address");
+      }else if (e.code == 'id-token-expired') {
+        MessageDialog().snackBarGetCut("Invalid Verification",
+            "Sent link are expired");
+      }
+    } catch (e) {
+      MessageDialog().snackBarGetCut("Error", e.toString());
+    }
+  }
 
   //TODO: Phone number Authentication
   Future<void> phoneAuthentication(String phoneNo) async {

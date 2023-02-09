@@ -38,7 +38,7 @@ class LoginForm extends StatelessWidget {
               hintText: "Your email",
               prefixIcon: Padding(
                 padding: EdgeInsets.all(defaultPadding),
-                child: Icon(Icons.person),
+                child: Icon(Icons.mail),
               ),
             ),
           ),

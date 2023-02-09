@@ -17,9 +17,9 @@ class MessageDialog {
   // }
 
   //TODO: Custom Snack bar
-  SnackbarController snackBarGetCut(String title, String message) {
+  SnackbarController snackBarGetCut(String title, String message, {var backgroundColor = Colors.redAccent}) {
     return Get.snackbar("About User", "User message",
-        backgroundColor: Colors.redAccent,
+        backgroundColor: backgroundColor,
         snackPosition: SnackPosition.BOTTOM,
         titleText: Text(title,
             style: const TextStyle(
@@ -45,7 +45,7 @@ class MessageDialog {
   }
 
   //TODO: Custom Alert Dialog
-  alertDialog(context, String mainTitle, String subTitle, String buttonText,
+  alertDialog(context, String mainTitle, String subTitle, String buttonText,VoidCallback continueCallBack,
       {bool disMissible = true}) {
     showDialog(
       context: context,
@@ -61,7 +61,7 @@ class MessageDialog {
           actions: <Widget>[
             InkWell(
               onTap: () {
-                Navigator.of(ctx).pop();
+                continueCallBack();
               },
               child: Container(
                 alignment: Alignment.center,

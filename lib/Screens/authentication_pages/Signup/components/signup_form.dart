@@ -1,6 +1,9 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:news_everyday/Screens/Profile/PrivacyPolicy.dart';
+import 'package:news_everyday/Screens/Profile/Terms_and_conditions.dart';
 import '../../../../firebase/auth_controller.dart';
 
 import '../../../../theme/colors.dart';
@@ -19,52 +22,54 @@ class SignUpForm extends StatelessWidget {
       key: _formKey,
       child: Column(
         children: [
-          TextFormField(
-            controller: emailController,
-            keyboardType: TextInputType.emailAddress,
-            textInputAction: TextInputAction.next,
-            cursorColor: primaryColor,
-            onSaved: (email) {},
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Please enter email ';
-              }
-              return null;
-            },
-            decoration: const InputDecoration(
-              hintText: "Your email",
-              prefixIcon: Padding(
-                padding: EdgeInsets.all(defaultPadding),
-                child: Icon(Icons.person),
-              ),
-            ),
-          ),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: defaultPadding),
+            padding: const EdgeInsets.symmetric(vertical: defaultPadding / 2),
             child: TextFormField(
-              controller: passwordController,
-              textInputAction: TextInputAction.done,
-              obscureText: true,
+              controller: emailController,
+              keyboardType: TextInputType.emailAddress,
+              textInputAction: TextInputAction.next,
               cursorColor: primaryColor,
+              onSaved: (email) {},
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return 'Please enter Password ';
+                  return 'Please enter email ';
                 }
                 return null;
               },
               decoration: const InputDecoration(
-                hintText: "Your password",
+                hintText: "Your email",
                 prefixIcon: Padding(
                   padding: EdgeInsets.all(defaultPadding),
-                  child: Icon(Icons.lock),
+                  child: Icon(Icons.mail),
                 ),
               ),
             ),
           ),
-          Text("By signing up, you agree to the Terms and Conditions and Privacy Policy"),
-          const SizedBox(height: defaultPadding / 2),
+          TextFormField(
+            controller: passwordController,
+            textInputAction: TextInputAction.done,
+            obscureText: true,
+            cursorColor: primaryColor,
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Please enter Password ';
+              }
+              return null;
+            },
+            decoration: const InputDecoration(
+              hintText: "Your password",
+              prefixIcon: Padding(
+                padding: EdgeInsets.all(defaultPadding),
+                child: Icon(Icons.lock),
+              ),
+            ),
+          ),
+          const SizedBox(height: defaultPadding / 4),
+          privacyPolicyAndTermsOfService(),
+          const SizedBox(height: defaultPadding / 0.5),
           ElevatedButton(
             onPressed: () {
+
               if (_formKey.currentState!.validate()) {}
               AuthController.instance.signUp(
                   emailController.text.trim(), passwordController.text.trim());
@@ -78,11 +83,51 @@ class SignUpForm extends StatelessWidget {
           AlreadyHaveAnAccountCheck(
             login: false,
             press: () {
-              Get.offAll(() => LoginScreen());
+              Get.to(() => LoginScreen());
             },
           ),
         ],
       ),
+    );
+  }
+
+  Container privacyPolicyAndTermsOfService() {
+    return Container(
+      alignment: Alignment.center,
+      padding: const EdgeInsets.all(10),
+      child: Text.rich(TextSpan(
+          text: 'By signing up, you agree to the ',
+          style: const TextStyle(fontSize: 13, color: primaryColor),
+          children: <TextSpan>[
+            TextSpan(
+                text: 'Terms and Conditions ',
+                style: const TextStyle(
+                  fontSize: 13,
+                  color: primaryColor,
+                  fontWeight: FontWeight.bold,
+                  decoration: TextDecoration.underline,
+                ),
+                recognizer: TapGestureRecognizer()
+                  ..onTap = () {
+                    Get.to(() => const TermsAndConditions());
+                  }),
+            TextSpan(
+                text: ' and ',
+                style: const TextStyle(fontSize: 14, color: primaryColor),
+                children: <TextSpan>[
+                  TextSpan(
+                      text: 'Privacy Policy ',
+                      style: const TextStyle(
+                          fontSize: 13,
+                          color: primaryColor,
+                          fontWeight: FontWeight.bold,
+                          decoration: TextDecoration.underline),
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () {
+                          Get.to(() => const PrivacyPolicy());
+                        })
+                ])
+          ])),
     );
   }
 }

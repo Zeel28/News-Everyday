@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:news_everyday/Screens/authentication_pages/Login/login_screen.dart';
+import 'package:news_everyday/firebase/auth_controller.dart';
+import 'package:news_everyday/utils/message.dart';
+import '../../../round_button.dart';
 import '../../../theme/colors.dart';
 
 class ForgotPassword extends StatefulWidget {
@@ -14,6 +18,12 @@ class _ForgotPasswordState extends State<ForgotPassword> {
 
   final forgotEmailController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+
+  @override
+  void dispose() {
+    forgotEmailController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +56,8 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                     color: primaryLightColor,
                     shape: BoxShape.circle,
                   ),
-                  child: Lottie.asset("assets/lottiefile/forgot-password.json",fit: BoxFit.fill),
+                  child: Lottie.asset("assets/lottiefile/sendmail.json",
+                      fit: BoxFit.fill),
                 ),
                 const SizedBox(
                   height: 24,
@@ -90,7 +101,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                           cursorColor: primaryColor,
                           validator: (value) {
                             if (value == null || value.isEmpty) {
-                              return 'Please enter phone-number';
+                              return 'Empty email';
                             }
                             return null;
                           },
@@ -99,6 +110,11 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                             fontWeight: FontWeight.bold,
                           ),
                           decoration: InputDecoration(
+                            hintText: "Enter email ",
+                            prefixIcon: const Padding(
+                              padding: EdgeInsets.all(defaultPadding),
+                              child: Icon(Icons.mail),
+                            ),
                             enabledBorder: OutlineInputBorder(
                                 borderSide:
                                 const BorderSide(color: Colors.black12),
@@ -116,26 +132,39 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                         SizedBox(
                           width: double.infinity,
                           child: ElevatedButton(
-                            onPressed: () {
-                                print(forgotEmailController);
+                            onPressed: () async {
+                              if (_formKey.currentState!.validate()) {}
+                              AuthController.instance.forgotPassword(forgotEmailController.text.trim(), context);
+                              // final _status = await resetPassword(
+                              //     email: forgotEmailController.text.trim());
+                              // if (_status == AuthStatus.successful) {
+                              //   MessageDialog().alertDialog(
+                              //       context, "Reset password email sent",
+                              //       "You should soon receive an email allowing you to reset your password. Please make sure to check your spam and trash if you can't find the email.",
+                              //       "Login",disMissible: false, () {
+                              //         Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginScreen(),));
+                              //       },);
+                              // } else if (_status == AuthStatus.invalidEmail) {
+                              //   MessageDialog().snackBarGetCut(
+                              //       "sd", "invalidEmail");
+                              // } else if (_status == AuthStatus.wrongPassword) {
+                              //   MessageDialog().snackBarGetCut(
+                              //       "sd", "AuthStatus.wrongPassword");
+                              // } else if (_status == AuthStatus.weakPassword) {
+                              //   MessageDialog().snackBarGetCut(
+                              //       "sd", "AuthStatus.weakPassword");
+                              // } else
+                              // if (_status == AuthStatus.emailAlreadyExists) {
+                              //   MessageDialog().snackBarGetCut(
+                              //       "sd", "AuthStatus.emailAlreadyExists");
+                              // } else if (_status == AuthStatus.unknown) {
+                              //   MessageDialog().snackBarGetCut(
+                              //       "sd", "AuthStatus.unknown");
+                              // } else if (_status == AuthStatus.invalidEmail) {
+                              //   MessageDialog().snackBarGetCut(
+                              //       "sd", "invalidEmail");
+                              // }
                             },
-                            // onPressed: () {
-                            //   if (countryCode != null) {
-                            //     finalPhonenumber =
-                            //     "${countryCode!.dialCode} ${phoneNumberController.text.trim()}";
-                            //     if (_formKey.currentState!.validate()) {
-                            //       AuthController.instance.phoneAuthentication(
-                            //           finalPhonenumber.trim());
-                            //     } else {
-                            //       MessageDialog().snackbarGetCut(
-                            //           "Please Enter phone-number", "");
-                            //     }
-                            //   } else {
-                            //     MessageDialog().snackbarGetCut(
-                            //         "Please select a country code",
-                            //         "& Enter phone umber");
-                            //   }
-                            // },
                             style: ButtonStyle(
                               foregroundColor:
                               MaterialStateProperty.all<Color>(Colors.white),
@@ -148,7 +177,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                                 ),
                               ),
                             ),
-                            child: Padding(
+                            child: const Padding(
                               padding: EdgeInsets.all(14.0),
                               child: Text(
                                 "Send",

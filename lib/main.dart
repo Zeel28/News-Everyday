@@ -1,14 +1,12 @@
 import 'dart:async';
 
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:news_everyday/Screens/authentication_pages/Login/login_screen.dart';
+import 'package:news_everyday/Screens/Welcome/welcome_screen.dart';
 import 'package:news_everyday/Screens/error_page.dart';
 import 'package:news_everyday/splash_screen.dart';
 import 'package:news_everyday/theme/colors.dart';
-import 'package:news_everyday/utils/message.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -67,7 +65,9 @@ class _MyAppState extends State<MyApp> {
             settings: settings,
             builder: (BuildContext context) => const ErrorPage404());
       },
-
+      getPages: [
+        GetPage(name: '/', page: () => const WelcomeScreen()),
+      ],
       home: const SplashScreen(),
     );
   }

@@ -22,7 +22,7 @@ class SignUpScreenTopImage extends StatelessWidget {
         Row(
           children: [
             Expanded(
-              flex: 8,
+              // flex: 6,
               child: Image.asset("assets/images/signup_signuppage.png"),
             ),
           ],

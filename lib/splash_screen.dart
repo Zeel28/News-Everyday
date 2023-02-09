@@ -15,15 +15,15 @@ class SplashScreen extends StatelessWidget {
     return SplashScreenView(
       navigateRoute: App(),
       duration: 2500,
-      imageSize: 600,
+      imageSize: 500,
       imageSrc: "assets/images/logo.png",
-      text: "By News Everyday ",
+      text: "By News Everyday",
       textType: TextType.TyperAnimatedText,
       textStyle: const TextStyle(
         fontSize: 30.0,
         color: Colors.white,
         fontFamily: "ODR",
-        letterSpacing: 3,
+        letterSpacing: 2,
       ),
       backgroundColor: Colors.grey[900],
     );
