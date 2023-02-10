@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "1092367710878",
+    "firebase_url": "https://thenews-everyday-default-rtdb.firebaseio.com",
     "project_id": "thenews-everyday",
     "storage_bucket": "thenews-everyday.appspot.com"
   },
@@ -14,11 +15,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "1092367710878-460orhvol75bcmvnirvepsmka6sjl2k0.apps.googleusercontent.com",
+          "client_id": "1092367710878-b4lcdr643r2ehhbotmd6g0211hv21u41.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.caribbean.news_everyday",
-            "certificate_hash": "aa38bb46234e54fcf0d5b380a16410b5a1b1c68e"
+            "certificate_hash": "d399493927f9d92628c1f2037be6ad1d80967c2b"
           }
         },
         {

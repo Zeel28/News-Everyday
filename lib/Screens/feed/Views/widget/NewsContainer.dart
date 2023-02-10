@@ -21,7 +21,7 @@ class NewsContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 500,
+      height: 400,
       width: double.infinity,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

@@ -1,15 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:news_everyday/Screens/authentication_pages/Forgot_screen/forgot_password.dart';
-import 'package:news_everyday/Screens/authentication_pages/Login/login_screen.dart';
-import 'package:news_everyday/Screens/introduction_screens/onboarding_screen.dart';
+import '../Screens/authentication_pages/Login/login_screen.dart';
 import 'package:news_everyday/utils/message.dart';
 import '../Screens/dashboard.dart';
 import '../Screens/authentication_pages/phonenumber/verifty_otp.dart';
-
+import '../Screens/onboarding_screens/onboarding_screen.dart';
 class AuthController extends GetxController {
   static var isLoading = false;
 
@@ -36,7 +33,10 @@ class AuthController extends GetxController {
       // print(user);
       UserInfo? zx;
       addUser(user,zx);
+
+
       Get.offAll(() => Dashboard());
+
     }
   }
 
@@ -54,9 +54,6 @@ class AuthController extends GetxController {
           'providerId': zx?.providerId.toString(),
           'uid': user.uid
         })
-        .then((value) {
-      MessageDialog().snackBarGetCut("Your account is ready to use", "", backgroundColor: Colors.greenAccent);
-    })
         .onError((error, stackTrace) {print("Failed to add user: $error");});
   }
 

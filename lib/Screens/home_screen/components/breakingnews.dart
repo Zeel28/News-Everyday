@@ -4,13 +4,20 @@ import '../../../api/model/article_model.dart';
 import '../../../widgets/image_container.dart';
 import '../../article_screen/article_screen.dart';
 
-class BreakingNews extends StatelessWidget {
+class BreakingNews extends StatefulWidget {
   BreakingNews({
     super.key,
     required this.articles,
   });
 
   final List<Article> articles;
+
+  @override
+  State<BreakingNews> createState() => _BreakingNewsState();
+}
+
+class _BreakingNewsState extends State<BreakingNews> {
+
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +48,7 @@ class BreakingNews extends StatelessWidget {
             height: 220,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: articles.length,
+              itemCount: widget.articles.length,
               itemBuilder: (context, index) {
                 return Container(
                   width: MediaQuery.of(context).size.width * 0.5,
@@ -52,7 +59,7 @@ class BreakingNews extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                             builder: (context) => ArticleScreen(
-                              article: articles[index],
+                              article: widget.articles[index],
                             ),
                           ));
                     },
@@ -61,11 +68,11 @@ class BreakingNews extends StatelessWidget {
                       children: [
                         ImageContainer(
                             width: MediaQuery.of(context).size.width * 0.5,
-                            imageUrl: articles[index].imageUrl),
+                            imageUrl: widget.articles[index].imageUrl),
                         const SizedBox(
                           height: 10,
                         ),
-                        Text(articles[index].title,
+                        Text(widget.articles[index].title,
                             maxLines: 2,
                             style: Theme.of(context)
                                 .textTheme
@@ -76,13 +83,13 @@ class BreakingNews extends StatelessWidget {
                           height: 5,
                         ),
                         Text(
-                            "${DateTime.now().difference(articles[index].createdAt).inHours} hours ago",
+                            "${DateTime.now().difference(widget.articles[index].createdAt).inHours} hours ago",
                             maxLines: 2,
                             style: Theme.of(context).textTheme.bodySmall!),
                         const SizedBox(
                           height: 5,
                         ),
-                        Text("by ${articles[index].author}",
+                        Text("by ${widget.articles[index].author}",
                             maxLines: 2,
                             style: Theme.of(context).textTheme.bodySmall!),
                       ],

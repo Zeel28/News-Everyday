@@ -23,7 +23,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
         mainTextColor: primaryColor,
         detectionTextColor: primaryColor,
         mainText: "Media Engagement",
-        assetImage: const AssetImage("assets/images/media_engagement.gif"),
+        assetImage: const AssetImage("assets/images/articles_scrolling.gif"),
         detectionText:
             "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and "),
     IntroPage(

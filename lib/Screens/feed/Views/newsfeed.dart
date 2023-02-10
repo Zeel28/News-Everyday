@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../controller/fetchNews.dart';
-import '../model/news_art.dart';
+import '../../../api/controller/fetchNews.dart';
+import '../../../api/model/news_art.dart';
 import 'widget/NewsContainer.dart';
 
 class NewsFeed extends StatefulWidget {

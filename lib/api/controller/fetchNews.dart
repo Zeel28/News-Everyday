@@ -37,11 +37,8 @@ class FetchNews{
 
     "techcrunch",
     "techradar",
-
     "the-hindu",
-
     "the-wall-street-journal",
-
     "the-washington-times",
     "time",
     "usa-today",
@@ -49,7 +46,7 @@ class FetchNews{
 
   static Future<NewsArt> fetchNews()async{
 
-    final _random = new Random();
+    final _random = Random();
     var sourceID = sourcesId[_random.nextInt(sourcesId.length)];
 
     // print(sourceID);
@@ -62,7 +59,7 @@ class FetchNews{
     // print(articles);
     // print(body_data);
 // print("**************************************************");
-    final _Newrandom = new Random();
+    final _Newrandom = Random();
     var myArticle = articles[_random.nextInt(articles.length)];
     // print(myArticle);
     // print("****************************************************************");

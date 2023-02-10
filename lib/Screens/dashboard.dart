@@ -4,7 +4,7 @@ import '../theme/colors.dart';
 import 'Discover/discover_screen.dart';
 import 'Favorite/Favorite_page.dart';
 import 'Profile/Profile_page.dart';
-import '../api/Views/newsfeed.dart';
+import 'feed/Views/newsfeed.dart';
 import 'home_screen/home_screen.dart';
 class Dashboard extends StatefulWidget {
 
@@ -18,7 +18,7 @@ class Dashboard extends StatefulWidget {
 
 class _DashboardState extends State<Dashboard> {
   int _selectedIndex = 0;
-  static List<Widget> pages = <Widget>[
+  static List<Widget> pages = <Widget> [
     HomeScreen(),
     DiscoverScreen(),
     NewsFeed(),
