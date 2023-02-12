@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:news_everyday/Screens/authentication_pages/Login/login_screen.dart';
 import 'package:news_everyday/firebase/auth_controller.dart';
-import 'package:news_everyday/utils/message.dart';
-import '../../../round_button.dart';
 import '../../../theme/colors.dart';
 
 class ForgotPassword extends StatefulWidget {

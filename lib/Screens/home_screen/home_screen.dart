@@ -1,8 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:news_everyday/Screens/Profile/Profile_page.dart';
-import '../../api/controller/fetchNews.dart';
 import '../../api/model/article_model.dart';
-import '../../api/model/news_art.dart';
+import 'package:http/http.dart' as http;
+import 'package:http/http.dart';
 import 'components/breakingnews.dart';
 import 'components/channels.dart';
 import 'components/newsofthday.dart';
@@ -17,6 +19,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
+
     Article article = Article.articles[0];
 
     return Scaffold(
@@ -37,7 +40,6 @@ class _HomeScreenState extends State<HomeScreen> {
         children: [
           NewsOfTheDay(article: article),
           BreakingNews(
-            articles: Article.articles,
           ),
           NewsChannels(
             articles: Article.articles,
@@ -47,6 +49,4 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
-
-
 

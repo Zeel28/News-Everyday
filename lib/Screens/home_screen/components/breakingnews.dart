@@ -1,16 +1,15 @@
-import 'package:flutter/material.dart';
+import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import '../../../api/model/article_model.dart';
-import '../../../widgets/image_container.dart';
-import '../../article_screen/article_screen.dart';
+import 'package:http/http.dart' as http;
+import 'package:http/http.dart';
 
 class BreakingNews extends StatefulWidget {
   BreakingNews({
     super.key,
-    required this.articles,
   });
 
-  final List<Article> articles;
 
   @override
   State<BreakingNews> createState() => _BreakingNewsState();
@@ -18,6 +17,27 @@ class BreakingNews extends StatefulWidget {
 
 class _BreakingNewsState extends State<BreakingNews> {
 
+  List<Articles> article = [];
+
+  @override
+  void initState() {
+    super.initState();
+    fetchNews();
+  }
+
+  void fetchNews() async {
+    Response response =await http.get(Uri.parse("https://newsapi.org/v2/everything?q=tesla&from=2023-01-12&sortBy=publishedAt&apiKey=3f1a0e1381c74be2ab644cf747bfad83"));
+
+    if (response.statusCode == 200) {
+      setState(() {
+        article = (json.decode(response.body)['articles'] as List)
+            .map((data) => Articles.fromJson(data))
+            .toList();
+      });
+    } else {
+      throw Exception('Failed to load news');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,53 +67,21 @@ class _BreakingNewsState extends State<BreakingNews> {
           SizedBox(
             height: 220,
             child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: widget.articles.length,
+              itemCount: article.length,
               itemBuilder: (context, index) {
                 return Container(
-                  width: MediaQuery.of(context).size.width * 0.5,
-                  margin: const EdgeInsets.only(right: 10),
-                  child: InkWell(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => ArticleScreen(
-                              article: widget.articles[index],
-                            ),
-                          ));
-                    },
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        ImageContainer(
-                            width: MediaQuery.of(context).size.width * 0.5,
-                            imageUrl: widget.articles[index].imageUrl),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Text(widget.articles[index].title,
-                            maxLines: 2,
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyLarge!
-                                .copyWith(
-                                fontWeight: FontWeight.bold, height: 1.5)),
-                        const SizedBox(
-                          height: 5,
-                        ),
-                        Text(
-                            "${DateTime.now().difference(widget.articles[index].createdAt).inHours} hours ago",
-                            maxLines: 2,
-                            style: Theme.of(context).textTheme.bodySmall!),
-                        const SizedBox(
-                          height: 5,
-                        ),
-                        Text("by ${widget.articles[index].author}",
-                            maxLines: 2,
-                            style: Theme.of(context).textTheme.bodySmall!),
-                      ],
-                    ),
+                  margin: EdgeInsets.all(8.0),
+                  child: Column(
+                    children: <Widget>[
+                      Image.network(article[index].urlToImage),
+                      SizedBox(height: 8.0),
+                      Text(
+                        article[index].title,
+                        style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+                      ),
+                      SizedBox(height: 8.0),
+                      Text(article[index].description),
+                    ],
                   ),
                 );
               },
