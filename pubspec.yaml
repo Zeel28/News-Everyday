@@ -62,6 +62,8 @@ dependencies:
   flutter_otp_text_field: ^1.1.1
   #url_launcher:
   open_mail_app: ^0.4.5
+
+  timeago: ^3.3.0
   splash_screen_view:
 
 dev_dependencies:

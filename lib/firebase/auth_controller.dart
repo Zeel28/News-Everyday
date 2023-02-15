@@ -31,8 +31,8 @@ class AuthController extends GetxController {
       Get.offAll(() => const OnBoardingScreen());
     } else {
       // print(user);
-      UserInfo? zx;
-      addUser(user,zx);
+      // UserInfo? zx;
+      // addUser(user,zx);
 
 
       Get.offAll(() => Dashboard());
@@ -40,22 +40,22 @@ class AuthController extends GetxController {
     }
   }
 
-  Future<void> addUser(User user, UserInfo? zx) {
-    CollectionReference zeel = FirebaseFirestore.instance.collection('users_information');
-    return zeel
-        .doc(user.uid)
-        .set({
-          'id': user.uid,
-          'full_name': user.displayName,
-          'email': user.email,
-          'emailVerified': user.emailVerified,
-          'phoneNumber': user.phoneNumber,
-          'photoURL': user.photoURL,
-          'providerId': zx?.providerId.toString(),
-          'uid': user.uid
-        })
-        .onError((error, stackTrace) {print("Failed to add user: $error");});
-  }
+  // Future<void> addUser(User user, UserInfo? zx) {
+  //   CollectionReference zeel = FirebaseFirestore.instance.collection('users_information');
+  //   return zeel
+  //       .doc(user.uid)
+  //       .set({
+  //         'id': user.uid,
+  //         'full_name': user.displayName,
+  //         'email': user.email,
+  //         'emailVerified': user.emailVerified,
+  //         'phoneNumber': user.phoneNumber,
+  //         'photoURL': user.photoURL,
+  //         'providerId': zx?.providerId.toString(),
+  //         'uid': user.uid
+  //       })
+  //       .onError((error, stackTrace) {print("Failed to add user: $error");});
+  // }
 
   //TODO: Email and Password Signup
   Future<void> signUp(String email, password) async {
