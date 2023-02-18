@@ -1,12 +1,12 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import '../Screens/authentication_pages/Login/login_screen.dart';
 import 'package:news_everyday/utils/message.dart';
-import '../Screens/dashboard.dart';
-import '../Screens/authentication_pages/phonenumber/verifty_otp.dart';
-import '../Screens/onboarding_screens/onboarding_screen.dart';
+
+import '../ui/Screens/authentication_pages/Login/login_screen.dart';
+import '../ui/Screens/authentication_pages/phonenumber/verifty_otp.dart';
+import '../ui/Screens/dashboard.dart';
+import '../ui/Screens/onboarding_screens/onboarding_screen.dart';
 class AuthController extends GetxController {
   static var isLoading = false;
 
@@ -27,7 +27,6 @@ class AuthController extends GetxController {
 
   _initialScreen(User? user) async {
     if (user == null) {
-      // print("Login Page");
       Get.offAll(() => const OnBoardingScreen());
     } else {
       // print(user);
@@ -176,7 +175,7 @@ class SocialAuth {
 
     // Create a new credential
     final credential = GoogleAuthProvider.credential(
-      accessToken: googleAuth?.accessToken,
+      accessToken: googleAuth?.accessToken ,
       idToken: googleAuth?.idToken,
     );
 

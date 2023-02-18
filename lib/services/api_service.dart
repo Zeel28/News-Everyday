@@ -1,5 +1,5 @@
 import 'dart:convert';
-
+import 'package:http/http.dart';
 import '../api/model/article_model.dart';
 import 'package:http/http.dart' as http;
 class ApiService {
@@ -27,22 +27,14 @@ class ApiService {
   // static const String _apiKey = '3f1a0e1381c74be2ab644cf747bfad83';
 
   static Future<List<Articles>> fetchNews() async {
-    final queryParameters = {
-      'country': 'in',
-      'category': 'top-headlines',
-      'apiKey': '3f1a0e1381c74be2ab644cf747bfad83'
-    };
 
-    final uri = Uri.https(endPointUrl, '/v2/top-headlines', queryParameters);
-    final response = await client.get(uri);
-
-    // final response = await http.get('$_baseUrl&apiKey=$_apiKey');
-    if (response.statusCode == 200) {
-      final json = jsonDecode(response.body);
-      final List<dynamic> newsJson = json['articles'];
-      return newsJson.map((e) => Articles.fromJson(e)).toList();
-    } else {
-      throw Exception('Failed to load news');
+      Response response =await http.get(Uri.parse("https://newsapi.org/v2/everything?q=tesla&sortBy=publishedAt&apiKey=3f1a0e1381c74be2ab644cf747bfad83"));
+      if (response.statusCode == 200) {
+        final json = jsonDecode(response.body);
+        final List<dynamic> newsJson = json['articles'];
+        return newsJson.map((e) => Articles.fromJson(e)).toList();
+      } else {
+        throw Exception('Failed to load news');
+      }
     }
-  }
 }

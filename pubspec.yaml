@@ -60,10 +60,11 @@ dependencies:
   smooth_page_indicator: ^1.0.0+2
   #OTP text field
   flutter_otp_text_field: ^1.1.1
-  #url_launcher:
-  open_mail_app: ^0.4.5
-
-  timeago: ^3.3.0
+  #Fancy Pull to Refresh
+  liquid_pull_to_refresh: ^3.0.1
+  #Slider
+  carousel_slider: ^4.2.1
+  #splash screen
   splash_screen_view:
 
 dev_dependencies:
