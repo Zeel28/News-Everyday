@@ -43,8 +43,7 @@ dependencies:
   firebase_core: ^2.4.1
   flutter_svg: ^1.1.0
   slide_to_act: ^2.0.1
-  webview_flutter: ^3.0.4
-  percent_indicator: ^4.0.0
+  webview_flutter: ^4.0.2
   #Bottom Navbar
   google_nav_bar: ^5.0.6
   #API

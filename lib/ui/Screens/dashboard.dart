@@ -29,7 +29,7 @@ class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: mainBackgroundColor,
       body: Center(
         child: pages.elementAt(_selectedIndex),
       ),
@@ -42,11 +42,11 @@ class _DashboardState extends State<Dashboard> {
         ),
         child: GNav(
           backgroundColor: primaryColor,
-          color: primaryLightColor,
+          color: mainBackgroundColor,
           activeColor: primaryColor,
           gap: 2,
           padding: const EdgeInsets.all(10),
-          tabBackgroundColor: primaryLightColor,
+          tabBackgroundColor: mainBackgroundColor,
           tabs: const [
             GButton(
               icon: Icons.home,

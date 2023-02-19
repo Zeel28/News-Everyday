@@ -31,7 +31,7 @@ class SocalSignUp extends StatelessWidget {
               iconSrc: "assets/icons/facebook.svg",
               press: () {
                 MessageDialog().alertDialog(context, "Coming Soon..", "This features under production", "Okay",() {
-                  Navigator.pop(context);
+                 Get.back();
                 },);
               },
             ),
@@ -39,7 +39,7 @@ class SocalSignUp extends StatelessWidget {
               iconSrc: "assets/icons/apple.svg",
               press: () {
                 MessageDialog().alertDialog(context, "Coming Soon..", "This features under production", "Okay",() {
-                  Navigator.pop(context);
+                  Get.back();
                 },);
               },
             ),

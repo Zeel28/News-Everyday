@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:lottie/lottie.dart';
 import 'package:news_everyday/firebase/auth_controller.dart';
 import '../../../theme/colors.dart';
@@ -34,7 +36,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                 Align(
                   alignment: Alignment.topLeft,
                   child: GestureDetector(
-                    onTap: () => Navigator.pop(context),
+                    onTap: () => Get.back(),
                     child: Icon(
                       Icons.arrow_back,
                       size: 32,

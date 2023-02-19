@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 import '../../theme/colors.dart';
+import '../../widgets/custom_icon_button.dart';
 import 'components/breakingnews.dart';
 import 'components/header_slider.dart';
 
@@ -21,9 +22,39 @@ class HomeScreen extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: mainBackgroundColor,
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.transparent,
+      appBar: PreferredSize(
+        preferredSize: Size(100, 90), //width and height
+        child: SafeArea(
+          child: Container(
+            padding: EdgeInsets.symmetric(vertical: 25, horizontal: 20),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const CircleAvatar(radius: 35),
+                Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(50),
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.shade200,
+                          blurRadius: 2.0,
+                          spreadRadius: 2.0,
+                          offset: Offset(
+                            5.0,
+                            5.0,
+                          ),
+                        )
+                      ],
+                    ),
+                    child: IconButton(
+                        onPressed: () {},
+                        icon: const Icon(Icons.notifications_active, color: primaryColor),))
+              ],
+            ),
+          ),
+        ),
       ),
       extendBodyBehindAppBar: true,
       body: LiquidPullToRefresh(
@@ -36,6 +67,7 @@ class HomeScreen extends StatelessWidget {
         child: ListView(
           children: [
             HeaderSlider(imgList: imgList),
+            BreakingNews(),
             BreakingNews(),
           ],
         ),

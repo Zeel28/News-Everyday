@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
 
-class NewsContainer extends StatelessWidget {
+class FeedPage extends StatelessWidget {
   String imageUrl;
   String newsHeand;
   String newsDec;
   String newsUrl;
   String newsCnt;
 
-  NewsContainer(
+  FeedPage(
       {Key? key,
         required this.imageUrl,
         required this.newsHeand,

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:lottie/lottie.dart';
 import '../../../theme/colors.dart';
 import 'numeric_pad.dart';
@@ -14,7 +16,7 @@ class OTPScreen extends StatefulWidget {
 class _OTPScreenState extends State<OTPScreen> {
   @override
   Widget build(BuildContext context) {
-    var otp;
+    var otp = TextEditingController();
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: const Color(0xfff7f6fb),
@@ -26,7 +28,7 @@ class _OTPScreenState extends State<OTPScreen> {
               Align(
                 alignment: Alignment.topLeft,
                 child: GestureDetector(
-                  onTap: () => Navigator.pop(context),
+                  onTap: () => Get.back(),
                   child: Icon(
                     Icons.arrow_back,
                     size: 32,
@@ -90,10 +92,9 @@ class _OTPScreenState extends State<OTPScreen> {
                       filled: true,
                       borderRadius: BorderRadius.circular(10),
                       fillColor: primaryLightColor,
-                      onSubmit: (String verificationCode) {
-                        otp = verificationCode;
-                        print("otp");
-                        OTPController.instance.verifyOTP(otp);
+                      onSubmit: (verificationCode) {
+                        otp.text = verificationCode;
+                        OTPController.instance.verifyOTP(otp.text);
                       },
                     ),
                     const SizedBox(
@@ -103,8 +104,7 @@ class _OTPScreenState extends State<OTPScreen> {
                       width: double.infinity,
                       child: ElevatedButton(
                         onPressed: () {
-                          print("dfggg");
-                          OTPController.instance.verifyOTP(otp);
+                          OTPController.instance.verifyOTP(otp.text);
                         },
                         style: ButtonStyle(
                           foregroundColor:

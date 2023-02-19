@@ -30,15 +30,14 @@ class FeedbackMenuList extends StatelessWidget {
             borderRadius: BorderRadius.circular(40),
             boxShadow: [
               BoxShadow(
-                  color: Colors.grey.shade500,
-                  offset: Offset(4.0, 4.0),
-                  blurRadius: 15.0,
-                  spreadRadius: 1.0),
-              BoxShadow(
-                  color: Colors.white,
-                  offset: Offset(-4.0, -4.0),
-                  blurRadius: 15.0,
-                  spreadRadius: 1.0),
+                color: Colors.grey.shade200,
+                blurRadius: 2.0,
+                spreadRadius: 2.0,
+                offset: Offset(
+                  5.0,
+                  5.0,
+                ),
+              )
             ],
           ),
           child: ListTile(

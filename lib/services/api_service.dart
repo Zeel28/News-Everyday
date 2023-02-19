@@ -28,7 +28,7 @@ class ApiService {
 
   static Future<List<Articles>> fetchNews() async {
 
-      Response response =await http.get(Uri.parse("https://newsapi.org/v2/everything?q=tesla&sortBy=publishedAt&apiKey=3f1a0e1381c74be2ab644cf747bfad83"));
+      Response response =await http.get(Uri.parse("https://newsapi.org/v2/top-headlines?country=in&apiKey=3f1a0e1381c74be2ab644cf747bfad83"));
       if (response.statusCode == 200) {
         final json = jsonDecode(response.body);
         final List<dynamic> newsJson = json['articles'];

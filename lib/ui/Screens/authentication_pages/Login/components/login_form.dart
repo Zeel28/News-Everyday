@@ -64,24 +64,21 @@ class LoginForm extends StatelessWidget {
               ),
             ),
           ),
-          Forgot(press: (){
-            return Navigator.push(context, MaterialPageRoute(builder: (context) => ForgotPassword(),));
-          }),
+          Forgot(
+            press: () => Get.to(ForgotPassword()),
+          ),
           const SizedBox(height: defaultPadding),
           ElevatedButton(
             onPressed: () async {
-              if (_formKey.currentState!.validate()) {
-
-              }
-              AuthController.instance.signIn(
-                  emailController.text.trim(), passwordController.text.trim(),context);
+              if (_formKey.currentState!.validate()) {}
+              AuthController.instance.signIn(emailController.text.trim(),
+                  passwordController.text.trim(), context);
             },
             child: Text(
               "Login".toUpperCase(),
               style: const TextStyle(fontSize: 16),
             ),
           ),
-
           const SizedBox(height: defaultPadding),
           AlreadyHaveAnAccountCheck(
             press: () {

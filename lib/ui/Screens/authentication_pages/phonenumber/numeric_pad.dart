@@ -54,7 +54,7 @@ class _LoginWithPhoneNumberState extends State<LoginWithPhoneNumber> {
               Align(
                 alignment: Alignment.topLeft,
                 child: GestureDetector(
-                  onTap: () => Navigator.pop(context),
+                  onTap: () => Get.back(),
                   child: Icon(
                     Icons.arrow_back,
                     size: 32,
@@ -244,6 +244,6 @@ class OTPController extends GetxController {
 
   void verifyOTP(String otp) async {
     var isVerified = await AuthController.instance.verifyOTP(otp);
-    isVerified ? Get.offAll(Dashboard()) : Get.back();
+    isVerified ? Get.offAll(const Dashboard()) : Get.back();
   }
 }

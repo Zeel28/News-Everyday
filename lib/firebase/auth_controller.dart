@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:news_everyday/utils/message.dart';
-
 import '../ui/Screens/authentication_pages/Login/login_screen.dart';
 import '../ui/Screens/authentication_pages/phonenumber/verifty_otp.dart';
 import '../ui/Screens/dashboard.dart';

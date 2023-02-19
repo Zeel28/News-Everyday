@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../../api/controller/fetchNews.dart';
 import '../../../../api/model/news_art.dart';
+import '../../../theme/colors.dart';
 import 'widget/NewsContainer.dart';
 
 class NewsFeed extends StatefulWidget {
@@ -33,9 +34,17 @@ class _NewsFeedState extends State<NewsFeed> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          backgroundColor: Colors.transparent,
           elevation: 0,
-          centerTitle: true,
-          title: Text("fultter"),
+          actions: [
+            IconButton(
+              onPressed: () {},
+              icon: const Icon(
+                Icons.more_horiz,
+                color: primaryColor,
+              ),
+            )
+          ],
         ),
         body: PageView.builder(
           controller: PageController(initialPage: 0),
@@ -47,7 +56,7 @@ class _NewsFeedState extends State<NewsFeed> {
             GetNews();
           },
           itemBuilder: (context, index) {
-            return isLoading ? Center(child: CircularProgressIndicator(),): NewsContainer(
+            return isLoading ? const Center(child: CircularProgressIndicator(),): FeedPage(
               imageUrl: newsArt.imagUrl,
               newsHeand: newsArt.newsHead,
               newsDec: newsArt.newsDes,

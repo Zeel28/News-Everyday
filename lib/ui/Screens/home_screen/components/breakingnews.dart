@@ -5,6 +5,7 @@ import '../../../../api/model/article_model.dart';
 import '../../../../services/api_service.dart';
 import '../../../widgets/image_container.dart';
 import '../../article_screen/article_screen.dart';
+
 class BreakingNews extends StatefulWidget {
   BreakingNews({
     super.key,
@@ -15,8 +16,6 @@ class BreakingNews extends StatefulWidget {
 }
 
 class _BreakingNewsState extends State<BreakingNews> {
-
-
   List<Articles> finalArticles = [];
   bool _isLoading = true;
   late String? _errorMessage;
@@ -43,11 +42,13 @@ class _BreakingNewsState extends State<BreakingNews> {
       });
     }
   }
+
   late final List<Article> articles;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(20.0),
+      padding: const EdgeInsets.all(15.0),
       child: Column(
         children: [
           Row(
@@ -81,19 +82,39 @@ class _BreakingNewsState extends State<BreakingNews> {
                         itemCount: finalArticles.length,
                         itemBuilder: (context, index) {
                           return Container(
-                            width: MediaQuery.of(context).size.width * 0.5,
+                            padding: EdgeInsets.all(7),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.shade200,
+                                  blurRadius: 2.0,
+                                  spreadRadius: 2.0,
+                                  offset: const Offset(
+                                    5.0,
+                                    5.0,
+                                  ),
+                                )
+                              ],
+                            ),
+                            width: MediaQuery.of(context).size.width * 0.6,
                             margin: const EdgeInsets.only(right: 10),
                             child: InkWell(
                               onTap: () {
-                                Get.to(() => ArticleScreen(article: finalArticles[index],));
+                                Get.to(() => ArticleScreen(
+                                      article: finalArticles[index],
+                                    ), duration: const Duration(milliseconds: 500), //duration of transitions, default 1 sec
+                                    transition: Transition.cupertinoDialog);
                               },
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   ImageContainer(
                                       width: MediaQuery.of(context).size.width *
-                                          0.5,
-                                      imageUrl: finalArticles[index].urlToImage),
+                                          0.6,
+                                      imageUrl:
+                                          finalArticles[index].urlToImage),
                                   const SizedBox(
                                     height: 10,
                                   ),
