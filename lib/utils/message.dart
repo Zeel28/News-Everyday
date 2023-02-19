@@ -33,16 +33,25 @@ class MessageDialog {
         ));
   }
 
-  progressIndicator2(context) {
-    return showDialog(
-        context: context,
-        builder: (context) {
-          return const Center(
-              child: CircularProgressIndicator(
-            backgroundColor: primaryColor,
-            color: primaryLightColor,
-          ));
-        });
+  progressIndicator(context) {
+    return  AlertDialog(
+      shape: const CircleBorder(),
+      shadowColor: primaryColor,
+      backgroundColor: primaryLightColor,
+      content: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
+        children: const <Widget>[
+          SizedBox(
+            width: 30,
+            height: 30,
+            child: CircularProgressIndicator(
+                color: primaryColor,
+                backgroundColor: primaryLightColor),
+          ),
+        ],
+      ),
+    );
   }
 
   //TODO: Custom Alert Dialog

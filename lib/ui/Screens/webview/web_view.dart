@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:news_everyday/utils/message.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
+import '../../../utils/message.dart';
 import '../../theme/colors.dart';
-class WebViewApp extends StatefulWidget {
 
+class WebViewApp extends StatefulWidget {
   final String url;
 
   WebViewApp({super.key, required this.url});
@@ -17,8 +17,6 @@ class WebViewApp extends StatefulWidget {
 
 class _WebViewAppState extends State<WebViewApp> {
   late final WebViewController controller;
-
-
 
   @override
   void initState() {
@@ -42,19 +40,34 @@ class _WebViewAppState extends State<WebViewApp> {
               Icons.arrow_back_ios,
               color: primaryColor,
             )),
+        title: Text("W E B V I E W",style: TextStyle(color: primaryColor)),
+        centerTitle: true,
         actions: [
           IconButton(
-            icon: const Icon(Icons.refresh_outlined,color: primaryColor,),
+            icon: const Icon(
+              Icons.refresh_outlined,
+              color: primaryColor,
+            ),
+            onPressed: () {
+              controller.reload();
+            },
+          ),
+          IconButton(
+            icon: const Icon(
+              Icons.share_sharp,
+              color: primaryColor,
+            ),
             onPressed: () {
               controller.reload();
             },
           ),
         ],
       ),
-      body: WebViewStack(controller: controller),       // MODIFY
+      body: WebViewStack(controller: controller), // MODIFY
     );
   }
 }
+
 class WebViewStack extends StatefulWidget {
   const WebViewStack({required this.controller, super.key});
 
@@ -115,11 +128,37 @@ class _WebViewStackState extends State<WebViewStack> {
           controller: widget.controller,
         ),
         if (loadingPercentage < 100)
-          _isLoading ? MessageDialog().progressIndicator2(context) : Container(),
-          // LinearProgressIndicator(
-          //   value: loadingPercentage / 100.0,
-          // ),
+          _isLoading
+              ? Center(
+                  child: MessageDialog().progressIndicator(context),
+                )
+              : Container(),
+        // LinearProgressIndicator(
+        //   value: loadingPercentage / 100.0,
+        // ),
       ],
+    );
+  }
+
+  Future loader() {
+    return showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: const Text("Alert Dialog Box"),
+        content: const Text("You have raised a Alert Dialog Box"),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () {
+              Navigator.of(ctx).pop();
+            },
+            child: Container(
+              color: Colors.green,
+              padding: const EdgeInsets.all(14),
+              child: const Text("okay"),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
