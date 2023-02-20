@@ -39,10 +39,14 @@ dependencies:
   get:
   #lottie Image
   lottie: ^2.2.0
+  #Firebase
   firebase_auth: ^4.2.5
   firebase_core: ^2.4.1
   flutter_svg: ^1.1.0
+  #firebase Storage
+  firebase_storage: ^11.0.13
   slide_to_act: ^2.0.1
+  #webview
   webview_flutter: ^4.0.2
   #Bottom Navbar
   google_nav_bar: ^5.0.6
@@ -51,6 +55,8 @@ dependencies:
   #Cuntry Code Picker
   fl_country_code_picker: ^0.0.4
   equatable:
+  #share
+  share_plus: ^6.3.1
   #Google SignIn(Firebase)
   google_sign_in: ^5.4.3
   #firestore

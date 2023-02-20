@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 import '../../../utils/message.dart';
@@ -40,7 +41,7 @@ class _WebViewAppState extends State<WebViewApp> {
               Icons.arrow_back_ios,
               color: primaryColor,
             )),
-        title: Text("W E B V I E W",style: TextStyle(color: primaryColor)),
+        title: Text("W E B V I E W", style: TextStyle(color: primaryColor)),
         centerTitle: true,
         actions: [
           IconButton(
@@ -52,14 +53,35 @@ class _WebViewAppState extends State<WebViewApp> {
               controller.reload();
             },
           ),
-          IconButton(
+          PopupMenuButton<int>(
             icon: const Icon(
-              Icons.share_sharp,
+              Icons.more_horiz,
               color: primaryColor,
             ),
-            onPressed: () {
-              controller.reload();
-            },
+            itemBuilder: (context) => [
+              PopupMenuItem(
+                onTap: () async {
+                  await Share.share('News Everyday : ${widget.url}');
+                },
+                value: 1,
+                child: Row(
+                  children: const [
+                    Icon(
+                      Icons.share,
+                      color: primaryColor,
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                      "Share",
+                      style: TextStyle(color: primaryColor),
+                    )
+                  ],
+                ),
+              ),
+            ],
+            offset: const Offset(0, 50),
           ),
         ],
       ),

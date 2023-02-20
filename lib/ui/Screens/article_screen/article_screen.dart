@@ -3,16 +3,20 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:news_everyday/ui/theme/colors.dart';
 import 'package:news_everyday/ui/widgets/custom_tag.dart';
+import 'package:news_everyday/utils/message.dart';
+import 'package:share_plus/share_plus.dart';
 import '../../../api/model/article_model.dart';
+import '../Profile/components/feedback_section.dart';
 import '../webview/web_view.dart';
 
 class ArticleScreen extends StatelessWidget {
   Articles article;
 
-  ArticleScreen({Key? key, required this.article}) : super(key: key);
+  ArticleScreen({Key? key, required this.article});
 
   @override
   Widget build(BuildContext context) {
+    RxBool pressedBool = false.obs;
     return Scaffold(
       backgroundColor: mainBackgroundColor,
       appBar: AppBar(
@@ -25,13 +29,61 @@ class ArticleScreen extends StatelessWidget {
               color: primaryColor,
             )),
         actions: [
-          IconButton(
-            onPressed: () {},
+          PopupMenuButton<int>(
             icon: const Icon(
               Icons.more_horiz,
               color: primaryColor,
             ),
-          )
+            itemBuilder: (context) => [
+              PopupMenuItem(
+                onTap: () async {
+                  await Share.share(
+                      'I saw this on the News Everyday and thought you should see it: ${article.title}   ${article.description}\n\n\n\n'
+                      '* Disclaimer *  The News Everyday is not responsible for the content of this email, and anything written in this email does not necessarily reflect the News Everyday views or opinions. Please note that neither the email address nor name of the sender have been verified.',
+                      subject:
+                          'I saw this on the News Everyday and thought you should see it: ${article.title}');
+                },
+                value: 1,
+                child: Row(
+                  children: const [
+                    Icon(
+                      Icons.share,
+                      color: primaryColor,
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                      "Share",
+                      style: TextStyle(color: primaryColor),
+                    )
+                  ],
+                ),
+              ),
+              PopupMenuItem(
+                onTap: () {
+                  Get.to(ReportBugandReportNews());
+                },
+                value: 1,
+                child: Row(
+                  children: const [
+                    Icon(
+                      Icons.report_gmailerrorred,
+                      color: primaryColor,
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                      "Report",
+                      style: TextStyle(color: primaryColor),
+                    )
+                  ],
+                ),
+              ),
+            ],
+            offset: const Offset(0, 50),
+          ),
         ],
       ),
       body: SingleChildScrollView(
@@ -80,16 +132,17 @@ class ArticleScreen extends StatelessWidget {
                     width: 10,
                   ),
                   const CustomTag(
-                      backgroundColor: primaryLightColor, children: [
-                    Icon(
-                      Icons.remove_red_eye,
-                      color: primaryColor,
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Text("67", style: TextStyle(color: primaryColor)),
-                  ]),
+                      backgroundColor: primaryLightColor,
+                      children: [
+                        Icon(
+                          Icons.remove_red_eye,
+                          color: primaryColor,
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text("67", style: TextStyle(color: primaryColor)),
+                      ]),
                 ],
               ),
               const SizedBox(
@@ -105,18 +158,69 @@ class ArticleScreen extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              Text(article.description, style: const TextStyle(
-                  fontSize: 15,
-                  fontWeight: FontWeight.w400,
-                  color: Colors.grey),),
+              Text(
+                article.description,
+                style: const TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w400,
+                    color: Colors.grey),
+              ),
               // Spacer(),
-              Text(" Url ${article.url}"),
-              ElevatedButton(onPressed: () {
-                Get.to(WebViewApp(url: article.url));
-              }, child: const Text("Read more"))
             ],
           ),
         ),
+      ),
+      bottomNavigationBar: Row(
+        children: [
+          Expanded(
+            flex: 3,
+            child: Container(
+              margin: const EdgeInsets.all(10),
+              child: ElevatedButton(
+                onPressed: () {
+                  Get.to(WebViewApp(url: article.url));
+                },
+                child: const Text(
+                  'Read more',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Expanded(
+            child: ElevatedButton(
+              onPressed: () {
+                pressedBool.toggle();
+                pressedBool.isTrue
+                    ? MessageDialog().snackBarGetCut("Your News is saved",
+                        "when you're ready to read this saved News, just tap on Saved News in the Menu bar",
+                        backgroundColor: Colors.green)
+                    : MessageDialog().snackBarGetCut("Remove News",
+                        "",
+                        );
+              },
+              style: ButtonStyle(
+                shape: MaterialStateProperty.all(const CircleBorder()),
+                backgroundColor: MaterialStateProperty.all(primaryLightColor),
+                overlayColor:
+                    MaterialStateProperty.resolveWith<Color?>((states) {}),
+              ),
+              child: Obx(() {
+                return pressedBool.isTrue
+                    ? Icon(
+                        Icons.bookmark,
+                        color: primaryColor,
+                      )
+                    : Icon(
+                        Icons.bookmark_add_outlined,
+                        color: primaryColor,
+                      );
+              }),
+            ),
+          )
+        ],
       ),
     );
   }
