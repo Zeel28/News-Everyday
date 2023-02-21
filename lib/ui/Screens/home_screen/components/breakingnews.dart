@@ -19,6 +19,11 @@ class _BreakingNewsState extends State<BreakingNews> {
   List<Articles> finalArticles = [];
   bool _isLoading = true;
   late String? _errorMessage;
+  final queryParameters = {
+      'country': 'in',
+      'category': '',
+      'apiKey' : '9f6d210f572a43c2892e84040a32e190',
+    };
 
   @override
   void initState() {
@@ -28,7 +33,7 @@ class _BreakingNewsState extends State<BreakingNews> {
 
   Future<void> _loadNews() async {
     try {
-      final article = await ApiService.fetchNews();
+      final article = await ApiService.fetchNews(queryParameters);
       setState(() {
         finalArticles = article;
         _isLoading = false;
@@ -43,7 +48,6 @@ class _BreakingNewsState extends State<BreakingNews> {
     }
   }
 
-  late final List<Article> articles;
 
   @override
   Widget build(BuildContext context) {
