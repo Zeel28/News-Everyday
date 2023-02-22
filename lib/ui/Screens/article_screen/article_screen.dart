@@ -5,7 +5,7 @@ import 'package:news_everyday/ui/theme/colors.dart';
 import 'package:news_everyday/ui/widgets/custom_tag.dart';
 import 'package:news_everyday/utils/message.dart';
 import 'package:share_plus/share_plus.dart';
-import '../../../api/model/article_model.dart';
+import '../../../model/article_model.dart';
 import '../Profile/components/feedback_section.dart';
 import '../webview/web_view.dart';
 
@@ -131,7 +131,7 @@ class ArticleScreen extends StatelessWidget {
                   const SizedBox(
                     width: 10,
                   ),
-                  const CustomTag(
+                   CustomTag(
                       backgroundColor: primaryLightColor,
                       children: [
                         Icon(

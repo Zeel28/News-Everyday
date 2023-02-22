@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import '../../../../api/model/article_model.dart';
+import '../../../../model/article_model.dart';
 import '../../../../services/api_service.dart';
 import '../../../widgets/image_container.dart';
 import '../../article_screen/article_screen.dart';

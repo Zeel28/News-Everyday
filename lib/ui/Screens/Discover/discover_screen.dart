@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-
-import '../../../api/model/article_model.dart';
+import '../../../model/article_model.dart';
 import '../../../services/api_service.dart';
+import '../../theme/colors.dart';
+import '../../widgets/custom_tag.dart';
 import '../../widgets/image_container.dart';
 import '../article_screen/article_screen.dart';
 
@@ -26,6 +27,7 @@ class DiscoverScreen extends StatelessWidget {
       initialIndex: 0,
       length: category.length,
       child: Scaffold(
+        backgroundColor: mainBackgroundColor,
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0,
@@ -38,7 +40,7 @@ class DiscoverScreen extends StatelessWidget {
         body: ListView(
           padding: const EdgeInsets.all(20.0),
           children: [
-            const _DiscoverNews(),
+            _DiscoverNews(),
             _CategoryNews(
               category: category,
               categoryData: categoryData,
@@ -69,8 +71,6 @@ class _CategoryNewsState extends State<_CategoryNews> {
   bool _isLoading = true;
   late String? _errorMessage;
 
-  
-
   @override
   void initState() {
     super.initState();
@@ -78,12 +78,12 @@ class _CategoryNewsState extends State<_CategoryNews> {
   }
 
   Future<void> _loadNews(String category) async {
-
     final queryParameters = {
-    'country': 'in',
-    'category': category,
-    'apiKey': '9f6d210f572a43c2892e84040a32e190',
-  };
+      'country': 'in',
+      'category': category,
+      'sortBy': 'publishedAt',
+      'apiKey': '9f6d210f572a43c2892e84040a32e190',
+    };
     try {
       final article = await ApiService.fetchNews(queryParameters);
       setState(() {
@@ -218,10 +218,20 @@ class _CategoryNewsState extends State<_CategoryNews> {
   }
 }
 
-class _DiscoverNews extends StatelessWidget {
+class _DiscoverNews extends StatefulWidget {
+
   const _DiscoverNews({
     super.key,
+
   });
+
+  @override
+  State<_DiscoverNews> createState() => _DiscoverNewsState();
+}
+
+class _DiscoverNewsState extends State<_DiscoverNews> {
+
+  final TextEditingController _searchWord = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -243,6 +253,7 @@ class _DiscoverNews extends StatelessWidget {
               style: Theme.of(context).textTheme.bodySmall!),
           const SizedBox(height: 20.0),
           TextFormField(
+            controller: _searchWord,
             decoration: InputDecoration(
                 hintText: "Search",
                 fillColor: Colors.grey.shade200,
@@ -251,16 +262,18 @@ class _DiscoverNews extends StatelessWidget {
                   Icons.search,
                   color: Colors.grey,
                 ),
-                suffixIcon: RotatedBox(
-                  quarterTurns: 1,
-                  child: IconButton(
-                    onPressed: () {},
-                    icon: Icon(
-                      Icons.tune,
-                      color: Colors.grey,
-                    ),
-                  ),
-                ),
+                // suffixIcon: RotatedBox(
+                //   quarterTurns: 1,
+                //   child: IconButton(
+                //     onPressed: () {
+                //       BottomSheet(context,widget.category);
+                //     },
+                //     icon: const Icon(
+                //       Icons.tune,
+                //       color: Colors.grey,
+                //     ),
+                //   ),
+                // ),
                 border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(20.0),
                     borderSide: BorderSide.none)),
@@ -269,4 +282,138 @@ class _DiscoverNews extends StatelessWidget {
       ),
     );
   }
+
+  // Future<dynamic> BottomSheet(BuildContext context,category) {
+  //   List<String> language = [
+  //     'English',
+  //     'French',
+  //     'Arabic',
+  //     'German',
+  //     'Hebrew',
+  //     'Italian',
+  //     'Dutch / Flemish',
+  //     'Swedish',
+  //     'Chinese',
+  //   ];
+  //   int _selected = 0;
+  //   int _selectedCategory = 0;
+  //
+  //   return showModalBottomSheet(
+  //     shape: const RoundedRectangleBorder(
+  //       borderRadius: BorderRadius.vertical(
+  //         top: Radius.circular(20),
+  //       ),
+  //     ),
+  //     clipBehavior: Clip.antiAliasWithSaveLayer,
+  //     context: context,
+  //     builder: (BuildContext context) {
+  //       return StatefulBuilder(
+  //         builder: (context, setState) => SizedBox(
+  //           height: double.maxFinite,
+  //           child: Container(
+  //             color: Colors.white,
+  //             padding: const EdgeInsets.all(15),
+  //             child: Column(
+  //               mainAxisAlignment: MainAxisAlignment.start,
+  //               children: <Widget>[
+  //                 Row(
+  //                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //                   children: [
+  //                     const Text('Filter',
+  //                         style: TextStyle(
+  //                             fontSize: 24, fontWeight: FontWeight.w600)),
+  //                     CustomTag(
+  //                         backgroundColor: Colors.grey.shade200,
+  //                         children: [Text(" Done ")])
+  //                   ],
+  //                 ),
+  //                 Divider(color: Colors.grey.shade300, thickness: 1.5),
+  //                 const SizedBox(
+  //                   height: 10,
+  //                 ),
+  //                 Row(
+  //                   children: const [
+  //                     Text('Category',
+  //                         style: TextStyle(
+  //                             fontSize: 18, fontWeight: FontWeight.w300)),
+  //                     Spacer(),
+  //                   ],
+  //                 ),
+  //                 const SizedBox(
+  //                   height: 10,
+  //                 ),
+  //                 Wrap(
+  //                   runSpacing: 5.0,
+  //                   spacing: 5.0,
+  //                   children: List.generate(category.length, (index) {
+  //                     return InkWell(
+  //                       onTap: () {
+  //                         setState(() {
+  //                           _selectedCategory = index;
+  //                         });
+  //                       },
+  //                       child: CustomTag(
+  //                           backgroundColor: _selectedCategory == index
+  //                               ? primaryColor
+  //                               : primaryLightColor,
+  //                           children: [
+  //                             Text(
+  //                               category[index],
+  //                               style: TextStyle(
+  //                                   color: _selectedCategory == index
+  //                                       ? primaryLightBackgroundColor
+  //                                       : primaryColor),
+  //                             ),
+  //                           ]),
+  //                     );
+  //                   }),
+  //                 ),
+  //                 const SizedBox(
+  //                   height: 20,
+  //                 ),
+  //                 Row(
+  //                   children: const [
+  //                     Text('Language',
+  //                         style: TextStyle(
+  //                             fontSize: 18, fontWeight: FontWeight.w300)),
+  //                     Spacer(),
+  //                   ],
+  //                 ),
+  //                 const SizedBox(
+  //                   height: 10,
+  //                 ),
+  //                 Wrap(
+  //                   runSpacing: 5.0,
+  //                   spacing: 5.0,
+  //                   children: List.generate(language.length, (index) {
+  //                     return InkWell(
+  //                       onTap: () {
+  //                         setState(() {
+  //                           _selected = index;
+  //                         });
+  //                       },
+  //                       child: CustomTag(
+  //                           backgroundColor: _selected == index
+  //                               ? primaryColor
+  //                               : primaryLightColor,
+  //                           children: [
+  //                             Text(
+  //                               language[index],
+  //                               style: TextStyle(
+  //                                   color: _selected == index
+  //                                       ? primaryLightBackgroundColor
+  //                                       : primaryColor),
+  //                             ),
+  //                           ]),
+  //                     );
+  //                   }),
+  //                 ),
+  //               ],
+  //             ),
+  //           ),
+  //         ),
+  //       );
+  //     },
+  //   );
+  // }
 }

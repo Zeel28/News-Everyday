@@ -1,28 +1,26 @@
 import 'dart:convert';
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:http/http.dart';
+import 'package:flutter/material.dart';
 import '../../../model/article_model.dart';
 
-class FavoriteScreen extends StatefulWidget {
-  const FavoriteScreen({Key? key}) : super(key: key);
+class SearchScreen extends StatefulWidget {
+  const SearchScreen({Key? key}) : super(key: key);
 
   @override
-  _FavoriteScreenState createState() => _FavoriteScreenState();
+  State<SearchScreen> createState() => _SearchScreenState();
 }
 
-class _FavoriteScreenState extends State<FavoriteScreen> {
+class _SearchScreenState extends State<SearchScreen> {
+
   final TextEditingController _textEditingController = TextEditingController();
   List<Articles> _articles = [];
 
   void _searchNews(String query) async {
-    final articles = await NewsApi.searchNews(query);
+    final articles = await NewsApi.searchNews(query, "", "in");
     setState(() {
       _articles = articles;
     });
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -43,9 +41,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
           return ListTile(
             title: Text(article.title),
             subtitle: Text(article.description),
-            onTap: () {
-              // TODO: Navigate to article detail page
-            },
+            onTap: () {},
           );
         },
       ),
@@ -53,30 +49,22 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
   }
 }
 
-class IpInfoApi {
-  static Future<String?> getIpAddress() async {
-    try {
-      Response response = await http.get(Uri.parse("https://api.ipify.org/"));
-      return response.statusCode == 200 ? response.body : null;
-    } catch (e) {
-      return null;
-    }
-  }
-}
-
-
 class NewsApi {
   static const String _baseUrl = 'https://newsapi.org/v2';
   static const String _apiKey = '9f6d210f572a43c2892e84040a32e190';
 
-  static Future<List<Articles>> searchNews(String query) async {
-    final url = '$_baseUrl/everything?q=$query&apiKey=$_apiKey';
+  static Future<List<Articles>> searchNews(
+      String query, String category, String country) async {
+    final url =
+        '$_baseUrl/everything?q=$query?country=$country&category=$category&apiKey=$_apiKey';
     final response = await http.get(Uri.parse(url));
 
     if (response.statusCode == 200) {
       final json = jsonDecode(response.body);
       final List<dynamic> articlesJson = json['articles'];
-      return articlesJson.map((articleJson) => Articles.fromJson(articleJson)).toList();
+      return articlesJson
+          .map((articleJson) => Articles.fromJson(articleJson))
+          .toList();
     } else {
       print('Error response: ${response.statusCode}');
       print('Error body: ${response.body}');
