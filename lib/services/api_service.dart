@@ -16,6 +16,8 @@ class ApiService {
       final List<dynamic> newsJson = json['articles'];
       return newsJson.map((e) => Articles.fromJson(e)).toList();
     } else {
+      print('Error response: ${response.statusCode}');
+      print('Error body: ${response.body}');
       throw Exception('Failed to load news');
     }
   }

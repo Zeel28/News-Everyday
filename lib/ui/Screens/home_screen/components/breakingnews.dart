@@ -21,6 +21,7 @@ class _BreakingNewsState extends State<BreakingNews> {
   late String? _errorMessage;
   final queryParameters = {
       'country': 'in',
+      '?q': '',
       'category': '',
       'apiKey' : '9f6d210f572a43c2892e84040a32e190',
     };

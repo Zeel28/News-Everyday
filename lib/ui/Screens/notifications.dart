@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'package:http/http.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:lottie/lottie.dart';
 
-import '../../theme/colors.dart';
+import '../theme/colors.dart';
 
-class FavoriteScreen extends StatelessWidget {
-  const FavoriteScreen({Key? key}) : super(key: key);
+class NotificationScreen extends StatelessWidget {
+  const NotificationScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,9 +15,15 @@ class FavoriteScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-
+        leading: IconButton(
+          onPressed: () => Get.back(),
+          icon: const Icon(
+            Icons.arrow_back_ios,
+            color: primaryColor,
+          ),
+        ),
         centerTitle: true,
-        title: const Text("Favorite",
+        title: const Text("Notifications",
             style: TextStyle(color: primaryColor, letterSpacing: 1)),
         actions: [
           Padding(
@@ -39,15 +45,12 @@ class FavoriteScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(
-                height: 170,
-                child: Lottie.asset("assets/lottiefile/bookmark.json",
+                height: 350,
+                child: Lottie.asset("assets/lottiefile/notifications.json",
                     fit: BoxFit.fill),
               ),
-              const SizedBox(
-                height: 20,
-              ),
               const Text(
-                "Your Bookmark is empty!",
+                "No notifications found!",
                 style: TextStyle(
                     fontWeight: FontWeight.w500,
                     fontSize: 22,
@@ -57,7 +60,7 @@ class FavoriteScreen extends StatelessWidget {
                 height: 20,
               ),
               const Text(
-                "Save your favourite news here",
+                "Your haven't received any notification yet. Make sure oyu have turned on the notification from the settings.",
                 style: TextStyle(color: darkBluishColor,fontSize: 15,),
               ),
             ],
