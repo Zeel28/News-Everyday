@@ -72,8 +72,6 @@ dependencies:
   carousel_slider: ^4.2.1
   #splash screen
   splash_screen_view:
-  #Date Picker
-  syncfusion_flutter_datepicker: ^20.4.51
 
 dev_dependencies:
   flutter_test:
