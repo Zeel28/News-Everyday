@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:news_everyday/utils/message.dart';
-
 import '../../../theme/colors.dart';
 import '../PrivacyPolicy.dart';
 import '../Terms_and_conditions.dart';
@@ -54,11 +52,11 @@ class GeneralMenuList extends StatelessWidget {
               boxShadow: [
                 BoxShadow(
                   color: Colors.grey.shade200,
-                  blurRadius: 2.0, // has the effect of softening the shadow
-                  spreadRadius: 2.0, // has the effect of extending the shadow
-                  offset: Offset(
-                    5.0, // horizontal, move right 10
-                    5.0, // vertical, move down 10
+                  blurRadius: 2.0,
+                  spreadRadius: 2.0,
+                  offset: const Offset(
+                    5.0,
+                    5.0,
                   ),
                 )
               ],

@@ -210,11 +210,11 @@ class ArticleScreen extends StatelessWidget {
               child: Obx(() {
                 return pressedBool.isTrue
                     ? Icon(
-                        Icons.bookmark,
-                        color: primaryColor,
+                        Icons.favorite,
+                        color: Colors.redAccent,
                       )
                     : Icon(
-                        Icons.bookmark_add_outlined,
+                        Icons.favorite_border_outlined,
                         color: primaryColor,
                       );
               }),

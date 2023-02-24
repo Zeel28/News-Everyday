@@ -5,6 +5,7 @@ import '../../../../model/article_model.dart';
 import '../../../../services/api_service.dart';
 import '../../../widgets/image_container.dart';
 import '../../article_screen/article_screen.dart';
+import '../../details_page/DetailsScreen.dart';
 
 class BreakingNews extends StatefulWidget {
   BreakingNews({
@@ -66,9 +67,12 @@ class _BreakingNewsState extends State<BreakingNews> {
                     .headlineSmall!
                     .copyWith(fontWeight: FontWeight.bold),
               ),
-              Text(
-                "More",
-                style: Theme.of(context).textTheme.bodyLarge,
+              InkWell(
+                onTap: () => Get.to(CategoryScreen(title: "Breaking News",)),
+                child: Text(
+                  "More",
+                  style: Theme.of(context).textTheme.bodyLarge,
+                ),
               )
             ],
           ),
