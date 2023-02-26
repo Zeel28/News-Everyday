@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
+
 import 'package:news_everyday/ui/theme/colors.dart';
 import 'package:news_everyday/ui/widgets/custom_tag.dart';
 import 'package:news_everyday/utils/message.dart';
@@ -205,7 +205,9 @@ class ArticleScreen extends StatelessWidget {
                 shape: MaterialStateProperty.all(const CircleBorder()),
                 backgroundColor: MaterialStateProperty.all(primaryLightColor),
                 overlayColor:
-                    MaterialStateProperty.resolveWith<Color?>((states) {}),
+                    MaterialStateProperty.resolveWith<Color?>((states) {
+                      return null;
+                    }),
               ),
               child: Obx(() {
                 return pressedBool.isTrue

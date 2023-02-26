@@ -1,9 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import '../../../model/article_model.dart';
 import '../../../services/api_service.dart';
+import '../../../utils/message.dart';
 import '../../theme/colors.dart';
 import '../../widgets/image_container.dart';
 import '../article_screen/article_screen.dart';
@@ -122,7 +121,7 @@ class _CategoryNewsState extends State<_CategoryNews> {
             children: widget.categoryData
                 .map(
                   (tab2) => _isLoading
-                      ? const Center(child: CircularProgressIndicator())
+                      ?  Center(child: MessageDialog().progressIndicator(context))
                       : _errorMessage != null
                           ? Center(child: Text(_errorMessage!))
                           : ListView.builder(

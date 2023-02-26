@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import '../ui/Screens/authentication_pages/Login/login_screen.dart';
 import '../ui/Screens/authentication_pages/phonenumber/verifty_otp.dart';
@@ -28,36 +27,44 @@ class AuthController extends GetxController {
     if (user == null) {
       Get.offAll(() => OnBoardingScreen());
     } else {
-      await addUserToFireStore(user);
+
       Get.offAll(() => Dashboard());
     }
   }
 
+  //TODO: Add User to Fire store
   Future<void> addUserToFireStore(User user) async {
     String providerId = '';
     try {
       List<UserInfo> providerData = user.providerData;
       for (UserInfo userInfo in providerData) {
-        providerId = userInfo.providerId ;
+        providerId = userInfo.providerId;
       }
-      await FirebaseFirestore.instance.collection('usersInformation').doc(user.uid).set({
-        'name': user.displayName  ?? '',
-        'email': user.email  ?? '',
-        'phone': user.phoneNumber  ?? '',
-        'photoURL': user.photoURL  ?? '',
-        'providerId': providerId  ?? '',
+      await FirebaseFirestore.instance
+          .collection('usersInformation')
+          .doc(user.uid)
+          .set({
+        'name': user.displayName ?? '',
+        'email': user.email ?? '',
+        'phone': user.phoneNumber ?? '',
+        'photoURL': user.photoURL ?? '',
+        'providerId': providerId ,
       });
     } catch (e) {
-      MessageDialog().snackBarGetCut('Error adding user information to Firestore: $e','');
+      MessageDialog()
+          .snackBarGetCut('Error adding user information to Firestore: $e', '');
     }
   }
 
+  //TODO: Email Signup
   Future<void> signUp(String email, String password) async {
     try {
       await _auth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
+      User? user;
+      await addUserToFireStore(user!);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         MessageDialog().snackBarGetCut(
@@ -78,6 +85,7 @@ class AuthController extends GetxController {
     }
   }
 
+  //TODO: Email SignIn
   Future<void> signIn(String email, String password) async {
     try {
       await _auth.signInWithEmailAndPassword(
@@ -103,20 +111,25 @@ class AuthController extends GetxController {
       );
     }
   }
+
+  //TODO: Email Forgot Password
   Future<void> forgotPassword(String email) async {
     try {
-      await _auth.sendPasswordResetEmail(email: email).then(
+      await _auth
+          .sendPasswordResetEmail(email: email)
+          .then(
             (value) => MessageDialog().alertDialog(
-          Get.context!,
-          "Reset password email sent",
-          "You should soon receive an email allowing you to reset your password. Please make sure to check your spam and trash if you can't find the email.",
-          "Login",
-          disMissible: false,
+              Get.context!,
+              "Reset password email sent",
+              "You should soon receive an email allowing you to reset your password. Please make sure to check your spam and trash if you can't find the email.",
+              "Login",
+              disMissible: false,
               () {
-            Get.off(() => LoginScreen());
-          },
-        ),
-      ).catchError((e) {
+                Get.off(() => LoginScreen());
+              },
+            ),
+          )
+          .catchError((e) {
         MessageDialog().snackBarGetCut("Error", e);
       });
     } on FirebaseAuthException catch (e) {
@@ -136,6 +149,7 @@ class AuthController extends GetxController {
     }
   }
 
+  //TODO: Phone Number
   Future<void> phoneAuthentication(String phoneNo) async {
     await _auth.verifyPhoneNumber(
       phoneNumber: phoneNo,
@@ -168,14 +182,16 @@ class AuthController extends GetxController {
   Future<bool> verifyOTP(String otp) async {
     var credentials = await _auth.signInWithCredential(
         PhoneAuthProvider.credential(
-            verificationId: this.verificationId.value, smsCode: otp));
+            verificationId: verificationId.value, smsCode: otp));
     return credentials.user != null ? true : false;
   }
 
+  //TODO: Sign Out
   Future<void> loginOut() async {
     await _auth.signOut();
   }
 }
+
 class SocialAuth {
   //TODO: Google SignIn
   Future<UserCredential> signInWithGoogle() async {
@@ -188,7 +204,7 @@ class SocialAuth {
 
     // Create a new credential
     final credential = GoogleAuthProvider.credential(
-      accessToken: googleAuth?.accessToken ,
+      accessToken: googleAuth?.accessToken,
       idToken: googleAuth?.idToken,
     );
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../../../controller/fetchNews.dart';
+import '../../../../controller/fetch_news.dart';
 import '../../../../model/news_art.dart';
+import '../../../../utils/message.dart';
 import '../../../theme/colors.dart';
 import 'widget/NewsContainer.dart';
 
@@ -15,7 +16,7 @@ class _NewsFeedState extends State<NewsFeed> {
   bool isLoading = true;
   late NewsArt newsArt;
 
-  GetNews() async {
+  getNews() async {
     newsArt = await FetchNews.fetchNews();
     setState(() {
       isLoading = false;
@@ -24,7 +25,7 @@ class _NewsFeedState extends State<NewsFeed> {
 
   @override
   void initState() {
-    GetNews();
+    getNews();
     // TODO: implement initState
 
     super.initState();
@@ -53,10 +54,10 @@ class _NewsFeedState extends State<NewsFeed> {
             setState(() {
               isLoading = true;
             });
-            GetNews();
+            getNews();
           },
           itemBuilder: (context, index) {
-            return isLoading ? const Center(child: CircularProgressIndicator(),): FeedPage(
+            return isLoading ?  Center(child: MessageDialog().progressIndicator(context),): FeedPage(
               imageUrl: newsArt.imagUrl,
               newsHeand: newsArt.newsHead,
               newsDec: newsArt.newsDes,

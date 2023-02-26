@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
+
 import '../../../theme/colors.dart';
-import '../PrivacyPolicy.dart';
-import '../Terms_and_conditions.dart';
+import '../privacy_policy.dart';
+import '../terms_and_conditions.dart';
 
 class GeneralMenuList extends StatelessWidget {
   GeneralMenuList({Key? key}) : super(key: key);

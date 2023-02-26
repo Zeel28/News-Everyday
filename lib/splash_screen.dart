@@ -1,7 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
+
 import 'package:news_everyday/utils/message.dart';
 import 'package:splash_screen_view/SplashScreenView.dart';
 
@@ -42,7 +42,7 @@ class App extends StatelessWidget {
           if (snapshot.hasError) {
             MessageDialog().snackBarGetCut("Error", "Something Went Wrong");
           }
-          return const Center(child: CircularProgressIndicator(),);
+          return Center(child: MessageDialog().progressIndicator(context),);
         },
       ),
     );

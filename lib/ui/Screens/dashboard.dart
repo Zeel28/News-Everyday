@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../theme/colors.dart';
 import 'Discover/discover_screen.dart';
 import 'Favorite/favorite_screen.dart';
-import 'Profile/Profile_page.dart';
+import 'Profile/profile_page.dart';
 import 'feed/Views/newsfeed.dart';
 import 'home_screen/home_screen.dart';
 

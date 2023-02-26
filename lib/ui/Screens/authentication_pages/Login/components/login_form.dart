@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
+
 import '../../../../../controller/auth_controller.dart';
 import '../../../../theme/colors.dart';
 import '../../Forgot_screen/forgot_password.dart';

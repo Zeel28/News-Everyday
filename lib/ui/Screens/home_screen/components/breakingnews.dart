@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
+
 import '../../../../model/article_model.dart';
 import '../../../../services/api_service.dart';
+import '../../../../utils/message.dart';
 import '../../../widgets/image_container.dart';
 import '../../article_screen/article_screen.dart';
 import '../../details_page/DetailsScreen.dart';
@@ -82,7 +83,7 @@ class _BreakingNewsState extends State<BreakingNews> {
           SizedBox(
             height: 220,
             child: _isLoading
-                ? const Center(child: CircularProgressIndicator())
+                ?  Center(child: MessageDialog().progressIndicator(context))
                 : _errorMessage != null
                     ? Center(child: Text(_errorMessage!))
                     : ListView.builder(
@@ -197,7 +198,7 @@ class _BreakingNewsState extends State<BreakingNews> {
             //       );
             //     }
             //     return const Center(
-            //       child: CircularProgressIndicator(),
+            //       child: MessageDialog().progressIndicator(context),
             //     );
             //   },
             // ),

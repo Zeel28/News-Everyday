@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
+
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../theme/colors.dart';
 import '../Welcome/welcome_screen.dart';
@@ -54,7 +54,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
         detectionText:
             "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and "),
   ];
-  int _curr = 0;
+
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +66,6 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
             controller: _controller,
             onPageChanged: (value) {
               setState(() {
-                _curr = value;
                 onLastPage = (value == 3);
               });
             },

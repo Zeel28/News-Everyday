@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fl_country_code_picker/fl_country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
+
 import 'package:news_everyday/controller/auth_controller.dart';
 import 'package:news_everyday/utils/message.dart';
 import '../../../theme/colors.dart';
