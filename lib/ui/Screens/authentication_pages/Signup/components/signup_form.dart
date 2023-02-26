@@ -2,7 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import '../../../../../firebase/auth_controller.dart';
+import '../../../../../controller/auth_controller.dart';
 import '../../../../theme/colors.dart';
 import '../../../Profile/PrivacyPolicy.dart';
 import '../../../Profile/Terms_and_conditions.dart';
@@ -70,7 +70,7 @@ class SignUpForm extends StatelessWidget {
             onPressed: () {
 
               if (_formKey.currentState!.validate()) {}
-              AuthController.instance.signUp(
+              AuthController().signUp(
                   emailController.text.trim(), passwordController.text.trim());
             },
             child: Text(

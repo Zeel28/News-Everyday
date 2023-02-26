@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:news_everyday/firebase/auth_controller.dart';
+import 'package:news_everyday/controller/auth_controller.dart';
 import 'package:news_everyday/utils/message.dart';
 
 import '../phonenumber/numeric_pad.dart';

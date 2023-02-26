@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:lottie/lottie.dart';
-import 'package:news_everyday/firebase/auth_controller.dart';
+import 'package:news_everyday/controller/auth_controller.dart';
 import '../../../theme/colors.dart';
 
 class ForgotPassword extends StatefulWidget {
@@ -132,7 +132,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                           child: ElevatedButton(
                             onPressed: () async {
                               if (_formKey.currentState!.validate()) {}
-                              AuthController.instance.forgotPassword(forgotEmailController.text.trim(), context);
+                              AuthController().forgotPassword(forgotEmailController.text.trim());
                               // final _status = await resetPassword(
                               //     email: forgotEmailController.text.trim());
                               // if (_status == AuthStatus.successful) {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import '../../../../../firebase/auth_controller.dart';
+import '../../../../../controller/auth_controller.dart';
 import '../../../../theme/colors.dart';
 import '../../Forgot_screen/forgot_password.dart';
 import '../../Signup/signup_screen.dart';
@@ -71,8 +71,8 @@ class LoginForm extends StatelessWidget {
           ElevatedButton(
             onPressed: () async {
               if (_formKey.currentState!.validate()) {}
-              AuthController.instance.signIn(emailController.text.trim(),
-                  passwordController.text.trim(), context);
+              AuthController().signIn(emailController.text.trim(),
+                  passwordController.text.trim());
             },
             child: Text(
               "Login".toUpperCase(),

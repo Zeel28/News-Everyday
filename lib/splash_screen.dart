@@ -5,7 +5,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:news_everyday/utils/message.dart';
 import 'package:splash_screen_view/SplashScreenView.dart';
 
-import 'firebase/auth_controller.dart';
+import 'controller/auth_controller.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({Key? key}) : super(key: key);

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../../api/controller/fetchNews.dart';
+import '../../../../controller/fetchNews.dart';
 import '../../../../model/news_art.dart';
 import '../../../theme/colors.dart';
 import 'widget/NewsContainer.dart';

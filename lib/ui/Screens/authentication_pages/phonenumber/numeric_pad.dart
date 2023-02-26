@@ -3,7 +3,7 @@ import 'package:fl_country_code_picker/fl_country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:news_everyday/firebase/auth_controller.dart';
+import 'package:news_everyday/controller/auth_controller.dart';
 import 'package:news_everyday/utils/message.dart';
 import '../../../theme/colors.dart';
 import '../../dashboard.dart';
@@ -150,7 +150,7 @@ class _LoginWithPhoneNumberState extends State<LoginWithPhoneNumber> {
                               finalPhonenumber =
                               "${countryCode!.dialCode} ${phoneNumberController.text.trim()}";
                               if (_formKey.currentState!.validate()) {
-                                AuthController.instance.phoneAuthentication(
+                                AuthController().phoneAuthentication(
                                     finalPhonenumber.trim());
                               } else {
                                 MessageDialog().snackBarGetCut(
@@ -174,14 +174,9 @@ class _LoginWithPhoneNumberState extends State<LoginWithPhoneNumber> {
                               ),
                             ),
                           ),
-                          child: Padding(
+                          child: const Padding(
                             padding: EdgeInsets.all(14.0),
-                            child: AuthController.isLoading
-                                ? CircularProgressIndicator(
-                              strokeWidth: 3,
-                              color: Colors.white,
-                            )
-                                : Text(
+                            child: Text(
                               "Send",
                               style: TextStyle(
                                   color: Colors.white, fontSize: 20),
@@ -243,7 +238,7 @@ class OTPController extends GetxController {
   static OTPController get instance => Get.find();
 
   void verifyOTP(String otp) async {
-    var isVerified = await AuthController.instance.verifyOTP(otp);
+    var isVerified = await AuthController().verifyOTP(otp);
     isVerified ? Get.offAll(const Dashboard()) : Get.back();
   }
 }

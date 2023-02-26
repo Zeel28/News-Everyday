@@ -1,126 +1,141 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:news_everyday/utils/message.dart';
 import '../ui/Screens/authentication_pages/Login/login_screen.dart';
 import '../ui/Screens/authentication_pages/phonenumber/verifty_otp.dart';
 import '../ui/Screens/dashboard.dart';
 import '../ui/Screens/onboarding_screens/onboarding_screen.dart';
+import '../utils/message.dart';
+
 class AuthController extends GetxController {
-  static var isLoading = false;
+  static AuthController get to => Get.find();
 
-  static AuthController instance = Get.find();
+  final _user = Rxn<User>();
+  final _auth = FirebaseAuth.instance;
 
-  late Rx<User?> _user;
-  FirebaseAuth _auth = FirebaseAuth.instance;
-
-  var verificationId = ''.obs;
+  final verificationId = ''.obs;
 
   @override
   void onReady() {
     super.onReady();
-    _user = Rx<User?>(_auth.currentUser);
-    _user.bindStream(_auth.userChanges());
     ever(_user, _initialScreen);
+    _user.bindStream(_auth.userChanges());
   }
 
-  _initialScreen(User? user) async {
+  void _initialScreen(User? user) async {
     if (user == null) {
-      Get.offAll(() => const OnBoardingScreen());
+      Get.offAll(() => OnBoardingScreen());
     } else {
-      // print(user);
-      // UserInfo? zx;
-      // addUser(user,zx);
-
-
+      await addUserToFireStore(user);
       Get.offAll(() => Dashboard());
-
     }
   }
 
-  // Future<void> addUser(User user, UserInfo? zx) {
-  //   CollectionReference zeel = FirebaseFirestore.instance.collection('users_information');
-  //   return zeel
-  //       .doc(user.uid)
-  //       .set({
-  //         'id': user.uid,
-  //         'full_name': user.displayName,
-  //         'email': user.email,
-  //         'emailVerified': user.emailVerified,
-  //         'phoneNumber': user.phoneNumber,
-  //         'photoURL': user.photoURL,
-  //         'providerId': zx?.providerId.toString(),
-  //         'uid': user.uid
-  //       })
-  //       .onError((error, stackTrace) {print("Failed to add user: $error");});
-  // }
+  Future<void> addUserToFireStore(User user) async {
+    String providerId = '';
+    try {
+      List<UserInfo> providerData = user.providerData;
+      for (UserInfo userInfo in providerData) {
+        providerId = userInfo.providerId ;
+      }
+      await FirebaseFirestore.instance.collection('usersInformation').doc(user.uid).set({
+        'name': user.displayName  ?? '',
+        'email': user.email  ?? '',
+        'phone': user.phoneNumber  ?? '',
+        'photoURL': user.photoURL  ?? '',
+        'providerId': providerId  ?? '',
+      });
+    } catch (e) {
+      MessageDialog().snackBarGetCut('Error adding user information to Firestore: $e','');
+    }
+  }
 
-  //TODO: Email and Password Signup
-  Future<void> signUp(String email, password) async {
+  Future<void> signUp(String email, String password) async {
     try {
       await _auth.createUserWithEmailAndPassword(
-          email: email, password: password);
+        email: email,
+        password: password,
+      );
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         MessageDialog().snackBarGetCut(
-            "Account creation failed", "Please enter Strong Password");
+          "Account creation failed",
+          "Please enter a strong password",
+        );
       } else if (e.code == 'email-already-in-use') {
-        MessageDialog().snackBarGetCut("Account creation failed",
-            "The account already exists for that email.");
+        MessageDialog().snackBarGetCut(
+          "Account creation failed",
+          "The account already exists for that email.",
+        );
       }
     } catch (e) {
-      MessageDialog().snackBarGetCut("Account creation failed", "");
+      MessageDialog().snackBarGetCut(
+        "Account creation failed",
+        "",
+      );
     }
   }
 
-  //TODO: Email and Password SignIn
-  Future<void> signIn(String email, password, context) async {
+  Future<void> signIn(String email, String password) async {
     try {
-      await _auth.signInWithEmailAndPassword(email: email, password: password);
+      await _auth.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         MessageDialog().snackBarGetCut(
-            "Login Failed", "Check your email or create an account.");
+          "Login Failed",
+          "Check your email or create an account.",
+        );
       } else if (e.code == 'wrong-password') {
-        MessageDialog().snackBarGetCut("Login Failed", "Wrong password ");
+        MessageDialog().snackBarGetCut(
+          "Login Failed",
+          "Wrong password",
+        );
       }
     } catch (e) {
-      MessageDialog().snackBarGetCut("Login Failed", "");
+      MessageDialog().snackBarGetCut(
+        "Login Failed",
+        "",
+      );
     }
   }
-
-  //TODO: Forgot Password
-  Future<void> forgotPassword(String email, context) async {
+  Future<void> forgotPassword(String email) async {
     try {
-      await _auth
-          .sendPasswordResetEmail(email: email)
-          .then((value) => MessageDialog().alertDialog(
-                context,
-                "Reset password email sent",
-                "You should soon receive an email allowing you to reset your password. Please make sure to check your spam and trash if you can't find the email.",
-                "Login",
-                disMissible: false,
-                () {
-                  Get.off(() => LoginScreen());
-                },
-              ))
-          .catchError((e) {
+      await _auth.sendPasswordResetEmail(email: email).then(
+            (value) => MessageDialog().alertDialog(
+          Get.context!,
+          "Reset password email sent",
+          "You should soon receive an email allowing you to reset your password. Please make sure to check your spam and trash if you can't find the email.",
+          "Login",
+          disMissible: false,
+              () {
+            Get.off(() => LoginScreen());
+          },
+        ),
+      ).catchError((e) {
         MessageDialog().snackBarGetCut("Error", e);
       });
-    }on FirebaseAuthException catch (e) {
+    } on FirebaseAuthException catch (e) {
       if (e.code == 'invalid-email') {
-        MessageDialog().snackBarGetCut("Invalid Email",
-            "Please Enter Valid Email Address");
-      }else if (e.code == 'id-token-expired') {
-        MessageDialog().snackBarGetCut("Invalid Verification",
-            "Sent link are expired");
+        MessageDialog().snackBarGetCut(
+          "Invalid Email",
+          "Please Enter Valid Email Address",
+        );
+      } else if (e.code == 'id-token-expired') {
+        MessageDialog().snackBarGetCut(
+          "Invalid Verification",
+          "Sent link are expired",
+        );
       }
     } catch (e) {
       MessageDialog().snackBarGetCut("Error", e.toString());
     }
   }
 
-  //TODO: Phone number Authentication
   Future<void> phoneAuthentication(String phoneNo) async {
     await _auth.verifyPhoneNumber(
       phoneNumber: phoneNo,
@@ -131,8 +146,9 @@ class AuthController extends GetxController {
       verificationFailed: (error) {
         if (error.code == 'invalid-phone-number') {
           MessageDialog().snackBarGetCut(
-              "The provided phone number is not valid.",
-              "Please enter valid phone number");
+            "The provided phone number is not valid.",
+            "Please enter valid phone number",
+          );
         } else {
           MessageDialog()
               .snackBarGetCut("Error", "Something went wrong. Try again!");
@@ -156,12 +172,10 @@ class AuthController extends GetxController {
     return credentials.user != null ? true : false;
   }
 
-  //TODO: Sign out
   Future<void> loginOut() async {
     await _auth.signOut();
   }
 }
-
 class SocialAuth {
   //TODO: Google SignIn
   Future<UserCredential> signInWithGoogle() async {
