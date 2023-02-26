@@ -23,7 +23,7 @@ class AuthController extends GetxController {
     _user.bindStream(_auth.userChanges());
   }
 
-      User? user;
+  User? user;
   void _initialScreen(User? user) async {
     if (user == null) {
       Get.offAll(() => OnBoardingScreen());
@@ -32,6 +32,9 @@ class AuthController extends GetxController {
       Get.offAll(() => Dashboard());
     }
   }
+
+
+
 
   //TODO: Add User to Fire store
   Future<void> addUserToFireStore(User user) async {

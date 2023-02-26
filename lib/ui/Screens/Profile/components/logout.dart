@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:slide_to_act/slide_to_act.dart';
-
 import '../../../../controller/auth_controller.dart';
 
 class LogoutButton extends StatefulWidget {

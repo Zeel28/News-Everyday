@@ -6,7 +6,7 @@ import '../../theme/colors.dart';
 import 'components/Gereral_section.dart';
 import 'components/feedback_section.dart';
 import 'components/logout.dart';
-import 'components/profile_header.dart';
+import 'components/profile_card.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -49,19 +49,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
           child: _userData != null
               ? Container(
                   padding:
-                      const EdgeInsets.symmetric(vertical: 10, horizontal: 12),
+                      const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text('Name: ${_userData!['name']}'),
-                          Text('Email: ${_userData!['email']}'),
-                          // display other user data here
-                        ],
-                      ),
+                      ProfileCard(userData: _userData),
                       const SizedBox(
                         height: 10,
                       ),
@@ -113,7 +106,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ],
                   ),
                 )
-              : Center(child: MessageDialog().progressIndicator(context),),
+              : Center(
+                  child: MessageDialog().progressIndicator(context),
+                ),
         ),
       ),
     );
