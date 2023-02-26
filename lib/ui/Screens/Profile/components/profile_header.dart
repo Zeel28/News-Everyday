@@ -1,58 +1,17 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
-import '../../../theme/colors.dart';
+class ProfileCard extends StatelessWidget {
 
-class ProfileHeaderSection extends StatelessWidget {
-   ProfileHeaderSection({
-    super.key,
-  });
+  List userData = [];
 
-
-  final user = FirebaseAuth.instance.currentUser;
+   ProfileCard({Key? key, required this.userData}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 200,
-      padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children:  [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              CircleAvatar(minRadius: 37,backgroundImage: NetworkImage(user!.photoURL.toString()),),
-              SizedBox(width: 20,),
-              Column(
-                children: [
-                  Text(user!.displayName.toString()),
-                  Text("@zeel_bhander")
-                ],
-              )
-            ],
-          ),
-          ListTile(
-            leading: Icon(Icons.call),
-            title: Text(
-              "+91 8160146729",
-              style: TextStyle(
-                  color: primaryColor,
-                  fontWeight: FontWeight.w400,
-                  fontSize: 16),
-            ),
-          ),
-          ListTile(
-            leading: Icon(Icons.mail_rounded),
-            title: Text(
-              user!.email.toString(),
-              style: TextStyle(
-                  color: primaryColor,
-                  fontWeight: FontWeight.w400,
-                  fontSize: 16),
-            ),
-          ),
+        children: [
+          // Text(name),
         ],
       ),
     );

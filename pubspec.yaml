@@ -72,6 +72,8 @@ dependencies:
   carousel_slider: ^4.2.1
   #splash screen
   splash_screen_view:
+  # Network Image
+  cached_network_image: ^3.2.3
 
 dev_dependencies:
   flutter_test:

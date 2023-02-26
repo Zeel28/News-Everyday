@@ -20,7 +20,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
   @override
   Widget build(BuildContext context) {
     WidgetsFlutterBinding.ensureInitialized();
@@ -38,7 +37,7 @@ class _MyAppState extends State<MyApp> {
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             elevation: 0,
-            primary: primaryColor,
+            backgroundColor: primaryColor,
             shape: const StadiumBorder(),
             maximumSize: const Size(double.infinity, 56),
             minimumSize: const Size(double.infinity, 56),
@@ -71,5 +70,3 @@ class _MyAppState extends State<MyApp> {
     );
   }
 }
-
-

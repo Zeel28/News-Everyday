@@ -20,7 +20,7 @@ class Articles {
       description: json['description'] ?? '',
       urlToImage: json['urlToImage'] ??
           "https://static.vecteezy.com/system/resources/thumbnails/006/299/370/original/world-breaking-news-digital-earth-hud-rotating-globe-rotating-free-video.jpg",
-      url: json['url'] ?? '',
+      url: json['url'] ?? "https://news.google.com/home?hl=en-IN&gl=IN&ceid=IN:en",
       publishedAt: json['publishedAt'] ?? '',
       content: json['content'] ?? '',
     );

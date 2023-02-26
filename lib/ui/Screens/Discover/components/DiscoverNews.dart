@@ -8,7 +8,7 @@ import '../../../../model/article_model.dart';
 import '../../article_screen/article_screen.dart';
 
 class DiscoverNews extends StatefulWidget {
-  DiscoverNews({
+  const DiscoverNews({
     super.key,
   });
 
@@ -39,7 +39,7 @@ class _DiscoverNewsState extends State<DiscoverNews> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text('Discover',
-                    style: Theme.of(context).textTheme.headline4!.copyWith(
+                    style: Theme.of(context).textTheme.headlineMedium!.copyWith(
                         color: Colors.black, fontWeight: FontWeight.bold)),
                 const SizedBox(
                   height: 5,
@@ -123,7 +123,7 @@ class _DiscoverNewsState extends State<DiscoverNews> {
                                 const EdgeInsets.symmetric(horizontal: 10.0),
                             child: Column(
                               children: [
-                                Text(article.title+"..",
+                                Text("${article.title}..",
                                     maxLines: 3,
                                     style: Theme.of(context)
                                         .textTheme

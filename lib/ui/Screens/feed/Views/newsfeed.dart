@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../../controller/fetch_news.dart';
-import '../../../../model/news_art.dart';
+import '../../../../services/fetch_news.dart';
+import '../../../../model/article_model.dart';
 import '../../../../utils/message.dart';
 import '../../../theme/colors.dart';
 import 'widget/NewsContainer.dart';
@@ -14,7 +14,7 @@ class NewsFeed extends StatefulWidget {
 
 class _NewsFeedState extends State<NewsFeed> {
   bool isLoading = true;
-  late NewsArt newsArt;
+  late Articles newsArt;
 
   getNews() async {
     newsArt = await FetchNews.fetchNews();
@@ -58,11 +58,11 @@ class _NewsFeedState extends State<NewsFeed> {
           },
           itemBuilder: (context, index) {
             return isLoading ?  Center(child: MessageDialog().progressIndicator(context),): FeedPage(
-              imageUrl: newsArt.imagUrl,
-              newsHeand: newsArt.newsHead,
-              newsDec: newsArt.newsDes,
-              newsCnt: newsArt.newsCnt,
-              newsUrl: newsArt.newsUrl,
+              imageUrl: newsArt.urlToImage,
+              newsHeand: newsArt.title,
+              newsDec: newsArt.description,
+              newsCnt: newsArt.content,
+              newsUrl: newsArt.url,
             );
           },
         ));

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../theme/colors.dart';
-import '../privacy_policy.dart';
-import '../terms_and_conditions.dart';
+import '../pages/privacy_policy.dart';
+import '../pages/terms_and_conditions.dart';
 
 class GeneralMenuList extends StatelessWidget {
   GeneralMenuList({Key? key}) : super(key: key);
@@ -51,9 +51,9 @@ class GeneralMenuList extends StatelessWidget {
               borderRadius: BorderRadius.circular(40),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.grey.shade200,
-                  blurRadius: 2.0,
-                  spreadRadius: 2.0,
+                  color: Colors.grey.shade100,
+                  blurRadius: 1.5,
+                  spreadRadius: 1.5,
                   offset: const Offset(
                     5.0,
                     5.0,

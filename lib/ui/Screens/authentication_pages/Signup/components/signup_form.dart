@@ -4,8 +4,8 @@ import 'package:get/get.dart';
 
 import '../../../../../controller/auth_controller.dart';
 import '../../../../theme/colors.dart';
-import '../../../Profile/privacy_policy.dart';
-import '../../../Profile/terms_and_conditions.dart';
+import '../../../Profile/pages/privacy_policy.dart';
+import '../../../Profile/pages/terms_and_conditions.dart';
 import '../../Login/login_screen.dart';
 import '../../components/already_have_an_account_acheck.dart';
 

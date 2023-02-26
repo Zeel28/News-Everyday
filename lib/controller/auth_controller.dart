@@ -23,11 +23,12 @@ class AuthController extends GetxController {
     _user.bindStream(_auth.userChanges());
   }
 
+      User? user;
   void _initialScreen(User? user) async {
     if (user == null) {
       Get.offAll(() => OnBoardingScreen());
     } else {
-
+      await addUserToFireStore(user!);
       Get.offAll(() => Dashboard());
     }
   }
@@ -44,10 +45,10 @@ class AuthController extends GetxController {
           .collection('usersInformation')
           .doc(user.uid)
           .set({
-        'name': user.displayName ?? '',
-        'email': user.email ?? '',
-        'phone': user.phoneNumber ?? '',
-        'photoURL': user.photoURL ?? '',
+        'name': user.displayName ?? '-',
+        'email': user.email ?? '-',
+        'phone': user.phoneNumber ?? '-',
+        'photoURL': user.photoURL ?? 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png',
         'providerId': providerId ,
       });
     } catch (e) {
@@ -63,8 +64,6 @@ class AuthController extends GetxController {
         email: email,
         password: password,
       );
-      User? user;
-      await addUserToFireStore(user!);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         MessageDialog().snackBarGetCut(
