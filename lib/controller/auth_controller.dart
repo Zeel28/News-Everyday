@@ -28,7 +28,7 @@ class AuthController extends GetxController {
     if (user == null) {
       Get.offAll(() => OnBoardingScreen());
     } else {
-      await addUserToFireStore(user!);
+      await addUserToFireStore(user);
       Get.offAll(() => Dashboard());
     }
   }

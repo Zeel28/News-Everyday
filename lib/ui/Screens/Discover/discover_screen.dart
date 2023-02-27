@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import '../../../model/article_model.dart';
 import '../../../services/api_service.dart';
 import '../../../utils/message.dart';
 import '../../theme/colors.dart';
-import '../../widgets/image_container.dart';
-import '../article_screen/article_screen.dart';
+import '../../widgets/list_title/vertical_list_title.dart';
 import 'components/DiscoverNews.dart';
 
 class DiscoverScreen extends StatefulWidget {
@@ -18,14 +16,6 @@ class DiscoverScreen extends StatefulWidget {
 class _DiscoverScreenState extends State<DiscoverScreen> {
   @override
   Widget build(BuildContext context) {
-    List<String> category = [
-      'Business',
-      'Entertainment',
-      'General',
-      'Science',
-      'Sports',
-      'Technology'
-    ];
 
     return Scaffold(
       backgroundColor: mainBackgroundColor,
@@ -39,11 +29,11 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
         ),
       ),
       body: ListView(
-          padding: const EdgeInsets.all(15.0),
-          children: [
-            DiscoverNews(),
-          ],
-        ),
+        padding: const EdgeInsets.all(15.0),
+        children: [
+          DiscoverNews(),
+        ],
+      ),
     );
   }
 }
@@ -121,88 +111,15 @@ class _CategoryNewsState extends State<_CategoryNews> {
             children: widget.categoryData
                 .map(
                   (tab2) => _isLoading
-                      ?  Center(child: MessageDialog().progressIndicator(context))
+                      ? Center(
+                          child: MessageDialog().progressIndicator(context))
                       : _errorMessage != null
                           ? Center(child: Text(_errorMessage!))
                           : ListView.builder(
                               shrinkWrap: true,
                               itemCount: categoryArticles.length,
                               itemBuilder: (context, index) {
-                                return InkWell(
-                                  onTap: () {
-                                    Get.to(
-                                        () => ArticleScreen(
-                                              article: categoryArticles[index],
-                                            ),
-                                        duration:
-                                            const Duration(milliseconds: 500),
-                                        transition: Transition.cupertinoDialog);
-                                  },
-                                  child: Row(
-                                    children: [
-                                      ImageContainer(
-                                          width: 80,
-                                          height: 80,
-                                          margin: const EdgeInsets.all(10.0),
-                                          boarderRadius: 5,
-                                          imageUrl: categoryArticles[index]
-                                              .urlToImage),
-                                      Expanded(
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Text(
-                                              categoryArticles[index].title,
-                                              maxLines: 2,
-                                              overflow: TextOverflow.clip,
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .bodyLarge!
-                                                  .copyWith(
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                            ),
-                                            const SizedBox(
-                                              height: 10,
-                                            ),
-                                            Row(
-                                              children: [
-                                                const Icon(
-                                                  Icons.schedule,
-                                                  size: 18,
-                                                ),
-                                                const SizedBox(
-                                                  width: 5,
-                                                ),
-                                                Text("2 hours ago",
-                                                    maxLines: 2,
-                                                    style: Theme.of(context)
-                                                        .textTheme
-                                                        .bodySmall!),
-                                                const SizedBox(
-                                                  width: 20,
-                                                ),
-                                                const Icon(
-                                                  Icons.visibility,
-                                                  size: 18,
-                                                ),
-                                                const SizedBox(
-                                                  width: 5,
-                                                ),
-                                                Text("100 views",
-                                                    style: TextStyle(
-                                                        fontSize: 12)),
-                                              ],
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                );
+                                return VListTitle(demo: categoryArticles[index]);
                               },
                             ),
                 )
@@ -213,3 +130,5 @@ class _CategoryNewsState extends State<_CategoryNews> {
     );
   }
 }
+
+

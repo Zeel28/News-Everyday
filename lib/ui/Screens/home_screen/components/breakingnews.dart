@@ -1,10 +1,10 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../../../model/article_model.dart';
 import '../../../../services/api_service.dart';
 import '../../../../utils/message.dart';
-import '../../../widgets/image_container.dart';
+import '../../../widgets/list_title/horizontal_list_tile.dart';
 import '../../article_screen/article_screen.dart';
 import '../../details_page/DetailsScreen.dart';
 
@@ -22,11 +22,11 @@ class _BreakingNewsState extends State<BreakingNews> {
   bool _isLoading = true;
   late String? _errorMessage;
   final queryParameters = {
-      'country': 'in',
-      '?q': '',
-      'category': '',
-      'apiKey' : '9f6d210f572a43c2892e84040a32e190',
-    };
+    'country': 'in',
+    '?q': '',
+    'category': '',
+    'apiKey': '9f6d210f572a43c2892e84040a32e190',
+  };
 
   @override
   void initState() {
@@ -51,7 +51,6 @@ class _BreakingNewsState extends State<BreakingNews> {
     }
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -69,7 +68,9 @@ class _BreakingNewsState extends State<BreakingNews> {
                     .copyWith(fontWeight: FontWeight.bold),
               ),
               InkWell(
-                onTap: () => Get.to(CategoryScreen(title: "Breaking News",)),
+                onTap: () => Get.to(CategoryScreen(
+                  title: "Breaking News",
+                )),
                 child: Text(
                   "More",
                   style: Theme.of(context).textTheme.bodyLarge,
@@ -83,7 +84,7 @@ class _BreakingNewsState extends State<BreakingNews> {
           SizedBox(
             height: 220,
             child: _isLoading
-                ?  Center(child: MessageDialog().progressIndicator(context))
+                ? Center(child: MessageDialog().progressIndicator(context))
                 : _errorMessage != null
                     ? Center(child: Text(_errorMessage!))
                     : ListView.builder(
@@ -91,121 +92,13 @@ class _BreakingNewsState extends State<BreakingNews> {
                         scrollDirection: Axis.horizontal,
                         itemCount: finalArticles.length,
                         itemBuilder: (context, index) {
-                          return Container(
-                            padding: EdgeInsets.all(7),
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(10),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.shade200,
-                                  blurRadius: 2.0,
-                                  spreadRadius: 2.0,
-                                  offset: const Offset(
-                                    5.0,
-                                    5.0,
-                                  ),
-                                )
-                              ],
-                            ),
-                            width: MediaQuery.of(context).size.width * 0.6,
-                            margin: const EdgeInsets.only(right: 10),
-                            child: InkWell(
-                              onTap: () {
-                                Get.to(() => ArticleScreen(
-                                      article: finalArticles[index],
-                                    ), duration: const Duration(milliseconds: 500), //duration of transitions, default 1 sec
-                                    transition: Transition.cupertinoDialog);
-                              },
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  ImageContainer(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.6,
-                                      imageUrl:
-                                          finalArticles[index].urlToImage),
-                                  const SizedBox(
-                                    height: 10,
-                                  ),
-                                  Text(finalArticles[index].title,
-                                      maxLines: 2,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodyLarge!
-                                          .copyWith(
-                                              fontWeight: FontWeight.bold,
-                                              height: 1.5)),
-                                  const SizedBox(
-                                    height: 5,
-                                  ),
-                                  Text(
-                                      "${finalArticles[index].publishedAt.substring(0, 10)} ago",
-                                      maxLines: 2,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodySmall!),
-                                ],
-                              ),
-                            ),
-                          );
+                          return HListTitle(article: finalArticles[index]);
                         },
                       ),
-            // child: FutureBuilder<List<Articles>>(
-            //   future: ApiService.fetchNews(),
-            //   builder: (context, snapshot) {
-            //     if (snapshot.hasData) {
-            //       return ListView.builder(
-            //         scrollDirection: Axis.horizontal,
-            //         itemCount: snapshot.data?.length,
-            //         itemBuilder: (context, index) {
-            //           final article = snapshot.data![index];
-            //           return Container(
-            //             width: MediaQuery.of(context).size.width * 0.5,
-            //             margin: const EdgeInsets.only(right: 10),
-            //             child: Column(
-            //               crossAxisAlignment: CrossAxisAlignment.start,
-            //               children: [
-            //                 ImageContainer(
-            //                     width: MediaQuery.of(context).size.width * 0.5,
-            //                     imageUrl: snapshot.data![index].urlToImage),
-            //                 const SizedBox(
-            //                   height: 10,
-            //                 ),
-            //                 Text(snapshot.data![index].title,
-            //                     maxLines: 2,
-            //                     style: Theme.of(context)
-            //                         .textTheme
-            //                         .bodyLarge!
-            //                         .copyWith(
-            //                             fontWeight: FontWeight.bold,
-            //                             height: 1.5)),
-            //                 const SizedBox(
-            //                   height: 5,
-            //                 ),
-            //                 Text(
-            //                     "${snapshot.data![index].publishedAt.substring(0, 10)} ago",
-            //                     maxLines: 2,
-            //                     style: Theme.of(context).textTheme.bodySmall!),
-            //               ],
-            //             ),
-            //           );
-            //         },
-            //       );
-            //     } else if (snapshot.hasError) {
-            //       return Center(
-            //         child: Text('${snapshot.error}'),
-            //       );
-            //     }
-            //     return const Center(
-            //       child: MessageDialog().progressIndicator(context),
-            //     );
-            //   },
-            // ),
           ),
-
         ],
       ),
     );
   }
 }
+

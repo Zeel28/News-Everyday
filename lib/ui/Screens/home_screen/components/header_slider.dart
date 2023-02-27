@@ -1,8 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-
 import '../../../theme/colors.dart';
 import '../../details_page/DetailsScreen.dart';
 
@@ -26,7 +24,7 @@ class _HeaderSliderState extends State<HeaderSlider> {
         .map((item) => InkWell(
               onTap: () => Get.to(CategoryScreen(title: widget.nameList[widget.imgList.indexOf(item)],)),
               child: ClipRRect(
-                borderRadius: BorderRadius.all(
+                borderRadius: const BorderRadius.all(
                   Radius.circular(20.0),
                 ),
                 child: Stack(
@@ -128,22 +126,3 @@ class _HeaderSliderState extends State<HeaderSlider> {
     );
   }
 }
-
-// CarouselSlider(
-//   items: imgList
-//       .map((item) => Container(
-//     child: Center(
-//       child: Image.network(
-//         item,
-//         fit: BoxFit.cover,
-//         width: 1000,
-//       ),
-//     ),
-//   ))
-//       .toList(),
-//   options: CarouselOptions(
-//     autoPlay: true,
-//     aspectRatio: 2.0,
-//     enlargeCenterPage: true,
-//   ),
-// ),
