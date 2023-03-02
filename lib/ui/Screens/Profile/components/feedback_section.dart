@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:news_everyday/utils/message.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../theme/colors.dart';
 
@@ -14,21 +15,24 @@ class FeedbackMenuList extends StatelessWidget {
     'bug.png',
     'feedback.png',
   ];
-  static List<Widget> navigatepages = <Widget>[
-    ReportBugandReportNews(),
-    FeedBack(),
-  ];
-
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      //You can make the ListView widget never scrollable by setting physics property to NeverScrollableScrollPhysics().
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       itemCount: Menu.length,
       itemBuilder: (BuildContext context, int index) {
         return InkWell(
-          onTap: () => Get.to(navigatepages[index]),
+          onTap: () async {
+            String email = Uri.encodeComponent("info.newseveryday@gmail.com");
+            String subject = Uri.encodeComponent(Menu[index]);
+            Uri mail = Uri.parse("mailto:$email?subject=$subject");
+            if (await launchUrl(mail)) {
+              //email app opened
+            }else{
+              MessageDialog().snackBarGetCut("Email App not found!", " Email id : info.newseveryday@gmail.com");
+            }
+          },
           child: Container(
             margin: const EdgeInsets.symmetric(horizontal: 5.0, vertical: 10.0),
             padding: const EdgeInsets.symmetric(horizontal: 2.0, vertical: 2.0),
@@ -67,33 +71,6 @@ class FeedbackMenuList extends StatelessWidget {
           ),
         );
       },
-    );
-  }
-}
-
-
-class ReportBugandReportNews extends StatelessWidget {
-  const ReportBugandReportNews({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Report Bug and Report News"),
-      ),
-    );
-  }
-}
-
-class FeedBack extends StatelessWidget {
-  const FeedBack({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Feed Back"),
-      ),
     );
   }
 }

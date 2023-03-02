@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import 'package:news_everyday/ui/theme/colors.dart';
 import 'package:news_everyday/ui/widgets/custom_tag.dart';
 import 'package:news_everyday/utils/message.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../../model/article_model.dart';
-import '../Profile/components/feedback_section.dart';
 import '../webview/web_view.dart';
 
 class ArticleScreen extends StatelessWidget {
@@ -61,8 +60,15 @@ class ArticleScreen extends StatelessWidget {
                 ),
               ),
               PopupMenuItem(
-                onTap: () {
-                  Get.to(ReportBugandReportNews());
+                onTap: () async {
+                  String email = Uri.encodeComponent("info.newseveryday@gmail.com");
+                  String subject = Uri.encodeComponent("Report a News ${article.title}");
+                  Uri mail = Uri.parse("mailto:$email?subject=$subject");
+                  if (await launchUrl(mail)) {
+                  //email app opened
+                  }else{
+                  MessageDialog().snackBarGetCut("Email App not found!", " Email id : info.newseveryday@gmail.com");
+                  }
                 },
                 value: 1,
                 child: Row(

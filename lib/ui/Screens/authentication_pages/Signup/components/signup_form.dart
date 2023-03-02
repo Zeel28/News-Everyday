@@ -1,11 +1,9 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../../../../controller/auth_controller.dart';
 import '../../../../theme/colors.dart';
 import '../../../Profile/pages/privacy_policy.dart';
-import '../../../Profile/pages/terms_and_conditions.dart';
 import '../../Login/login_screen.dart';
 import '../../components/already_have_an_account_acheck.dart';
 
@@ -108,7 +106,7 @@ class SignUpForm extends StatelessWidget {
                 ),
                 recognizer: TapGestureRecognizer()
                   ..onTap = () {
-                    Get.to(() => const TermsAndConditions());
+                    Get.to(() => const PrivacyPolicy());
                   }),
             TextSpan(
                 text: ' and ',

@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:news_everyday/ui/Screens/Profile/components/screen.dart';
 
 import '../../../theme/colors.dart';
+import '../pages/about_page.dart';
 import '../pages/privacy_policy.dart';
-import '../pages/terms_and_conditions.dart';
 
 class GeneralMenuList extends StatelessWidget {
   GeneralMenuList({Key? key}) : super(key: key);
+
+  RxBool demo = false.obs;
 
   final List<String> Menu = <String>[
     'Account',
     'Notification',
     'Dark Mode',
-    'Privacy Policy',
+    'PrivacyPolicy',
     'Security',
     'About'
   ];
@@ -24,14 +27,6 @@ class GeneralMenuList extends StatelessWidget {
     'security.png',
     'about.png'
   ];
-  static List<Widget> navigatepages = <Widget>[
-    PrivacyPolicy(),
-    PrivacyPolicy(),
-    PrivacyPolicy(),
-    PrivacyPolicy(),
-    TermsAndConditions(),
-    PrivacyPolicy(),
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +37,7 @@ class GeneralMenuList extends StatelessWidget {
       itemCount: Menu.length,
       itemBuilder: (BuildContext context, int index) {
         return InkWell(
-          onTap: () => Get.to(navigatepages[index]),
+          onTap: () { Menu[index]!= 'Dark Mode' ?  Get.to(SettingOptionScreen(appBarTitle: Menu[index],)) : demo.toggle();demo.isTrue;},
           child: Container(
             margin: const EdgeInsets.symmetric(horizontal: 5.0, vertical: 10.0),
             padding: const EdgeInsets.symmetric(horizontal: 2.0, vertical: 2.0),
@@ -67,10 +62,20 @@ class GeneralMenuList extends StatelessWidget {
                     "assets/icons/profile_page/${leadingIcon[index]}",
                     height: 35,
                     width: 35),
-                trailing: const Icon(
+                trailing: Menu[index]!= 'Dark Mode' ?   Icon(
                   Icons.arrow_forward_ios_outlined,
                   color: primaryColor,
-                ),
+                ) : Obx(() {
+                  return demo.isTrue
+                      ? Icon(
+                    Icons.dark_mode_outlined,
+                    color: Colors.redAccent,
+                  )
+                      : Icon(
+                    Icons.light_mode_outlined,
+                    color: primaryColor,
+                  );
+                }),
                 title: Text(
                   Menu[index],
                   style: const TextStyle(
