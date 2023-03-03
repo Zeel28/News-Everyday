@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../controller/userData.dart';
+import '../../../controller/userdata_controller.dart';
 import '../../../utils/message.dart';
 import '../../theme/colors.dart';
 import 'components/Gereral_section.dart';

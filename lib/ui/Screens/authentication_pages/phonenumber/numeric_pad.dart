@@ -20,7 +20,6 @@ class _LoginWithPhoneNumberState extends State<LoginWithPhoneNumber> {
   final _formKey = GlobalKey<FormState>();
 
   bool loading = false;
-  final _auth = FirebaseAuth.instance;
   final phoneNumberController = TextEditingController();
 
   //Country Code Picker

@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:news_everyday/utils/message.dart';
 import '../model/article_model.dart';
 
 class ApiService {
@@ -16,8 +17,7 @@ class ApiService {
       final List<dynamic> newsJson = json['articles'];
       return newsJson.map((e) => Articles.fromJson(e)).toList();
     } else {
-      print('Error response: ${response.statusCode}');
-      print('Error body: ${response.body}');
+      MessageDialog().snackBarGetCut("News Loading Issues", "");
       throw Exception('Failed to load news');
     }
   }

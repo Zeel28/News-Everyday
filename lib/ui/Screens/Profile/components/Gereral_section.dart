@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:news_everyday/ui/Screens/Profile/components/screen.dart';
-
 import '../../../theme/colors.dart';
-import '../pages/about_page.dart';
-import '../pages/privacy_policy.dart';
 
 class GeneralMenuList extends StatelessWidget {
   GeneralMenuList({Key? key}) : super(key: key);

@@ -1,12 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../../model/article_model.dart';
 import '../../../services/api_service.dart';
 import '../../../utils/message.dart';
 import '../../theme/colors.dart';
-import '../../widgets/image_container.dart';
 import '../article_screen/article_screen.dart';
 
 class CategoryScreen extends StatefulWidget {

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 import 'package:news_everyday/ui/Screens/notifications.dart';
-import '../../../controller/userData.dart';
+import '../../../controller/userdata_controller.dart';
 import '../../../utils/message.dart';
 import '../../theme/colors.dart';
 import 'components/breakingnews.dart';

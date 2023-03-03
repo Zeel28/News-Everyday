@@ -33,7 +33,8 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
 
     if (isEmailVerified) {
       // TODO: implement your code after email verification
-      ScaffoldMessenger.of(context)
+      // ignore: use_build_context_synchronously
+       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text("Email Successfully Verified")));
       timer?.cancel();
     }

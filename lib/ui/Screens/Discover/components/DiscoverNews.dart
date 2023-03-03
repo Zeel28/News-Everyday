@@ -178,8 +178,6 @@ class NewsApi {
           .map((articleJson) => Articles.fromJson(articleJson))
           .toList();
     } else {
-      print('Error response: ${response.statusCode}');
-      print('Error body: ${response.body}');
       throw Exception('Failed to load news');
     }
   }

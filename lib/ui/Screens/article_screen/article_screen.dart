@@ -1,18 +1,43 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 import 'package:news_everyday/ui/theme/colors.dart';
-import 'package:news_everyday/ui/widgets/custom_tag.dart';
 import 'package:news_everyday/utils/message.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../../../controller/favourites_controller.dart';
 import '../../../model/article_model.dart';
 import '../webview/web_view.dart';
+class NewsController extends GetxController {
+  var isLoading = true.obs;
+  var newsList = [].obs;
 
+  @override
+  void onInit() {
+    super.onInit();
+    fetchNews();
+  }
+
+  void fetchNews() async {
+    isLoading(true);
+    final apiKey = "459f208e91ae40e3a7f6477321f9e61e";
+    final response = await http.get(Uri.parse(
+        "https://newsapi.org/v2/top-headlines?country=us&apiKey=$apiKey"));
+    if (response.statusCode == 200) {
+      newsList.value = json.decode(response.body)["articles"];
+      isLoading(false);
+    } else {
+      print("Error getting news.");
+    }
+  }
+}
 class ArticleScreen extends StatelessWidget {
   Articles article;
 
   ArticleScreen({Key? key, required this.article});
-
+  FavouritesController favouritesController = Get.find();
+  final NewsController newsController = Get.put(NewsController());
   @override
   Widget build(BuildContext context) {
     RxBool pressedBool = false.obs;
@@ -92,90 +117,114 @@ class ArticleScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(18.0),
-          child: Column(
-            children: [
-              Container(
-                width: double.infinity,
-                height: 200,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  image: DecorationImage(
-                      image: NetworkImage(article.urlToImage),
-                      fit: BoxFit.cover),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.shade200,
-                      blurRadius: 2.0,
-                      spreadRadius: 2.0,
-                      offset: const Offset(
-                        5.0,
-                        5.0,
-                      ),
-                    )
-                  ],
+      body: Obx(() {
+        if (newsController.isLoading.value) {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        } else {
+          return ListView.builder(
+            itemCount: newsController.newsList.length,
+            itemBuilder: (context, index) {
+              final article = newsController.newsList[index];
+              return ListTile(
+                title: Text(article["title"]??"hgfh"),
+                subtitle: Text(article["description"]??"gfhfhf"),
+                trailing: IconButton(
+                  icon: Icon(Icons.favorite),
+                  onPressed: () {
+                    favouritesController.addFavourite(article);
+                  },
                 ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Row(
-                children: [
-                  CustomTag(backgroundColor: primaryColor, children: [
-                    const Icon(
-                      Icons.timer_sharp,
-                      color: primaryLightColor,
-                    ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    Text(article.publishedAt,
-                        style: TextStyle(color: primaryLightColor)),
-                  ]),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                   CustomTag(
-                      backgroundColor: primaryLightColor,
-                      children: [
-                        Icon(
-                          Icons.remove_red_eye,
-                          color: primaryColor,
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Text("67", style: TextStyle(color: primaryColor)),
-                      ]),
-                ],
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Text(
-                article.title,
-                style: const TextStyle(
-                    fontSize: 22,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.black87),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Text(
-                article.description,
-                style: const TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w400,
-                    color: Colors.grey),
-              ),
-              // Spacer(),
-            ],
-          ),
-        ),
-      ),
+              );
+            },
+          );
+        }
+      }),
+      // body: SingleChildScrollView(
+      //   child: Padding(
+      //     padding: const EdgeInsets.all(18.0),
+      //     child: Column(
+      //       children: [
+      //         Container(
+      //           width: double.infinity,
+      //           height: 200,
+      //           decoration: BoxDecoration(
+      //             borderRadius: BorderRadius.circular(15),
+      //             image: DecorationImage(
+      //                 image: NetworkImage(article.urlToImage),
+      //                 fit: BoxFit.cover),
+      //             boxShadow: [
+      //               BoxShadow(
+      //                 color: Colors.grey.shade200,
+      //                 blurRadius: 2.0,
+      //                 spreadRadius: 2.0,
+      //                 offset: const Offset(
+      //                   5.0,
+      //                   5.0,
+      //                 ),
+      //               )
+      //             ],
+      //           ),
+      //         ),
+      //         const SizedBox(
+      //           height: 20,
+      //         ),
+      //         Row(
+      //           children: [
+      //             CustomTag(backgroundColor: primaryColor, children: [
+      //               const Icon(
+      //                 Icons.timer_sharp,
+      //                 color: primaryLightColor,
+      //               ),
+      //               const SizedBox(
+      //                 width: 10,
+      //               ),
+      //               Text(article.publishedAt,
+      //                   style: TextStyle(color: primaryLightColor)),
+      //             ]),
+      //             const SizedBox(
+      //               width: 10,
+      //             ),
+      //              CustomTag(
+      //                 backgroundColor: primaryLightColor,
+      //                 children: [
+      //                   Icon(
+      //                     Icons.remove_red_eye,
+      //                     color: primaryColor,
+      //                   ),
+      //                   SizedBox(
+      //                     width: 10,
+      //                   ),
+      //                   Text("67", style: TextStyle(color: primaryColor)),
+      //                 ]),
+      //           ],
+      //         ),
+      //         const SizedBox(
+      //           height: 20,
+      //         ),
+      //         Text(
+      //           article.title,
+      //           style: const TextStyle(
+      //               fontSize: 22,
+      //               fontWeight: FontWeight.w500,
+      //               color: Colors.black87),
+      //         ),
+      //         const SizedBox(
+      //           height: 20,
+      //         ),
+      //         Text(
+      //           article.description,
+      //           style: const TextStyle(
+      //               fontSize: 15,
+      //               fontWeight: FontWeight.w400,
+      //               color: Colors.grey),
+      //         ),
+      //         // Spacer(),
+      //       ],
+      //     ),
+      //   ),
+      // ),
       bottomNavigationBar: Row(
         children: [
           Expanded(
@@ -198,14 +247,15 @@ class ArticleScreen extends StatelessWidget {
           Expanded(
             child: ElevatedButton(
               onPressed: () {
-                pressedBool.toggle();
-                pressedBool.isTrue
-                    ? MessageDialog().snackBarGetCut("Your News is saved",
-                        "when you're ready to read this saved News, just tap on Saved News in the Menu bar",
-                        backgroundColor: Colors.green)
-                    : MessageDialog().snackBarGetCut("Remove News",
-                        "",
-                        );
+                favouritesController.addFavourite(article);
+                // pressedBool.toggle();
+                // pressedBool.isTrue
+                //     ? MessageDialog().snackBarGetCut("Your News is saved",
+                //         "when you're ready to read this saved News, just tap on Saved News in the Menu bar",
+                //         backgroundColor: Colors.green)
+                //     : MessageDialog().snackBarGetCut("Remove News",
+                //         "",
+                //         );
               },
               style: ButtonStyle(
                 shape: MaterialStateProperty.all(const CircleBorder()),
