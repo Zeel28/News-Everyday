@@ -10,30 +10,30 @@ class FavouriteScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text("Favourites"),
       ),
-      body: Obx(() {
-        if (favouritesController.favouritesList.isEmpty) {
-          return Center(
-            child: Text("You have no favourite articles"),
-          );
-        } else {
-          return ListView.builder(
-            itemCount: favouritesController.favouritesList.length,
-            itemBuilder: (context, index) {
-              final article = favouritesController.favouritesList[index];
-              return ListTile(
-                title: Text(article["title"] ?? ""),
-                subtitle: Text(article["description"] ?? ""),
-                trailing: IconButton(
-                  icon: Icon(Icons.delete),
-                  onPressed: () {
-                    favouritesController.removeFavourite(article);
-                  },
-                ),
-              );
-            },
-          );
-        }
-      }),
+      // body: Obx(() {
+      //   if (favouritesController.favouritesList.isEmpty) {
+      //     return Center(
+      //       child: Text("You have no favourite articles"),
+      //     );
+      //   } else {
+      //     return ListView.builder(
+      //       itemCount: favouritesController.favouritesList.length,
+      //       itemBuilder: (context, index) {
+      //         final article = favouritesController.favouritesList[index];
+      //         return ListTile(
+      //           title: Text(article["title"] ?? ""),
+      //           subtitle: Text(article["description"] ?? ""),
+      //           trailing: IconButton(
+      //             icon: Icon(Icons.delete),
+      //             onPressed: () {
+      //               favouritesController.removeFavourite(article);
+      //             },
+      //           ),
+      //         );
+      //       },
+      //     );
+      //   }
+      // }),
     );
   }
 }
