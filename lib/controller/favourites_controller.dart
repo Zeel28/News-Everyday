@@ -1,8 +1,10 @@
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:news_everyday/controller/userdata_controller.dart';
 
 class FavouritesController extends GetxController {
   var favouritesList = [].obs;
+  final profileController = Get.put(ProfileController());
 
   @override
   void onInit() {
@@ -11,10 +13,12 @@ class FavouritesController extends GetxController {
   }
 
   void fetchFavourites() async {
-    final user = "1"; // Replace with the user ID
+
     final favourites = await FirebaseFirestore.instance
-        .collection("favourites")
-        .doc(user)
+        .collection("usersInformation")
+        .doc(profileController.userData!['id'])
+        .collection("userData")
+        .doc("favouritesNews")
         .get();
     if (favourites.exists) {
       favouritesList.value = favourites.data()!["articles"];
@@ -22,20 +26,22 @@ class FavouritesController extends GetxController {
   }
 
   void addFavourite(article) async {
-    final user = "1"; // Replace with the user ID
     favouritesList.add(article);
     await FirebaseFirestore.instance
-        .collection("favouritesNews")
-        .doc(user)
+        .collection("usersInformation")
+        .doc(profileController.userData!['id'])
+        .collection("userData")
+        .doc("favouritesNews")
         .set({"articles": favouritesList});
   }
 
   void removeFavourite(article) async {
-    final user = "1"; // Replace with the user ID
     favouritesList.remove(article);
     await FirebaseFirestore.instance
-        .collection("favourites")
-        .doc(user)
+        .collection("usersInformation")
+        .doc(profileController.userData!['id'])
+        .collection("userData")
+        .doc("favouritesNews")
         .set({"articles": favouritesList});
   }
 }

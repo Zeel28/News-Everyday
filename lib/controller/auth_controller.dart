@@ -48,6 +48,7 @@ class AuthController extends GetxController {
           .collection('usersInformation')
           .doc(user.uid)
           .set({
+        'id': user.uid ,
         'name': user.displayName ?? '-',
         'email': user.email ?? '-',
         'phone': user.phoneNumber ?? '-',
