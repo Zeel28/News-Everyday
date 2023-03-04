@@ -1,39 +1,44 @@
 import 'package:flutter/material.dart';
 import '../../../controller/favourites_controller.dart';
 import 'package:get/get.dart';
-class FavouriteScreen extends StatelessWidget {
-  final FavouritesController favouritesController = Get.put(FavouritesController());
+
+import '../../../model/article_model.dart';
+class FavoriteNewsScreen extends StatelessWidget {
+  final FavoriteNewsService _favoriteNewsService = FavoriteNewsService();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Favourites"),
+        title: const Text('Favorite News'),
       ),
-      // body: Obx(() {
-      //   if (favouritesController.favouritesList.isEmpty) {
-      //     return Center(
-      //       child: Text("You have no favourite articles"),
-      //     );
-      //   } else {
-      //     return ListView.builder(
-      //       itemCount: favouritesController.favouritesList.length,
-      //       itemBuilder: (context, index) {
-      //         final article = favouritesController.favouritesList[index];
-      //         return ListTile(
-      //           title: Text(article["title"] ?? ""),
-      //           subtitle: Text(article["description"] ?? ""),
-      //           trailing: IconButton(
-      //             icon: Icon(Icons.delete),
-      //             onPressed: () {
-      //               favouritesController.removeFavourite(article);
-      //             },
-      //           ),
-      //         );
-      //       },
-      //     );
-      //   }
-      // }),
+      body: StreamBuilder<List<Articles>>(
+        stream: _favoriteNewsService.getFavoriteNews(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            final favoriteNews = snapshot.data!;
+            return ListView.builder(
+              itemCount: favoriteNews.length,
+              itemBuilder: (context, index) {
+                return ListTile(
+                  title: Text(favoriteNews[index].title),
+                  subtitle: Text(favoriteNews[index].description),
+                  trailing: IconButton(
+                    icon: const Icon(Icons.delete),
+                    onPressed: () {
+                      _favoriteNewsService.removeFavoriteNews(favoriteNews[index]);
+                    },
+                  ),
+                );
+              },
+            );
+          } else if (snapshot.hasError) {
+            return Center(child: Text(snapshot.error.toString()));
+          } else {
+            return const Center(child: CircularProgressIndicator());
+          }
+        },
+      ),
     );
   }
 }

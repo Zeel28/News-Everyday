@@ -22,7 +22,7 @@ class _DashboardState extends State<Dashboard> {
     HomeScreen(),
     DiscoverScreen(),
     NewsFeed(),
-    FavouriteScreen(),
+    FavoriteNewsScreen(),
     ProfileScreen(),
   ];
 

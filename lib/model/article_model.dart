@@ -25,4 +25,13 @@ class Articles {
       content: json['content'] ?? '',
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'title': title,
+      'description': description,
+      'url': url,
+      'urlToImage': urlToImage,
+    };
+  }
 }

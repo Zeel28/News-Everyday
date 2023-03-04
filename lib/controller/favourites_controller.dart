@@ -1,38 +1,53 @@
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:news_everyday/controller/userdata_controller.dart';
 import '../model/article_model.dart';
 
-class FavouritesController extends GetxController {
-  List favourites = [];
-  final profileController = Get.put(ProfileController());
+class FavoriteNewsService extends GetxController {
+  final FirebaseFirestore _db = FirebaseFirestore.instance;
+  final RxList<Articles> favoriteNews = <Articles>[].obs;
 
-  Future<void> addToFavourites(Articles article) async {
-    favourites.add({'title': article.title});
-    await FirebaseFirestore.instance
-        .collection("usersInformation")
-        .doc(profileController.userData!['id'])
-        .collection("userData")
-        .doc("favouritesNews")
-        .set({"articles": favourites});
-    update();
+  Future<void> addFavoriteNews(Articles article) async {
+    try {
+      await _db.collection('favorites').doc(article.title).set(article.toJson());
+    } catch (e) {
+      print(e.toString());
+    }
   }
 
-  Future<void> removeFavourites(Articles article) async {
-    favourites.removeLast();
-    await FirebaseFirestore.instance
-        .collection("usersInformation")
-        .doc(profileController.userData!['id'])
-        .collection("userData")
-        .doc("favouritesNews")
-        .set({"articles": favourites});
-    // update();
+  // void fetchFavoriteNews() {
+  //   try {
+  //     _db.collection('favorites').snapshots().listen((snapshot) {
+  //       favoriteNews.assignAll(snapshot.docs.map((doc) => Articles.fromJson(doc.data())).toList());
+  //     });
+  //   } catch (e) {
+  //     print(e.toString());
+  //   }
+  // }
+  Stream<List<Articles>> getFavoriteNews() {
+    try {
+      return _db.collection('favorites').snapshots().map((snapshot) {
+        List<Articles> articles = [];
+        snapshot.docs.forEach((doc) {
+          Articles article = Articles.fromJson(doc.data() as Map<String, dynamic>);
+          articles.add(article);
+        });
+        return articles;
+      });
+    } catch (e) {
+      print(e.toString());
+      return Stream.empty();
+    }
   }
 
-  bool isFavourite(Articles article) {
-    return favourites.contains(article);
+  Future<void> removeFavoriteNews(Articles article) async {
+    try {
+      await _db.collection('favorites').doc(article.title).delete();
+    } catch (e) {
+      print(e.toString());
+    }
   }
 }
+
 // class FavouritesController extends GetxController {
 //   // var favouritesList = [].obs;
 //   List<Articles> favouritesList = [];
