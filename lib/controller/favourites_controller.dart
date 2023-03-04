@@ -2,29 +2,30 @@ import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:news_everyday/controller/userdata_controller.dart';
 import '../model/article_model.dart';
+
 class FavouritesController extends GetxController {
-  List<Articles> favourites = [];
+  List favourites = [];
   final profileController = Get.put(ProfileController());
 
   Future<void> addToFavourites(Articles article) async {
-    favourites.add(article);
-    print(article);
+    favourites.add({'title': article.title});
     await FirebaseFirestore.instance
         .collection("usersInformation")
         .doc(profileController.userData!['id'])
         .collection("userData")
         .doc("favouritesNews")
-        .set({
-      'title': article.title ,
-
-    });
-    print("yes");
-    // update();
+        .set({"articles": favourites});
+    update();
   }
 
-  void removeFromFavourites(Articles article) {
-    favourites.remove(article);
-    print("no");
+  Future<void> removeFavourites(Articles article) async {
+    favourites.removeLast();
+    await FirebaseFirestore.instance
+        .collection("usersInformation")
+        .doc(profileController.userData!['id'])
+        .collection("userData")
+        .doc("favouritesNews")
+        .set({"articles": favourites});
     // update();
   }
 

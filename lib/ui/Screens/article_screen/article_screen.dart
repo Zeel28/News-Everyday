@@ -33,26 +33,14 @@ class NewsController extends GetxController {
     }
   }
 }
-class ArticleScreen extends StatefulWidget {
+class ArticleScreen extends StatelessWidget {
   Articles article;
 
   ArticleScreen({Key? key, required this.article});
 
-  @override
-  State<ArticleScreen> createState() => _ArticleScreenState();
-}
-
-class _ArticleScreenState extends State<ArticleScreen> {
   FavouritesController favouritesController = Get.find();
 
   final FavouritesController _favouritesController = Get.find();
-
-  bool _isFavourite = false;
-  @override
-  void initState() {
-    super.initState();
-    _isFavourite = _favouritesController.isFavourite(widget.article);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -95,7 +83,7 @@ class _ArticleScreenState extends State<ArticleScreen> {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
                   image: DecorationImage(
-                      image: NetworkImage(widget.article.urlToImage),
+                      image: NetworkImage(article.urlToImage),
                       fit: BoxFit.cover),
                   boxShadow: [
                     BoxShadow(
@@ -123,7 +111,7 @@ class _ArticleScreenState extends State<ArticleScreen> {
                     const SizedBox(
                       width: 10,
                     ),
-                    Text(widget.article.publishedAt,
+                    Text(article.publishedAt,
                         style: TextStyle(color: primaryLightColor)),
                   ]),
                   const SizedBox(
@@ -147,7 +135,7 @@ class _ArticleScreenState extends State<ArticleScreen> {
                 height: 20,
               ),
               Text(
-                widget.article.title,
+                article.title,
                 style: const TextStyle(
                     fontSize: 22,
                     fontWeight: FontWeight.w500,
@@ -156,24 +144,8 @@ class _ArticleScreenState extends State<ArticleScreen> {
               const SizedBox(
                 height: 20,
               ),
-              IconButton(
-                onPressed: () {
-                  setState(() {
-                    _isFavourite = !_isFavourite;
-                    if (_isFavourite) {
-                      _favouritesController.addToFavourites(widget.article);
-                    } else {
-                      _favouritesController.removeFromFavourites(widget.article);
-                    }
-                  });
-                },
-                icon: Icon(
-                  _isFavourite ? Icons.favorite : Icons.favorite_border,
-                  color: _isFavourite ? Colors.red : null,
-                ),
-              ),
               Text(
-                widget.article.description,
+                article.description,
                 style: const TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.w400,
@@ -192,7 +164,7 @@ class _ArticleScreenState extends State<ArticleScreen> {
               margin: const EdgeInsets.all(10),
               child: ElevatedButton(
                 onPressed: () {
-                  Get.to(WebViewApp(url: widget.article.url));
+                  Get.to(WebViewApp(url: article.url));
                 },
                 child: const Text(
                   'Read more',
@@ -206,16 +178,14 @@ class _ArticleScreenState extends State<ArticleScreen> {
           Expanded(
             child: ElevatedButton(
               onPressed: () {
-                print(widget.article);
-                favouritesController.addToFavourites(widget.article);
                 pressedBool.toggle();
-                // pressedBool.isTrue
-                //     ? MessageDialog().snackBarGetCut("Your News is saved",
-                //         "when you're ready to read this saved News, just tap on Saved News in the Menu bar",
-                //         backgroundColor: Colors.green)
-                //     : MessageDialog().snackBarGetCut("Remove News",
-                //         "",
-                //         );
+                if(pressedBool.isTrue){
+                  favouritesController.addToFavourites(article);
+                  MessageDialog().snackBarGetCut("Your News is saved", "when you're ready to read this saved News, just tap on Saved News in the Menu bar", backgroundColor: Colors.green);
+                }else{
+                  favouritesController.removeFavourites(article);
+                  MessageDialog().snackBarGetCut("Remove News", "",);
+                }
               },
               style: ButtonStyle(
                 shape: MaterialStateProperty.all(const CircleBorder()),
@@ -263,10 +233,10 @@ class _ArticleScreenState extends State<ArticleScreen> {
             PopupMenuItem(
               onTap: () async {
                 await Share.share(
-                    'I saw this on the News Everyday and thought you should see it: ${widget.article.title}   ${widget.article.description}\n\n\n\n'
+                    'I saw this on the News Everyday and thought you should see it: ${article.title}   ${article.description}\n\n\n\n'
                     '* Disclaimer *  The News Everyday is not responsible for the content of this email, and anything written in this email does not necessarily reflect the News Everyday views or opinions. Please note that neither the email address nor name of the sender have been verified.',
                     subject:
-                        'I saw this on the News Everyday and thought you should see it: ${widget.article.title}');
+                        'I saw this on the News Everyday and thought you should see it: ${article.title}');
               },
               value: 1,
               child: Row(
@@ -288,7 +258,7 @@ class _ArticleScreenState extends State<ArticleScreen> {
             PopupMenuItem(
               onTap: () async {
                 String email = Uri.encodeComponent("info.newseveryday@gmail.com");
-                String subject = Uri.encodeComponent("Report a News ${widget.article.title}");
+                String subject = Uri.encodeComponent("Report a News ${article.title}");
                 Uri mail = Uri.parse("mailto:$email?subject=$subject");
                 if (await launchUrl(mail)) {
                 //email app opened
