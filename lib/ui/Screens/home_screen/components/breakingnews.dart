@@ -4,7 +4,7 @@ import '../../../../model/article_model.dart';
 import '../../../../services/api_service.dart';
 import '../../../../utils/message.dart';
 import '../../../widgets/list_title/horizontal_list_tile.dart';
-import '../../details_page/DetailsScreen.dart';
+import '../../details_page/category_screen.dart';
 
 class BreakingNews extends StatefulWidget {
   BreakingNews({
@@ -19,12 +19,6 @@ class _BreakingNewsState extends State<BreakingNews> {
   List<Articles> finalArticles = [];
   bool _isLoading = true;
   late String? _errorMessage;
-  final queryParameters = {
-    'country': 'in',
-    '?q': '',
-    'category': '',
-    'apiKey': '9f6d210f572a43c2892e84040a32e190',
-  };
 
   @override
   void initState() {
@@ -34,7 +28,7 @@ class _BreakingNewsState extends State<BreakingNews> {
 
   Future<void> _loadNews() async {
     try {
-      final article = await ApiService.fetchNews(queryParameters);
+      final article = await ApiService.searchNews("news");
       setState(() {
         finalArticles = article;
         _isLoading = false;

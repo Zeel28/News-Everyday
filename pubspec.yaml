@@ -68,6 +68,7 @@ dependencies:
   flutter_otp_text_field: ^1.1.1
   #Fancy Pull to Refresh
   liquid_pull_to_refresh: ^3.0.1
+  #open a mail app
   url_launcher: ^6.1.10
   #Slider
   carousel_slider: ^4.2.1

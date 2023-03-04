@@ -1,10 +1,9 @@
-import 'dart:convert';
 import 'package:get/get.dart';
-import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:news_everyday/ui/theme/colors.dart';
 import 'package:news_everyday/ui/widgets/custom_tag.dart';
 import '../../../../model/article_model.dart';
+import '../../../../services/api_service.dart';
 import '../../article_screen/article_screen.dart';
 
 class DiscoverNews extends StatefulWidget {
@@ -21,7 +20,7 @@ class _DiscoverNewsState extends State<DiscoverNews> {
   List<Articles> _articles = [];
 
   void _searchNews(String query) async {
-    final articles = await NewsApi.searchNews(query);
+    final articles = await ApiService.searchNews(query);
     setState(() {
       _articles = articles;
     });
@@ -163,22 +162,4 @@ class _DiscoverNewsState extends State<DiscoverNews> {
   }
 }
 
-class NewsApi {
-  static const String _baseUrl = 'https://newsapi.org/v2';
-  static const String _apiKey = '9f6d210f572a43c2892e84040a32e190';
 
-  static Future<List<Articles>> searchNews(String query) async {
-    final url = '$_baseUrl/everything?q=$query&apiKey=$_apiKey';
-    final response = await http.get(Uri.parse(url));
-
-    if (response.statusCode == 200) {
-      final json = jsonDecode(response.body);
-      final List<dynamic> articlesJson = json['articles'];
-      return articlesJson
-          .map((articleJson) => Articles.fromJson(articleJson))
-          .toList();
-    } else {
-      throw Exception('Failed to load news');
-    }
-  }
-}
