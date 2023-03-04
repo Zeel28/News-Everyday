@@ -75,6 +75,8 @@ dependencies:
   splash_screen_view:
   # Network Image
   cached_network_image: ^3.2.3
+  #ListTitleSlidable
+  flutter_slidable: ^2.0.0
 
 dev_dependencies:
   flutter_test:

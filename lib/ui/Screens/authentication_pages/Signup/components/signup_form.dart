@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:news_everyday/utils/message.dart';
 import '../../../../../controller/auth_controller.dart';
 import '../../../../theme/colors.dart';
 import '../../../Profile/pages/privacy_policy.dart';
@@ -66,7 +67,7 @@ class SignUpForm extends StatelessWidget {
           const SizedBox(height: defaultPadding / 0.5),
           ElevatedButton(
             onPressed: () {
-
+              MessageDialog().progressIndicator(context);
               if (_formKey.currentState!.validate()) {}
               AuthController().signUp(
                   emailController.text.trim(), passwordController.text.trim());

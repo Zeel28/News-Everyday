@@ -1,7 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../ui/theme/colors.dart';
 
 class MessageDialog {
@@ -61,6 +60,7 @@ class MessageDialog {
             InkWell(
               onTap: () {
                 continueCallBack();
+
               },
               child: Container(
                 alignment: Alignment.center,
