@@ -8,7 +8,7 @@ class GeneralMenuList extends StatelessWidget {
 
   RxBool demo = false.obs;
 
-  final List<String> Menu = <String>[
+  final List<String> menu = <String>[
     'Account',
     'Notification',
     'Dark Mode',
@@ -31,10 +31,10 @@ class GeneralMenuList extends StatelessWidget {
       //You can make the ListView widget never scrollable by setting physics property to NeverScrollableScrollPhysics().
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
-      itemCount: Menu.length,
+      itemCount: menu.length,
       itemBuilder: (BuildContext context, int index) {
         return InkWell(
-          onTap: () { Menu[index]!= 'Dark Mode' ?  Get.to(SettingOptionScreen(appBarTitle: Menu[index],)) : demo.toggle();demo.isTrue;},
+          onTap: () { menu[index]!= 'Dark Mode' ?  Get.to(() =>SettingOptionScreen(appBarTitle: menu[index],)) : demo.toggle();demo.isTrue;},
           child: Container(
             margin: const EdgeInsets.symmetric(horizontal: 5.0, vertical: 10.0),
             padding: const EdgeInsets.symmetric(horizontal: 2.0, vertical: 2.0),
@@ -59,7 +59,7 @@ class GeneralMenuList extends StatelessWidget {
                     "assets/icons/profile_page/${leadingIcon[index]}",
                     height: 35,
                     width: 35),
-                trailing: Menu[index]!= 'Dark Mode' ?   Icon(
+                trailing: menu[index]!= 'Dark Mode' ?   Icon(
                   Icons.arrow_forward_ios_outlined,
                   color: primaryColor,
                 ) : Obx(() {
@@ -74,7 +74,7 @@ class GeneralMenuList extends StatelessWidget {
                   );
                 }),
                 title: Text(
-                  Menu[index],
+                  menu[index],
                   style: const TextStyle(
                       color: primaryColor,
                       fontWeight: FontWeight.w400,

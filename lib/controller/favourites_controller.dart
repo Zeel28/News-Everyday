@@ -13,7 +13,7 @@ class FavoriteNewsService extends GetxController {
     try {
       await _db.collection('usersInformation').doc(profileController.userData!['id']).collection("favouritesNews").doc(article.title).set(article.toJson());
     } catch (e) {
-      MessageDialog().snackBarGetCut("This News are not bookmark", "Please try agin or later");
+      MessageDialog().snackBarGetCut("This News are not bookmark", "Please try again or later");
     }
   }
 
@@ -36,7 +36,7 @@ class FavoriteNewsService extends GetxController {
     try {
       await _db.collection('usersInformation').doc(profileController.userData!['id']).collection("favouritesNews").doc(article.title).delete();
     } catch (e) {
-      print(e.toString());
+      MessageDialog().snackBarGetCut("This News are not remove bookmark", "Please try again or later");
     }
   }
 }

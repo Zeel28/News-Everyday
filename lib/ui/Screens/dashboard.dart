@@ -4,7 +4,7 @@ import '../theme/colors.dart';
 import 'Discover/discover_screen.dart';
 import 'Favorite/favorite_screen.dart';
 import 'Profile/profile_page.dart';
-import 'feed/Views/newsfeed.dart';
+import 'feed/newsfeed.dart';
 import 'home_screen/home_screen.dart';
 
 class Dashboard extends StatefulWidget {

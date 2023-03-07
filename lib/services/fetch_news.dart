@@ -38,13 +38,13 @@ class FetchNews{
 
   static Future<Articles> fetchNews()async{
 
-    final _random = Random();
-    var sourceID = sourcesId[_random.nextInt(sourcesId.length)];
+    final random = Random();
+    var sourceID = sourcesId[random.nextInt(sourcesId.length)];
     Response response =await http.get(Uri.parse("https://newsapi.org/v2/top-headlines?sources=$sourceID&apiKey=459f208e91ae40e3a7f6477321f9e61e"));
 
-    Map body_data = jsonDecode(response.body);
-    List articles = body_data["articles"];
-    var myArticle = articles[_random.nextInt(articles.length)];
+    Map bodyData = jsonDecode(response.body);
+    List articles = bodyData["articles"];
+    var myArticle = articles[random.nextInt(articles.length)];
 
     return Articles.fromJson(myArticle);
 

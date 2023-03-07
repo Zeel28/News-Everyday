@@ -27,27 +27,27 @@ class IntroPage extends StatelessWidget {
           children: [
             Container(
               alignment: Alignment.centerLeft,
-              margin: const EdgeInsets.only(left: 50, top: 30,right: 10),
+              margin: const EdgeInsets.only(left: 20, top: 30,right: 10),
               child: Text(
                 mainText,
                 style: TextStyle(
                     fontWeight: FontWeight.w400,
-                    fontSize: 35,
+                    fontSize: 32,
                     color: mainTextColor),
               ),
             ),
             const SizedBox(
-              height: 30,
+              height: 90,
             ),
             Container(
-              height: 300,
+              height: 240,
               width: 320,
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(300),
-                  image: DecorationImage(image: assetImage)),
+                  borderRadius: BorderRadius.circular(50),
+                  image: DecorationImage(image: assetImage,fit: BoxFit.cover)),
             ),
             const SizedBox(
-              height: 30,
+              height: 50,
             ),
             Container(
               alignment: Alignment.centerLeft,

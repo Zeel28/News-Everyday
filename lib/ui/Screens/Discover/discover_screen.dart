@@ -62,10 +62,16 @@ class _CategoryNewsState extends State<_CategoryNews> {
     super.initState();
     _loadNews("business");
   }
-
   Future<void> _loadNews(String category) async {
+  final queryParameters = {
+    'q' : category,
+    'sortBy': "popularity",
+    'sortBy': 'publishedAt',
+    'language': 'en',
+    'apiKey': '459f208e91ae40e3a7f6477321f9e61e',
+  };
     try {
-      final article = await ApiService.searchNews(category);
+      final article = await ApiService.searchNews(queryParameters);
       setState(() {
         categoryArticles = article;
         _isLoading = false;

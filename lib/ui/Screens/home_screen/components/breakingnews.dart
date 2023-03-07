@@ -25,10 +25,16 @@ class _BreakingNewsState extends State<BreakingNews> {
     super.initState();
     _loadNews();
   }
-
+  final queryParameters = {
+    'q' : "google-news",
+    'sortBy': "popularity,publishedAt",
+    'language': 'en',
+    'apiKey': '459f208e91ae40e3a7f6477321f9e61e',
+  };
   Future<void> _loadNews() async {
+
     try {
-      final article = await ApiService.searchNews("news");
+      final article = await ApiService.searchNews(queryParameters);
       setState(() {
         finalArticles = article;
         _isLoading = false;
@@ -54,13 +60,10 @@ class _BreakingNewsState extends State<BreakingNews> {
             children: [
               Text(
                 'Breaking News',
-                style: Theme.of(context)
-                    .textTheme
-                    .headlineSmall!
-                    .copyWith(fontWeight: FontWeight.bold),
+                style:TextStyle(fontSize: 22,fontWeight: FontWeight.bold)
               ),
               InkWell(
-                onTap: () => Get.to(CategoryScreen(
+                onTap: () => Get.to(() =>CategoryScreen(
                   title: "Breaking News",
                 )),
                 child: Text(

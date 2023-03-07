@@ -22,7 +22,7 @@ class _HeaderSliderState extends State<HeaderSlider> {
   Widget build(BuildContext context) {
     final List<Widget> imageSliders = widget.imgList
         .map((item) => InkWell(
-              onTap: () => Get.to(CategoryScreen(title: widget.nameList[widget.imgList.indexOf(item)],)),
+              onTap: () => Get.to(() =>CategoryScreen(title: widget.nameList[widget.imgList.indexOf(item)],)),
               child: ClipRRect(
                 borderRadius: const BorderRadius.all(
                   Radius.circular(20.0),
@@ -76,10 +76,7 @@ class _HeaderSliderState extends State<HeaderSlider> {
           children: [
             Text(
               'Today News',
-              style: Theme.of(context)
-                  .textTheme
-                  .headlineSmall!
-                  .copyWith(fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 22,fontWeight: FontWeight.bold)
             ),
             Text(
               "More",

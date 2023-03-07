@@ -17,11 +17,10 @@ class VListTitle extends StatelessWidget {
     return InkWell(
       onTap: () {
         Get.to(
-                () => ArticleScreen(
-              article: demo,
-            ),
-            duration:
-            const Duration(milliseconds: 500),
+            () => ArticleScreen(
+                  article: demo,
+                ),
+            duration: const Duration(milliseconds: 500),
             transition: Transition.cupertinoDialog);
       },
       child: Row(
@@ -31,14 +30,11 @@ class VListTitle extends StatelessWidget {
               height: 80,
               margin: const EdgeInsets.all(10.0),
               boarderRadius: 5,
-              imageUrl: demo
-                  .urlToImage),
+              imageUrl: demo.urlToImage),
           Expanded(
             child: Column(
-              crossAxisAlignment:
-              CrossAxisAlignment.start,
-              mainAxisAlignment:
-              MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
                   demo.title,
@@ -47,9 +43,7 @@ class VListTitle extends StatelessWidget {
                   style: Theme.of(context)
                       .textTheme
                       .bodyLarge!
-                      .copyWith(
-                      fontWeight:
-                      FontWeight.bold),
+                      .copyWith(fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(
                   height: 10,
@@ -65,9 +59,7 @@ class VListTitle extends StatelessWidget {
                     ),
                     Text("2 hours ago",
                         maxLines: 2,
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodySmall!),
+                        style: Theme.of(context).textTheme.bodySmall!),
                     const SizedBox(
                       width: 20,
                     ),
@@ -78,9 +70,7 @@ class VListTitle extends StatelessWidget {
                     const SizedBox(
                       width: 5,
                     ),
-                    Text("100 views",
-                        style: TextStyle(
-                            fontSize: 12)),
+                    Text("100 views", style: TextStyle(fontSize: 12)),
                   ],
                 )
               ],

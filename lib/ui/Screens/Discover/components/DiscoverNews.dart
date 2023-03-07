@@ -18,9 +18,16 @@ class DiscoverNews extends StatefulWidget {
 class _DiscoverNewsState extends State<DiscoverNews> {
   final TextEditingController _searchWord = TextEditingController();
   List<Articles> _articles = [];
-
   void _searchNews(String query) async {
-    final articles = await ApiService.searchNews(query);
+  final queryParameters = {
+    'q' : query,
+    'sortBy': "relevancy",
+    'sortBy': 'popularity',
+    'sortBy': 'publishedAt',
+    'language': 'en',
+    'apiKey': '459f208e91ae40e3a7f6477321f9e61e',
+  };
+    final articles = await ApiService.searchNews(queryParameters);
     setState(() {
       _articles = articles;
     });
@@ -48,7 +55,7 @@ class _DiscoverNewsState extends State<DiscoverNews> {
                 const SizedBox(height: 20.0),
                 TextFormField(
                   controller: _searchWord,
-                  // onTap: () => Get.to(SearchBar()),
+
                   onFieldSubmitted: (value) {
                     _searchNews(value);
                   },
@@ -102,7 +109,6 @@ class _DiscoverNewsState extends State<DiscoverNews> {
                               article: _articles[index],
                             ),
                         duration: const Duration(milliseconds: 500),
-                        //duration of transitions, default 1 sec
                         transition: Transition.cupertinoDialog),
                     child: Row(
                       children: [

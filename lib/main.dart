@@ -5,8 +5,7 @@ import 'package:get/get.dart';
 import 'package:news_everyday/splash_screen.dart';
 import 'package:news_everyday/ui/Screens/Welcome/welcome_screen.dart';
 import 'package:news_everyday/ui/Screens/error_page.dart';
-import 'package:news_everyday/ui/theme/colors.dart';
-
+import 'package:news_everyday/ui/theme/colors.dart'; 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());

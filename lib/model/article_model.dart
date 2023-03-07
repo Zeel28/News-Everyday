@@ -26,6 +26,7 @@ class Articles {
     );
   }
 
+  //store data from firebase FireStore
   Map<String, dynamic> toJson() {
     return {
       'title': title,

@@ -65,7 +65,7 @@ class LoginForm extends StatelessWidget {
             ),
           ),
           Forgot(
-            press: () => Get.to(ForgotPassword()),
+            press: () => Get.to(() =>ForgotPassword()),
           ),
           const SizedBox(height: defaultPadding),
           ElevatedButton(

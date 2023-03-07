@@ -26,10 +26,10 @@ class AuthController extends GetxController {
   User? user;
   void _initialScreen(User? user) async {
     if (user == null) {
-      Get.offAll(() => OnBoardingScreen());
+      Get.offAll(() => const OnBoardingScreen());
     } else {
       await addUserToFireStore(user);
-      Get.offAll(() => Dashboard());
+      Get.offAll(() => const Dashboard());
     }
   }
 

@@ -72,7 +72,7 @@ class HomeScreen extends StatelessWidget {
                           ],
                         ),
                         child: IconButton(
-                          onPressed: () => Get.to(const NotificationScreen()),
+                          onPressed: () => Get.to(() =>const NotificationScreen()),
                           icon: const Icon(Icons.notifications_active,
                               color: primaryColor),
                         ),

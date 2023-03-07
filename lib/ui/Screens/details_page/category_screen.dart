@@ -25,10 +25,16 @@ class _CategoryScreenState extends State<CategoryScreen> {
     super.initState();
     _loadNews(widget.title);
   }
-
   Future<void> _loadNews(String category) async {
+  final queryParameters = {
+    'q' : category,
+    'sortBy': "relevancy",
+    'sortBy': 'popularity',
+    'language': 'en',
+    'apiKey': '459f208e91ae40e3a7f6477321f9e61e',
+  };
     try {
-      final article = await ApiService.searchNews(category);
+      final article = await ApiService.searchNews(queryParameters);
       setState(() {
         categoryArticles = article;
         _isLoading = false;

@@ -24,35 +24,35 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
         bgColor: Colors.blue[50],
         mainTextColor: primaryColor,
         detectionTextColor: primaryColor,
-        mainText: "Media Engagement",
-        assetImage: const AssetImage("assets/images/articles_scrolling.gif"),
+        mainText: "Breaking news updates",
+        assetImage: const AssetImage("assets/images/breaking_news.gif"),
         detectionText:
-            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and "),
+            "Stay Ahead of the Game with Our Breaking News Coverage. Get the latest breaking news and stay up-to-date with the most important events happening around the world, delivered straight to your phone."),
     IntroPage(
         bgColor: Colors.green[300],
-        mainText: "Article",
+        mainText: "Tailored news feed",
         mainTextColor: Colors.white,
     detectionTextColor: Colors.white,
         assetImage: const AssetImage("assets/images/articles_scrolling.gif"),
         detectionText:
-            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and ",
+            "Enjoy a personalized news feed that is tailored to your interests and preferences, so you can stay informed about the topics that matter most to you.",
     ),
     IntroPage(
         bgColor: Colors.grey[100],
         mainTextColor: primaryColor,
         detectionTextColor: primaryColor,
-        mainText: "Breaking news",
-        assetImage: const AssetImage("assets/images/breaking_news.gif"),
+        mainText: "Stay informed daily",
+        assetImage: const AssetImage("assets/images/informed_daily.gif"),
         detectionText:
-            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and "),
+            "Stay ahead of the game with daily news updates and analysis from top journalists and experts in your preferred areas of interest."),
     IntroPage(
         bgColor: Colors.purple[50],
         mainTextColor: primaryColor,
         detectionTextColor: primaryColor,
-        mainText: "Global News",
-        assetImage: const AssetImage("assets/images/global_news.gif"),
+        mainText: "Curated news stories",
+        assetImage: const AssetImage("assets/images/news_strories.jpg"),
         detectionText:
-            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and "),
+            "Discover a wide range of thought-provoking news stories that have been carefully curated and presented to you in a visually engaging format."),
   ];
 
 

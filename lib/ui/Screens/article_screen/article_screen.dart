@@ -23,7 +23,7 @@ class ArticleScreen extends StatelessWidget {
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-            onPressed: () => Get.back(),
+            onPressed: () => Navigator.pop(context),
             icon: const Icon(
               Icons.arrow_back_ios,
               color: primaryColor,
@@ -152,7 +152,7 @@ class ArticleScreen extends StatelessWidget {
               margin: const EdgeInsets.all(10),
               child: ElevatedButton(
                 onPressed: () {
-                  Get.to(WebViewApp(url: article.url));
+                  Get.to(() =>WebViewApp(url: article.url));
                 },
                 child: const Text(
                   'Read more',
