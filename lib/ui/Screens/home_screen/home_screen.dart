@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
+import 'package:news_everyday/ui/Screens/home_screen/components/channels.dart';
 import 'package:news_everyday/ui/Screens/notifications.dart';
 import '../../../controller/userdata_controller.dart';
 import '../../../utils/message.dart';
@@ -72,7 +73,8 @@ class HomeScreen extends StatelessWidget {
                           ],
                         ),
                         child: IconButton(
-                          onPressed: () => Get.to(() =>const NotificationScreen()),
+                          onPressed: () =>
+                              Get.to(() => const NotificationScreen()),
                           icon: const Icon(Icons.notifications_active,
                               color: primaryColor),
                         ),
@@ -92,10 +94,11 @@ class HomeScreen extends StatelessWidget {
         backgroundColor: primaryLightColor,
         showChildOpacityTransition: false,
         child: ListView(
+          physics: const BouncingScrollPhysics(),
           children: [
             HeaderSlider(imgList: imgList, nameList: nameList),
             BreakingNews(),
-            BreakingNews(),
+            Channels(),
           ],
         ),
       ),

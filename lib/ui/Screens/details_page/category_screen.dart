@@ -8,8 +8,15 @@ import '../../widgets/list_title/vertical_list_title.dart';
 
 class CategoryScreen extends StatefulWidget {
   String title;
+  String searchValue;
+  String keySearch;
 
-  CategoryScreen({Key? key, required this.title}) : super(key: key);
+  CategoryScreen(
+      {Key? key,
+      required this.title,
+      required this.keySearch,
+      required this.searchValue})
+      : super(key: key);
 
   @override
   State<CategoryScreen> createState() => _CategoryScreenState();
@@ -23,16 +30,16 @@ class _CategoryScreenState extends State<CategoryScreen> {
   @override
   void initState() {
     super.initState();
-    _loadNews(widget.title);
+    _loadNews(widget.searchValue, widget.keySearch);
   }
-  Future<void> _loadNews(String category) async {
-  final queryParameters = {
-    'q' : category,
-    'sortBy': "relevancy",
-    'sortBy': 'popularity',
-    'language': 'en',
-    'apiKey': '3f1a0e1381c74be2ab644cf747bfad83',
-  };
+
+  Future<void> _loadNews(String category, String key) async {
+    final queryParameters = {
+      key: category,
+      'sortBy': 'popularity',
+      'language': 'en',
+      'apiKey': '3f1a0e1381c74be2ab644cf747bfad83',
+    };
     try {
       final article = await ApiService.searchNews(queryParameters);
       setState(() {
@@ -71,6 +78,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
           : _errorMessage != null
               ? Center(child: Text(_errorMessage!))
               : ListView.builder(
+                  physics: const BouncingScrollPhysics(),
                   shrinkWrap: true,
                   itemCount: categoryArticles.length,
                   itemBuilder: (context, index) {

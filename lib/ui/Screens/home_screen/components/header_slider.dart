@@ -22,7 +22,7 @@ class _HeaderSliderState extends State<HeaderSlider> {
   Widget build(BuildContext context) {
     final List<Widget> imageSliders = widget.imgList
         .map((item) => InkWell(
-              onTap: () => Get.to(() =>CategoryScreen(title: widget.nameList[widget.imgList.indexOf(item)],)),
+              onTap: () => Get.to(() =>CategoryScreen(title: widget.nameList[widget.imgList.indexOf(item)],keySearch: "q", searchValue: widget.nameList[widget.imgList.indexOf(item)],)),
               child: ClipRRect(
                 borderRadius: const BorderRadius.all(
                   Radius.circular(20.0),

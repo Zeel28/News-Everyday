@@ -38,8 +38,6 @@ class AuthController extends GetxController {
 
   //TODO: Add User to Fire store
   Future<void> addUserToFireStore(User user,String password) async {
-    print("--------------------$password");
-    print("-------------------$password2");
     String providerId = '';
     try {
       List<UserInfo> providerData = user.providerData;

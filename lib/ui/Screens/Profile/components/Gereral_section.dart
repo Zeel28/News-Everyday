@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:news_everyday/ui/Screens/Profile/components/screen.dart';
 import '../../../theme/colors.dart';
+import '../../notifications.dart';
 
 class GeneralMenuList extends StatelessWidget {
   GeneralMenuList({Key? key}) : super(key: key);
@@ -34,7 +35,7 @@ class GeneralMenuList extends StatelessWidget {
       itemCount: menu.length,
       itemBuilder: (BuildContext context, int index) {
         return InkWell(
-          onTap: () { menu[index]!= 'Dark Mode' ?  Get.to(() =>SettingOptionScreen(appBarTitle: menu[index],)) : demo.toggle();demo.isTrue;},
+          onTap: () { menu[index]!= 'Dark Mode' ? menu[index]== 'Notification' ? Get.to(() => const NotificationScreen()) :  Get.to(() => SettingOptionScreen(appBarTitle: menu[index],)) : demo.toggle();demo.isTrue;},
           child: Container(
             margin: const EdgeInsets.symmetric(horizontal: 5.0, vertical: 10.0),
             padding: const EdgeInsets.symmetric(horizontal: 2.0, vertical: 2.0),

@@ -29,6 +29,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
         ),
       ),
       body: ListView(
+        physics: const BouncingScrollPhysics(),
         padding: const EdgeInsets.all(15.0),
         children: [
           DiscoverNews(),

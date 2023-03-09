@@ -17,6 +17,7 @@ class ProfileScreen extends StatelessWidget {
       backgroundColor: mainBackgroundColor,
       body: SafeArea(
         child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
           child: Obx(
             () => profileController.userData!.isNotEmpty
                 ? Container(

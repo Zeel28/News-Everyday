@@ -15,7 +15,9 @@ class HListTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(7),
+      padding: EdgeInsets.all(8),
+      margin: const EdgeInsets.only(right: 6, bottom: 6, left: 6),
+      width: MediaQuery.of(context).size.width * 0.6,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(10),
@@ -31,8 +33,6 @@ class HListTitle extends StatelessWidget {
           )
         ],
       ),
-      width: MediaQuery.of(context).size.width * 0.6,
-      margin: const EdgeInsets.only(right: 10),
       child: InkWell(
         onTap: () {
           Get.to(
@@ -47,11 +47,10 @@ class HListTitle extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CachedNetworkImage(
-                width: MediaQuery.of(context).size.width *
-                    0.6,
+                width: MediaQuery.of(context).size.width * 0.6,
                 height: 115,
-                imageUrl:
-                    article.urlToImage),
+                fit: BoxFit.cover,
+                imageUrl: article.urlToImage),
             const SizedBox(
               height: 10,
             ),
@@ -60,18 +59,12 @@ class HListTitle extends StatelessWidget {
                 style: Theme.of(context)
                     .textTheme
                     .bodyLarge!
-                    .copyWith(
-                        fontWeight: FontWeight.bold,
-                        height: 1.5)),
+                    .copyWith(fontWeight: FontWeight.bold, height: 1.5)),
             const SizedBox(
               height: 5,
             ),
-            Text(
-                "${article.publishedAt.substring(0, 10)} ago",
-                maxLines: 2,
-                style: Theme.of(context)
-                    .textTheme
-                    .bodySmall!),
+            Text("${article.publishedAt.substring(0, 10)} ago",
+                maxLines: 2, style: Theme.of(context).textTheme.bodySmall!),
           ],
         ),
       ),

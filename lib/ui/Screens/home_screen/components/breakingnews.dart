@@ -52,7 +52,7 @@ class _BreakingNewsState extends State<BreakingNews> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(15.0),
+      padding: const EdgeInsets.all(14.0),
       child: Column(
         children: [
           Row(
@@ -63,8 +63,8 @@ class _BreakingNewsState extends State<BreakingNews> {
                 style:TextStyle(fontSize: 22,fontWeight: FontWeight.bold)
               ),
               InkWell(
-                onTap: () => Get.to(() =>CategoryScreen(
-                  title: "Breaking News",
+                onTap: () => Get.to(() => CategoryScreen(
+                  title: "Breaking News",keySearch: "q",searchValue: "Breaking News",
                 )),
                 child: Text(
                   "More",
@@ -77,7 +77,7 @@ class _BreakingNewsState extends State<BreakingNews> {
             height: 20,
           ),
           SizedBox(
-            height: 220,
+            height: 210,
             child: _isLoading
                 ? Center(child: MessageDialog().progressIndicator(context))
                 : _errorMessage != null

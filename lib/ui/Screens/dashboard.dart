@@ -1,9 +1,9 @@
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:flutter/material.dart';
 import '../theme/colors.dart';
-import 'Discover/discover_screen.dart';
 import 'Favorite/favorite_screen.dart';
 import 'Profile/profile_page.dart';
+import 'discover_news/discover_screen.dart';
 import 'feed/newsfeed.dart';
 import 'home_screen/home_screen.dart';
 

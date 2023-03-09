@@ -36,6 +36,7 @@ class _DiscoverNewsState extends State<DiscoverNews> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
+      physics:  const BouncingScrollPhysics(),
       child: Column(
         children: [
           SizedBox(

@@ -63,6 +63,7 @@ class FavoriteNewsScreen extends StatelessWidget {
               );
             } else {
               return ListView.builder(
+                physics: const BouncingScrollPhysics(),
                 itemCount: favoriteNews.length,
                 itemBuilder: (context, index) {
                   return Slidable(
