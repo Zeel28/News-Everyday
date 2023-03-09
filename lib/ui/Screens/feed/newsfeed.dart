@@ -5,8 +5,10 @@ import 'package:news_everyday/ui/Screens/feed/widget/my_floating_actionbutton.da
 import 'package:news_everyday/utils/message.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../../../services/api_service.dart';
 import '../../../services/fetch_news.dart';
 import '../../theme/colors.dart';
+
 class NewsFeed extends StatefulWidget {
   const NewsFeed({Key? key}) : super(key: key);
 
@@ -15,23 +17,39 @@ class NewsFeed extends StatefulWidget {
 }
 
 class _NewsFeedState extends State<NewsFeed> {
-  bool isLoading = true;
-
-
-  Articles? newsFeedArticle;
-  getNews() async {
-    newsFeedArticle = await FetchNews.fetchNews();
-    setState(() {
-      isLoading = false;
-    });
-  }
+  List<Articles> newsFeedArticle = [];
+  bool _isLoading = true;
+  late String? _errorMessage;
+  int _currentPage = 0;
 
   @override
   void initState() {
-    getNews();
-    // TODO: implement initState
-
     super.initState();
+    _loadNews();
+  }
+
+  final queryParameters = {
+    'q': "google-news",
+    'sortBy': "popularity,publishedAt",
+    'language': 'en',
+    'apiKey': '3f1a0e1381c74be2ab644cf747bfad83',
+  };
+
+  Future<void> _loadNews() async {
+    try {
+      final article = await ApiService.searchNews(queryParameters);
+      setState(() {
+        newsFeedArticle = article;
+        _isLoading = false;
+        _errorMessage = null;
+      });
+    } catch (e) {
+      setState(() {
+        newsFeedArticle = [];
+        _isLoading = false;
+        _errorMessage = e.toString();
+      });
+    }
   }
 
   @override
@@ -52,35 +70,10 @@ class _NewsFeedState extends State<NewsFeed> {
             itemBuilder: (context) => [
               PopupMenuItem(
                 onTap: () async {
-                  await Share.share(
-                      'I saw this on the News Everyday and thought you should see it :-  ${newsFeedArticle!.title}   ${newsFeedArticle!.description}\n\n\n\n'
-                      '* Disclaimer *  The News Everyday is not responsible for the content of this email, and anything written in this email does not necessarily reflect the News Everyday views or opinions. Please note that neither the email address nor name of the sender have been verified.',
-                      subject:
-                          'I saw this on the News Everyday and thought you should see it: ${newsFeedArticle!.title}');
-                },
-                value: 1,
-                child: Row(
-                  children: const [
-                    Icon(
-                      Icons.share,
-                      color: primaryColor,
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Text(
-                      "Share",
-                      style: TextStyle(color: primaryColor),
-                    )
-                  ],
-                ),
-              ),
-              PopupMenuItem(
-                onTap: () async {
                   String email =
                       Uri.encodeComponent("info.newseveryday@gmail.com");
                   String subject =
-                      Uri.encodeComponent("Report a News ${newsFeedArticle!.title}");
+                      Uri.encodeComponent("Report a News ${newsFeedArticle[_currentPage].title}");
                   Uri mail = Uri.parse("mailto:$email?subject=$subject");
                   if (await launchUrl(mail)) {
                     //email app opened
@@ -116,23 +109,22 @@ class _NewsFeedState extends State<NewsFeed> {
         scrollDirection: Axis.vertical,
         onPageChanged: (value) {
           setState(() {
-            isLoading = true;
+            _isLoading = true;
+            _currentPage = value;
           });
-          getNews();
+          _loadNews();
         },
         itemBuilder: (context, index) {
-          return isLoading
-              ? Center(child: MessageDialog().progressIndicator(context))
-              : NewsContainer(
-                  imageUrl: newsFeedArticle!.urlToImage,
-                  newsHeand: newsFeedArticle!.title,
-                  newsDec: newsFeedArticle!.description,
-                  newsCnt: newsFeedArticle!.content,
-                  newsUrl: newsFeedArticle!.url,
-                );
+          if (_isLoading) {
+            return Center(child: MessageDialog().progressIndicator(context));
+          } else {
+            return NewsContainer(
+              article: newsFeedArticle[index]
+            );
+          }
         },
       ),
-      floatingActionButton: MyFloatingActionButton(article: newsFeedArticle!),
-      );
+      floatingActionButton: _isLoading ? null  : MyFloatingActionButton(article: newsFeedArticle[_currentPage],)
+    );
   }
 }

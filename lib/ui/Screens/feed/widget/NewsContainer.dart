@@ -1,20 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:news_everyday/model/article_model.dart';
+
+import 'my_floating_actionbutton.dart';
 
 class NewsContainer extends StatelessWidget {
-  String imageUrl;
-  String newsHeand;
-  String newsDec;
-  String newsUrl;
-  String newsCnt;
+  Articles article;
 
-  NewsContainer(
-      {Key? key,
-      required this.imageUrl,
-      required this.newsHeand,
-      required this.newsDec,
-      required this.newsCnt,
-      required this.newsUrl})
-      : super(key: key);
+  NewsContainer({Key? key, required this.article}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -46,29 +38,30 @@ class NewsContainer extends StatelessWidget {
                   fit: BoxFit.cover,
                   width: double.infinity,
                   placeholder: "assets/images/splashscreen.gif",
-                  image: imageUrl),
+                  image: article.urlToImage),
             ),
           ),
           const SizedBox(
             height: 20,
           ),
           Text(
-              newsHeand.length > 90
-                  ? "${newsHeand.substring(0, 90)}..."
-                  : newsHeand,
+              article.title,
               style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold)),
-          Text(newsDec, style: TextStyle(fontSize: 12, color: Colors.black38)),
+          Text(article.description, style: TextStyle(fontSize: 12, color: Colors.black38)),
           Text(
             // newsCnt != "--"
             //     ? newsCnt.length > 350
             //         ? newsCnt.substring(0, 250)
             //         : "${newsCnt.toString().substring(0, newsCnt.length - 15)}..."
             //     : newsCnt,
-            newsCnt,
+            article.content,
             style: TextStyle(fontSize: 16),
           ),
+          // MyFloatingActionButton(
+          //   article: article,
+          // )
         ],
-      ),
+      )
     );
   }
 }

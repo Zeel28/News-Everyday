@@ -5,9 +5,11 @@ import 'package:share_plus/share_plus.dart';
 import '../../../../../controller/favourites_controller.dart';
 import '../../../../../utils/message.dart';
 import '../../../../model/article_model.dart';
+import '../../webview/web_view.dart';
 
 class MyFloatingActionButton extends StatefulWidget {
   Articles article;
+
   MyFloatingActionButton({Key? key, required this.article}) : super(key: key);
 
   @override
@@ -107,9 +109,9 @@ class _MyFloatingActionButtonState extends State<MyFloatingActionButton>
                       onClick: () async {
                         await Share.share(
                             'I saw this on the News Everyday and thought you should see it :-  ${widget.article.title}   ${widget.article.description}\n\n\n\n'
-                                '* Disclaimer *  The News Everyday is not responsible for the content of this email, and anything written in this email does not necessarily reflect the News Everyday views or opinions. Please note that neither the email address nor name of the sender have been verified.',
+                            '* Disclaimer *  The News Everyday is not responsible for the content of this email, and anything written in this email does not necessarily reflect the News Everyday views or opinions. Please note that neither the email address nor name of the sender have been verified.',
                             subject:
-                            'I saw this on the News Everyday and thought you should see it: ${widget.article.title}');
+                                'I saw this on the News Everyday and thought you should see it: ${widget.article.title}');
                       },
                     ),
                   ),
@@ -131,7 +133,7 @@ class _MyFloatingActionButtonState extends State<MyFloatingActionButton>
                         color: Colors.white,
                       ),
                       onClick: () {
-                        print('Second button');
+                        Get.to(() => WebViewApp(url: widget.article.url));
                       },
                     ),
                   ),
@@ -140,23 +142,46 @@ class _MyFloatingActionButtonState extends State<MyFloatingActionButton>
                   offset: Offset.fromDirection(getRadiansFromDegree(180),
                       degThreeTranslationAnimation.value * 100),
                   child: Transform(
-                    transform: Matrix4.rotationZ(
-                        getRadiansFromDegree(rotationAnimation.value))
-                      ..scale(degThreeTranslationAnimation.value),
-                    alignment: Alignment.center,
-                    child: CircularButton(
-                      color: Colors.black,
-                      width: 50,
-                      height: 50,
-                      icon: Icon(
-                        Icons.open_in_new,
-                        color: Colors.white,
-                      ),
-                      onClick: () {
-                        print('Second button');
-                      },
-                    ),
-                  ),
+                      transform: Matrix4.rotationZ(
+                          getRadiansFromDegree(rotationAnimation.value))
+                        ..scale(degThreeTranslationAnimation.value),
+                      alignment: Alignment.center,
+                      child: InkWell(
+                        onTap: () {
+                          pressedBool.toggle();
+                          if (pressedBool.isTrue) {
+                            _favoriteNewsService
+                                .addFavoriteNews(widget.article);
+                            MessageDialog().snackBarGetCut("Your News is saved",
+                                "when you're ready to read this saved News, just tap on Saved News in the Menu bar",
+                                backgroundColor: Colors.green);
+                          } else {
+                            _favoriteNewsService
+                                .removeFavoriteNews(widget.article);
+                            MessageDialog().snackBarGetCut(
+                              "Remove News",
+                              "",
+                            );
+                          }
+                        },
+                        child: Container(
+                          decoration: const BoxDecoration(
+                              color: primaryLightColor, shape: BoxShape.circle),
+                          width: 60,
+                          height: 60,
+                          child: Obx(() {
+                            return pressedBool.isTrue
+                                ? const Icon(
+                                    Icons.favorite,
+                                    color: Colors.redAccent,
+                                  )
+                                : const Icon(
+                                    Icons.favorite_border_outlined,
+                                    color: primaryColor,
+                                  );
+                          }),
+                        ),
+                      )),
                 ),
                 Transform(
                   transform: Matrix4.rotationZ(
@@ -204,14 +229,13 @@ class CircularButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(color: color, shape: BoxShape.circle),
-      width: width,
-      height: height,
-      child: IconButton(
-          icon: icon,
-          enableFeedback: true,
-          onPressed: onClick as void Function()?),
+    return InkWell(
+      onTap: onClick as void Function()?,
+      child: Container(
+          decoration: BoxDecoration(color: color, shape: BoxShape.circle),
+          width: width,
+          height: height,
+          child: icon),
     );
   }
 }
