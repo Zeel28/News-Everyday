@@ -10,11 +10,11 @@ import '../utils/message.dart';
 
 class AuthController extends GetxController {
   static AuthController get to => Get.find();
-
   final _user = Rxn<User>();
   final _auth = FirebaseAuth.instance;
-
   final verificationId = ''.obs;
+  String password2 = '';
+
 
   @override
   void onReady() {
@@ -28,8 +28,8 @@ class AuthController extends GetxController {
     if (user == null) {
       Get.offAll(() => const OnBoardingScreen());
     } else {
-      await addUserToFireStore(user);
       Get.offAll(() => const Dashboard());
+      await addUserToFireStore(user,password2);
     }
   }
 
@@ -37,7 +37,9 @@ class AuthController extends GetxController {
 
 
   //TODO: Add User to Fire store
-  Future<void> addUserToFireStore(User user) async {
+  Future<void> addUserToFireStore(User user,String password) async {
+    print("--------------------$password");
+    print("-------------------$password2");
     String providerId = '';
     try {
       List<UserInfo> providerData = user.providerData;
@@ -51,6 +53,7 @@ class AuthController extends GetxController {
         'id': user.uid ,
         'name': user.displayName ?? '-',
         'email': user.email ?? '-',
+        'password': password,
         'phone': user.phoneNumber ?? '-',
         'photoURL': user.photoURL ?? 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png',
         'providerId': providerId ,
@@ -62,7 +65,8 @@ class AuthController extends GetxController {
   }
 
   //TODO: Email Signup
-  Future<void> signUp(String email, String password) async {
+  Future<void> signUp(String email, String password,String myax) async {
+
     try {
       await _auth.createUserWithEmailAndPassword(
         email: email,

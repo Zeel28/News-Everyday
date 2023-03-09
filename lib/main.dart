@@ -38,8 +38,8 @@ class _MyAppState extends State<MyApp> {
             elevation: 0,
             backgroundColor: primaryColor,
             shape: const StadiumBorder(),
-            maximumSize: const Size(double.infinity, 56),
-            minimumSize: const Size(double.infinity, 56),
+            maximumSize: const Size(double.infinity, 50),
+            minimumSize: const Size(double.infinity, 50),
           ),
         ),
         inputDecorationTheme: const InputDecorationTheme(

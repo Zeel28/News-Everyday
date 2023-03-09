@@ -45,7 +45,7 @@ class _DashboardState extends State<Dashboard> {
           color: mainBackgroundColor,
           activeColor: primaryColor,
           gap: 2,
-          padding: const EdgeInsets.all(10),
+          padding: const EdgeInsets.all(8),
           tabBackgroundColor: mainBackgroundColor,
           tabs: const [
             GButton(

@@ -14,10 +14,10 @@ class Forgot extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.only(top: 0.0,bottom: 4.0),
       child: Row(
         children: <Widget>[
-          Spacer(),
+          const Spacer(),
           GestureDetector(
             onTap: press as void Function()?,
             child: Align(
@@ -27,6 +27,7 @@ class Forgot extends StatelessWidget {
                 style: const TextStyle(
                   color: primaryColor,
                   fontWeight: FontWeight.bold,
+                  fontSize: 12
                 ),
               ),
             ),

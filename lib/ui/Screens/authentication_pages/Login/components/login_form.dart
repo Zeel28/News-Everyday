@@ -37,7 +37,7 @@ class LoginForm extends StatelessWidget {
             decoration: const InputDecoration(
               hintText: "Your email",
               prefixIcon: Padding(
-                padding: EdgeInsets.all(defaultPadding),
+                padding: EdgeInsets.all(defaultPadding/2),
                 child: Icon(Icons.mail),
               ),
             ),
@@ -58,14 +58,14 @@ class LoginForm extends StatelessWidget {
               decoration: const InputDecoration(
                 hintText: "Your password",
                 prefixIcon: Padding(
-                  padding: EdgeInsets.all(defaultPadding),
+                  padding: EdgeInsets.all(defaultPadding/2),
                   child: Icon(Icons.lock),
                 ),
               ),
             ),
           ),
           Forgot(
-            press: () => Get.to(() =>ForgotPassword()),
+            press: () => Get.to(() =>const ForgotPassword()),
           ),
           const SizedBox(height: defaultPadding),
           ElevatedButton(

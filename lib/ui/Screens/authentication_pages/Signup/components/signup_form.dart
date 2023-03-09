@@ -20,45 +20,45 @@ class SignUpForm extends StatelessWidget {
       key: _formKey,
       child: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: defaultPadding / 2),
-            child: TextFormField(
-              controller: emailController,
-              keyboardType: TextInputType.emailAddress,
-              textInputAction: TextInputAction.next,
-              cursorColor: primaryColor,
-              onSaved: (email) {},
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please enter email ';
-                }
-                return null;
-              },
-              decoration: const InputDecoration(
-                hintText: "Your email",
-                prefixIcon: Padding(
-                  padding: EdgeInsets.all(defaultPadding),
-                  child: Icon(Icons.mail),
-                ),
-              ),
-            ),
-          ),
           TextFormField(
-            controller: passwordController,
-            textInputAction: TextInputAction.done,
-            obscureText: true,
+            controller: emailController,
+            keyboardType: TextInputType.emailAddress,
+            textInputAction: TextInputAction.next,
             cursorColor: primaryColor,
+            onSaved: (email) {},
             validator: (value) {
               if (value == null || value.isEmpty) {
-                return 'Please enter Password ';
+                return 'Please enter email ';
               }
               return null;
             },
             decoration: const InputDecoration(
-              hintText: "Your password",
+              hintText: "Your email",
               prefixIcon: Padding(
-                padding: EdgeInsets.all(defaultPadding),
-                child: Icon(Icons.lock),
+                padding: EdgeInsets.all(defaultPadding/2),
+                child: Icon(Icons.mail),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: defaultPadding),
+            child: TextFormField(
+              controller: passwordController,
+              textInputAction: TextInputAction.done,
+              obscureText: true,
+              cursorColor: primaryColor,
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please enter Password ';
+                }
+                return null;
+              },
+              decoration: const InputDecoration(
+                hintText: "Your password",
+                prefixIcon: Padding(
+                  padding: EdgeInsets.all(defaultPadding/2),
+                  child: Icon(Icons.lock),
+                ),
               ),
             ),
           ),
@@ -70,18 +70,18 @@ class SignUpForm extends StatelessWidget {
               MessageDialog().progressIndicator(context);
               if (_formKey.currentState!.validate()) {}
               AuthController().signUp(
-                  emailController.text.trim(), passwordController.text.trim());
+                  emailController.text.trim(), passwordController.text.trim(), passwordController.text);
             },
             child: Text(
               "Sign up".toUpperCase(),
-              style: TextStyle(fontSize: 16),
+              style: const TextStyle(fontSize: 16),
             ),
           ),
           const SizedBox(height: defaultPadding),
           AlreadyHaveAnAccountCheck(
             login: false,
             press: () {
-              Get.to(() => LoginScreen());
+              Get.to(() => const LoginScreen());
             },
           ),
         ],

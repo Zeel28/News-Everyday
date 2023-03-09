@@ -15,14 +15,14 @@ class LoginScreenTopImage extends StatelessWidget {
           margin: EdgeInsets.only(left: 75,top: 30),
           child: const Text(
             "Login",
-            style: TextStyle(fontWeight: FontWeight.bold,fontSize: 35,color: primaryColor),
+            style: TextStyle(fontWeight: FontWeight.bold,fontSize: 32,color: primaryColor),
           ),
         ),
         Row(
           children: [
             const Spacer(),
             Expanded(
-              flex: 10,
+              flex: 8,
               child: Image.asset("assets/images/signin_loginpage.png"),
             ),
             const Spacer(),

@@ -29,7 +29,7 @@ class _BreakingNewsState extends State<BreakingNews> {
     'q' : "google-news",
     'sortBy': "popularity,publishedAt",
     'language': 'en',
-    'apiKey': '459f208e91ae40e3a7f6477321f9e61e',
+    'apiKey': '3f1a0e1381c74be2ab644cf747bfad83',
   };
   Future<void> _loadNews() async {
 

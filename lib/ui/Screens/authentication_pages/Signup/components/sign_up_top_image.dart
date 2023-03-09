@@ -15,16 +15,18 @@ class SignUpScreenTopImage extends StatelessWidget {
           margin: EdgeInsets.only(left: 75,top: 30),
           child: const Text(
             "Signup",
-            style: TextStyle(fontWeight: FontWeight.bold,fontSize: 35,color: primaryColor),
+            style: TextStyle(fontWeight: FontWeight.bold,fontSize: 32,color: primaryColor),
           ),
         ),
         SizedBox(height: defaultPadding),
         Row(
           children: [
+            const Spacer(),
             Expanded(
-              // flex: 6,
+              flex: 8,
               child: Image.asset("assets/images/signup_signuppage.png"),
             ),
+            const Spacer(),
           ],
         ),
       ],
