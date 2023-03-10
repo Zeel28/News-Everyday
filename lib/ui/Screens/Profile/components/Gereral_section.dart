@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:news_everyday/ui/Screens/Profile/components/screen.dart';
+import '../../../../utils/message.dart';
 import '../../../theme/colors.dart';
 import '../../notifications.dart';
 
@@ -35,7 +36,22 @@ class GeneralMenuList extends StatelessWidget {
       itemCount: menu.length,
       itemBuilder: (BuildContext context, int index) {
         return InkWell(
-          onTap: () { menu[index]!= 'Dark Mode' ? menu[index]== 'Notification' ? Get.to(() => const NotificationScreen()) :  Get.to(() => SettingOptionScreen(appBarTitle: menu[index],)) : demo.toggle();demo.isTrue;},
+          onTap: () {
+            menu[index] != 'Dark Mode'
+                ? menu[index] == 'Notification'
+                    ? Get.to(() => const NotificationScreen())
+                    : MessageDialog().alertDialog(
+                        context,
+                        "Coming Soon..",
+                        "This features under production",
+                        "Okay",
+                        () {
+                          Get.back();
+                        },
+                      )
+                : demo.toggle();
+            demo.isTrue;
+          },
           child: Container(
             margin: const EdgeInsets.symmetric(horizontal: 5.0, vertical: 10.0),
             padding: const EdgeInsets.symmetric(horizontal: 2.0, vertical: 2.0),
@@ -60,20 +76,22 @@ class GeneralMenuList extends StatelessWidget {
                     "assets/icons/profile_page/${leadingIcon[index]}",
                     height: 35,
                     width: 35),
-                trailing: menu[index]!= 'Dark Mode' ?   Icon(
-                  Icons.arrow_forward_ios_outlined,
-                  color: primaryColor,
-                ) : Obx(() {
-                  return demo.isTrue
-                      ? Icon(
-                    Icons.dark_mode_outlined,
-                    color: Colors.redAccent,
-                  )
-                      : Icon(
-                    Icons.light_mode_outlined,
-                    color: primaryColor,
-                  );
-                }),
+                trailing: menu[index] != 'Dark Mode'
+                    ? Icon(
+                        Icons.arrow_forward_ios_outlined,
+                        color: primaryColor,
+                      )
+                    : Obx(() {
+                        return demo.isTrue
+                            ? Icon(
+                                Icons.dark_mode_outlined,
+                                color: Colors.redAccent,
+                              )
+                            : Icon(
+                                Icons.light_mode_outlined,
+                                color: primaryColor,
+                              );
+                      }),
                 title: Text(
                   menu[index],
                   style: const TextStyle(
