@@ -26,7 +26,7 @@ class ProfileCard extends StatelessWidget {
             color: Colors.grey.shade200,
             blurRadius: 2.0,
             spreadRadius: 2.0,
-            offset: Offset(
+            offset: const Offset(
               5.0,
               5.0,
             ),
@@ -56,9 +56,9 @@ class ProfileCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(_userData!['name'],style: TextStyle(fontSize: 23,fontWeight: FontWeight.w500),),
-                  SizedBox(height: 10,),
+                  const SizedBox(height: 10,),
                   Text(_userData!['email']),
-                  SizedBox(height: 10,),
+                  const SizedBox(height: 10,),
                   Text(_userData!['phone']),
                 ],
               ),

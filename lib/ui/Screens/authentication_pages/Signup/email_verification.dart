@@ -1,51 +1,13 @@
-import 'dart:async';
-
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import 'package:lottie/lottie.dart';
+import '../../../../controller/auth_controller.dart';
+import '../../../../utils/message.dart';
 import '../../../theme/colors.dart';
 
-class EmailVerificationScreen extends StatefulWidget {
-  EmailVerificationScreen({Key? key}) : super(key: key);
+class EmailVerificationScreen extends StatelessWidget {
+  const EmailVerificationScreen({Key? key}) : super(key: key);
 
-  @override
-  State<EmailVerificationScreen> createState() => _EmailVerificationScreenState();
-}
-
-class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
-  bool isEmailVerified = false;
-  Timer? timer;
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    timer =
-        Timer.periodic(const Duration(seconds: 10), (_) => checkEmailVerified());
-  }
-
-  checkEmailVerified() async {
-    await FirebaseAuth.instance.currentUser?.reload();
-    setState(() {
-      isEmailVerified = FirebaseAuth.instance.currentUser!.emailVerified;
-    });
-
-    if (isEmailVerified) {
-      // TODO: implement your code after email verification
-      // ignore: use_build_context_synchronously
-       ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text("Email Successfully Verified")));
-      timer?.cancel();
-    }
-  }
-
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    timer?.cancel();
-    super.dispose();
-  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -93,7 +55,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                 height: 10,
               ),
               const Text(
-                "We have sent you a Email on ",
+                "An email has been sent to your email address. Please click on the link to verify your account.",
                 style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.bold,
@@ -103,46 +65,6 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
               ),
               const SizedBox(
                 height: 28,
-              ),
-              Container(
-                padding: EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: Column(
-                  children: [
-                    SizedBox(
-                      width: double.infinity,
-                      child: ElevatedButton(
-                        onPressed: () async {
-                          FirebaseAuth.instance.currentUser?.sendEmailVerification();
-
-                        },
-                        style: ButtonStyle(
-                          foregroundColor:
-                              MaterialStateProperty.all<Color>(Colors.white),
-                          backgroundColor:
-                              MaterialStateProperty.all<Color>(primaryColor),
-                          shape:
-                              MaterialStateProperty.all<RoundedRectangleBorder>(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(24.0),
-                            ),
-                          ),
-                        ),
-                        child: const Padding(
-                          padding: EdgeInsets.all(14.0),
-                          child: Text(
-
-                            "Open",
-                            style: TextStyle(color: Colors.white, fontSize: 20),
-                          ),
-                        ),
-                      ),
-                    )
-                  ],
-                ),
               ),
               const SizedBox(
                 height: 18,
@@ -160,14 +82,69 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                 height: 18,
               ),
               Container(
+                padding: EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Column(
+                  children: [
+                    SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        onPressed: () async {
+                          try {
+                            AuthController().verifyEmail();
+                          } catch (e) {
+                            MessageDialog().snackBarGetCut(
+                              "Error",
+                              "Failed to verify email.",
+                            );
+                          }
+                        },
+                        style: ButtonStyle(
+                          foregroundColor:
+                          MaterialStateProperty.all<Color>(Colors.white),
+                          backgroundColor:
+                          MaterialStateProperty.all<Color>(primaryColor),
+                          shape:
+                          MaterialStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(24.0),
+                            ),
+                          ),
+                        ),
+                        child: const Padding(
+                          padding: EdgeInsets.all(14.0),
+                          child: Text(
+                            "Verify Email",
+                            style: TextStyle(color: Colors.white, fontSize: 20),
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              const SizedBox(
+                height: 18,
+              ),
+              Container(
                 width: double.infinity,
                 padding: EdgeInsets.all(14.0),
                 child: ElevatedButton(
-                  onPressed: () {
+                  onPressed: () async {
                     try {
-                      FirebaseAuth.instance.currentUser?.sendEmailVerification();
+                      await AuthController.to.sendEmailVerification();
+                      MessageDialog().snackBarGetCut(
+                        "Email sent",
+                        "Please check your email to verify your account.",
+                      );
                     } catch (e) {
-                      debugPrint('$e');
+                      MessageDialog().snackBarGetCut(
+                        "Error",
+                        "Failed to send email verification.",
+                      );
                     }
                   },
                   style: ButtonStyle(
@@ -199,83 +176,4 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
       ),
     );
   }
-
-
 }
-
-// class EmailVerificationScreen extends StatefulWidget {
-//   const EmailVerificationScreen({Key? key}) : super(key: key);
-//
-//   @override
-//   State<EmailVerificationScreen> createState() =>
-//       _EmailVerificationScreenState();
-// }
-//
-// class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
-//   bool isEmailVerified = false;
-//   Timer? timer;
-//   @override
-//   void initState() {
-//     // TODO: implement initState
-//     super.initState();
-//     FirebaseAuth.instance.currentUser?.sendEmailVerification();
-//     timer =
-//         Timer.periodic(const Duration(seconds: 3), (_) => checkEmailVerified());
-//   }
-//
-//   checkEmailVerified() async {
-//     await FirebaseAuth.instance.currentUser?.reload();
-//
-//     setState(() {
-//       isEmailVerified = FirebaseAuth.instance.currentUser!.emailVerified;
-//     });
-//
-//     if (isEmailVerified) {
-//       // TODO: implement your code after email verification
-//       ScaffoldMessenger.of(context)
-//           .showSnackBar(SnackBar(content: Text("Email Successfully Verified")));
-//       timer?.cancel();
-//     }
-//   }
-//
-//   @override
-//   void dispose() {
-//     // TODO: implement dispose
-//     timer?.cancel();
-//     super.dispose();
-//   }
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return SafeArea(
-//       child: Scaffold(
-//         body: SingleChildScrollView(
-//           child: Column(
-//             crossAxisAlignment: CrossAxisAlignment.center,
-//             children: [
-//               const SizedBox(height: 35),
-//               const SizedBox(height: 30),
-//               const Center(
-//                 child: Text(
-//                   'Check your \n Email',
-//                   textAlign: TextAlign.center,
-//                 ),
-//               ),
-//               const SizedBox(height: 8),
-//               Padding(
-//                 padding: const EdgeInsets.symmetric(horizontal: 32.0),
-//                 child: Center(
-//                   child: Text(
-//                     // 'We have sent you a Email on  ${auth.currentUser?.email}',
-//                     'We have sent you a Email on  ',
-//                     textAlign: TextAlign.center,
-//                   ),
-//                 ),
-//               ),
-//             ],
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }

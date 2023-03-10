@@ -5,7 +5,7 @@ import '../../../utils/message.dart';
 import '../../theme/colors.dart';
 import 'components/Gereral_section.dart';
 import 'components/feedback_section.dart';
-import 'components/logout.dart';
+import 'components/logout_button.dart';
 import 'components/profile_card.dart';
 
 class ProfileScreen extends StatelessWidget {

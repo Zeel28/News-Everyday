@@ -70,7 +70,7 @@ class SignUpForm extends StatelessWidget {
               MessageDialog().progressIndicator(context);
               if (_formKey.currentState!.validate()) {}
               AuthController().signUp(
-                  emailController.text.trim(), passwordController.text.trim(), passwordController.text);
+                  emailController.text.trim(), passwordController.text.trim());
             },
             child: Text(
               "Sign up".toUpperCase(),

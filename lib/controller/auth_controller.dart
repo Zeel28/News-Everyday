@@ -1,8 +1,12 @@
+import 'dart:ui';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import '../ui/Screens/authentication_pages/Login/login_screen.dart';
+import '../ui/Screens/authentication_pages/Signup/email_verification.dart';
 import '../ui/Screens/authentication_pages/phonenumber/verifty_otp.dart';
 import '../ui/Screens/dashboard.dart';
 import '../ui/Screens/onboarding_screens/onboarding_screen.dart';
@@ -15,7 +19,6 @@ class AuthController extends GetxController {
   final verificationId = ''.obs;
   String password2 = '';
 
-
   @override
   void onReady() {
     super.onReady();
@@ -24,20 +27,22 @@ class AuthController extends GetxController {
   }
 
   User? user;
+
   void _initialScreen(User? user) async {
     if (user == null) {
       Get.offAll(() => const OnBoardingScreen());
     } else {
-      Get.offAll(() => const Dashboard());
-      await addUserToFireStore(user,password2);
+      if (!user.emailVerified) {
+        Get.offAll(() => EmailVerificationScreen());
+      } else {
+        Get.offAll(() => const Dashboard());
+        await addUserToFireStore(user, password2);
+      }
     }
   }
 
-
-
-
   //TODO: Add User to Fire store
-  Future<void> addUserToFireStore(User user,String password) async {
+  Future<void> addUserToFireStore(User user, String password) async {
     String providerId = '';
     try {
       List<UserInfo> providerData = user.providerData;
@@ -48,13 +53,15 @@ class AuthController extends GetxController {
           .collection('usersInformation')
           .doc(user.uid)
           .set({
-        'id': user.uid ,
+        'id': user.uid,
         'name': user.displayName ?? '-',
         'email': user.email ?? '-',
+        'emailVerified': user.emailVerified ?? '-',
         'password': password,
         'phone': user.phoneNumber ?? '-',
-        'photoURL': user.photoURL ?? 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png',
-        'providerId': providerId ,
+        'photoURL': user.photoURL ??
+            'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png',
+        'providerId': providerId,
       });
     } catch (e) {
       MessageDialog()
@@ -63,13 +70,13 @@ class AuthController extends GetxController {
   }
 
   //TODO: Email Signup
-  Future<void> signUp(String email, String password,String myax) async {
-
+  Future<void> signUp(String email, String password) async {
     try {
       await _auth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
+      await sendEmailVerification();
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         MessageDialog().snackBarGetCut(
@@ -87,6 +94,29 @@ class AuthController extends GetxController {
         "Account creation failed",
         "",
       );
+    }
+  }
+
+  //TODO: Email Verification
+  Future<void> sendEmailVerification() async {
+    final user = _auth.currentUser;
+    if (user != null && !user.emailVerified) {
+      await user.sendEmailVerification();
+    }
+  }
+  void verifyEmail() async {
+    final user = _auth.currentUser;
+    if (user != null) {
+      await user.reload();
+      if (user.emailVerified) {
+        Get.offAll(() => Dashboard());
+      } else {
+        MessageDialog().snackBarGetCut(
+          "Email verified",
+          "Your account is verify your account. Enjoy a News .. 😊",
+          backgroundColor: Colors.green,
+        );
+      }
     }
   }
 

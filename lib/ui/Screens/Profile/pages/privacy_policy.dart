@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import '../../../theme/colors.dart';
 
 class PrivacyPolicy extends StatelessWidget {
@@ -24,8 +23,9 @@ class PrivacyPolicy extends StatelessWidget {
               style: TextStyle(color: primaryColor, letterSpacing: 1)),
         ),
         body: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
           child: Padding(
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(14),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
