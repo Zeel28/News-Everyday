@@ -2,11 +2,22 @@
 
 This simple Flutter News Application uses GetX State Management for efficient state management. The application fetches news articles using [newsapi. org](https://newsapi.org/) and displays them in a list. Users can click on an article to view the full details of the article.
 
+<p align="center">
+ <img width="800" alt="wonderous-banner-800w" src="screenshots\app_banner_news_everyday.png">
+</p>
+
+# Download App
+<p align="left">
+ <img width="150" alt="wonderous-banner-800w" src="screenshots\download.png">
+</p>
 ## Features
 * Fetches news articles from [newsapi. org](https://newsapi.org/)
 * Search for articles by keyword
 * Display articles with images and clickable links
 * Favorite news features and access any device way Firebase FireStore
+* My Feed – A feed of latest stories and other content personalised only for you!
+• News-Everyday intelligently learns your preferences as you swipe, and displays stories personalized for you in ‘Feed’
+* Share News : Facebook, WhatsApp, Reddit, Hike, e-mail and other social platforms are supported
 * More news in WebView
 * Authentication : 
   - Email Password (send email verification, forgot password, login, Signup)
@@ -46,47 +57,27 @@ flutter run
 
 ## Dependencies
 The following dependencies are used in the application:
-  * flutter_svg: ^1.1.0
-* #state management
+* flutter_svg: ^1.1.0
 * get:
-* #lottie Image
 * lottie: ^2.2.0
-* #Firebase
 * firebase_auth: ^4.2.5
 * firebase_core: ^2.4.1
-* #firebase Storage
 * firebase_storage: ^11.0.13
-* #slider button
 * slide_to_act: ^2.0.1
-* #webview
 * webview_flutter: ^4.0.2
-* #Bottom Navbar
 * google_nav_bar: ^5.0.6
-* #API
 * http: ^0.13.5
-* #Cuntry Code Picker
 * fl_country_code_picker: ^0.0.4
-* #share
 * share_plus: ^6.3.1
-* #Google SignIn(Firebase)
 * google_sign_in: ^5.4.3
-* #firestore
 * cloud_firestore: ^4.3.1
-* #onboarding screen
 * smooth_page_indicator: ^1.0.0+2
-* #OTP text field
 * flutter_otp_text_field: ^1.1.1
-* #Fancy Pull to Refresh
 * liquid_pull_to_refresh: ^3.0.1
-* #open a mail app
 * url_launcher: ^6.1.10
-* #Slider
 * carousel_slider: ^4.2.1
-* #splash screen
 * splash_screen_view:
-* #Network Image
 * cached_network_image: ^3.2.3
-* #ListTitleSlidable
 * flutter_slidable: ^2.0.0
 
 ## Project structure
