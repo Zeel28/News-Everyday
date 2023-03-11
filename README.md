@@ -10,6 +10,7 @@ This simple Flutter News Application uses GetX State Management for efficient st
 <p align="left">
  <img width="150" alt="wonderous-banner-800w" src="screenshots\download.png">
 </p>
+
 ## Features
 * Fetches news articles from [newsapi. org](https://newsapi.org/)
 * Search for articles by keyword
