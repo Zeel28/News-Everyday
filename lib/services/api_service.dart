@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:news_everyday/utils/message.dart';
-import '../model/article_model.dart';
+import '../models/article_model.dart';
 
 class ApiService {
   static String endPointUrl = "newsapi.org";

@@ -14,9 +14,9 @@ class OTPScreen extends StatefulWidget {
 }
 
 class _OTPScreenState extends State<OTPScreen> {
+    TextEditingController otp = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    var otp = TextEditingController();
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: const Color(0xfff7f6fb),
@@ -94,7 +94,7 @@ class _OTPScreenState extends State<OTPScreen> {
                       fillColor: primaryLightColor,
                       onSubmit: (verificationCode) {
                         otp.text = verificationCode;
-                        OTPController.instance.verifyOTP(otp.text);
+                        Get.put(OTPController.instance.verifyOTP(otp.text));
                       },
                     ),
                     const SizedBox(
@@ -104,7 +104,7 @@ class _OTPScreenState extends State<OTPScreen> {
                       width: double.infinity,
                       child: ElevatedButton(
                         onPressed: () {
-                          OTPController.instance.verifyOTP(otp.text);
+                          Get.put(OTPController.instance.verifyOTP(otp.text));
                         },
                         style: ButtonStyle(
                           foregroundColor:

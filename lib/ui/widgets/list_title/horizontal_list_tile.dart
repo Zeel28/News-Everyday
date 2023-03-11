@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../model/article_model.dart';
+import '../../../models/article_model.dart';
 import '../../Screens/article_screen/article_screen.dart';
 
 class HListTitle extends StatelessWidget {

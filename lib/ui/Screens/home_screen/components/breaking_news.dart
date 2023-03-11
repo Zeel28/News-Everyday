@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../../model/article_model.dart';
+import '../../../../models/article_model.dart';
 import '../../../../services/api_service.dart';
 import '../../../../utils/message.dart';
 import '../../../widgets/list_title/horizontal_list_tile.dart';

@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:news_everyday/controller/userdata_controller.dart';
 import 'package:news_everyday/utils/message.dart';
-import '../model/article_model.dart';
+import '../models/article_model.dart';
 
 class FavoriteNewsService extends GetxController {
   final FirebaseFirestore _db = FirebaseFirestore.instance;

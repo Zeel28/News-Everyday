@@ -1,11 +1,11 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
-import 'package:news_everyday/model/article_model.dart';
 import 'package:news_everyday/ui/Screens/feed/widget/NewsContainer.dart';
 import 'package:news_everyday/ui/Screens/feed/widget/my_floating_actionbutton.dart';
 import 'package:news_everyday/utils/message.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../../../models/article_model.dart';
 import '../../../services/fetch_news.dart';
 import '../../theme/colors.dart';
 

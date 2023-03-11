@@ -12,7 +12,7 @@ class LoginForm extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
 
   bool loading = false;
-
+  LoginForm({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     var emailController = TextEditingController();

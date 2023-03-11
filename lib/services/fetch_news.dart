@@ -2,8 +2,7 @@ import 'dart:convert';
 import 'dart:math';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
-
-import '../model/article_model.dart';
+import '../models/article_model.dart';
 
 class FetchNews{
 
@@ -39,14 +38,14 @@ class FetchNews{
 
   static Future<Articles> fetchNews()async{
 
-    final _random = Random();
-    var sourceID = sourcesId[_random.nextInt(sourcesId.length)];
+    final random = Random();
+    var sourceID = sourcesId[random.nextInt(sourcesId.length)];
+    const String apiKey = '9f6d210f572a43c2892e84040a32e190';
+    Response response =await http.get(Uri.parse("https://newsapi.org/v2/top-headlines?sources=$sourceID&apiKey=$apiKey"));
 
-    Response response =await http.get(Uri.parse("https://newsapi.org/v2/top-headlines?sources=$sourceID&apiKey=9f6d210f572a43c2892e84040a32e190"));
-
-    Map body_data = jsonDecode(response.body);
-    List articles = body_data["articles"];
-    var myArticle = articles[_random.nextInt(articles.length)];
+    Map bodyData = jsonDecode(response.body);
+    List articles = bodyData["articles"];
+    var myArticle = articles[random.nextInt(articles.length)];
 
     return Articles.fromJson(myArticle);
 

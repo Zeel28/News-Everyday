@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:news_everyday/model/article_model.dart';
+import '../../../../models/article_model.dart';
 
 class NewsContainer extends StatelessWidget {
   Articles article;

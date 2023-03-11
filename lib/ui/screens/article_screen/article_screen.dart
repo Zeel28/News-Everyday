@@ -4,7 +4,7 @@ import 'package:news_everyday/ui/theme/colors.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../controller/favourites_controller.dart';
-import '../../../model/article_model.dart';
+import '../../../models/article_model.dart';
 import '../../../utils/message.dart';
 import '../webview/web_view.dart';
 

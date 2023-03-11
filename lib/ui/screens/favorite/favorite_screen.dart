@@ -4,7 +4,7 @@ import 'package:lottie/lottie.dart';
 import 'package:news_everyday/ui/widgets/list_title/vertical_list_title.dart';
 import 'package:news_everyday/utils/message.dart';
 import '../../../controller/favourites_controller.dart';
-import '../../../model/article_model.dart';
+import '../../../models/article_model.dart';
 import '../../theme/colors.dart';
 
 class FavoriteNewsScreen extends StatelessWidget {

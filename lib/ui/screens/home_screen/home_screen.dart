@@ -5,12 +5,12 @@ import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 import 'package:news_everyday/ui/Screens/home_screen/components/channels.dart';
 import 'package:news_everyday/ui/Screens/notifications.dart';
 import '../../../controller/userdata_controller.dart';
-import '../../../model/article_model.dart';
+import '../../../models/article_model.dart';
 import '../../../services/api_service.dart';
 import '../../../utils/message.dart';
 import '../../theme/colors.dart';
 import '../../widgets/list_title/vertical_list_title.dart';
-import 'components/breakingnews.dart';
+import 'components/breaking_news.dart';
 import 'components/header_slider.dart';
 
 class HomeScreen extends StatelessWidget {

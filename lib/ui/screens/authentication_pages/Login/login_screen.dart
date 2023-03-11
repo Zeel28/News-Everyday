@@ -1,38 +1,38 @@
 import 'package:flutter/material.dart';
-import '../../../responsive/responsive.dart';
-import '../authentication_pages/components/background.dart';
-import 'components/login_signup_btn.dart';
-import 'components/welcome_image.dart';
+import '../../../../responsive/responsive.dart';
+import '../components/background.dart';
+import '../social_auth/socal_sign_up.dart';
+import 'components/login_form.dart';
+import 'components/login_screen_top_image.dart';
 
-class WelcomeScreen extends StatelessWidget {
-  const WelcomeScreen({Key? key}) : super(key: key);
+class LoginScreen extends StatelessWidget {
+  const LoginScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Background(
-      child: SingleChildScrollView(
-        child: SafeArea(
+    return SafeArea(
+      child: Background(
+        child: SingleChildScrollView(
           child: Responsive(
+            mobile: const MobileLoginScreen(),
             desktop: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 const Expanded(
-                  child: WelcomeImage(),
+                  child: LoginScreenTopImage(),
                 ),
                 Expanded(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
+                    children:  [
                       SizedBox(
                         width: 450,
-                        child: LoginAndSignupBtn(),
+                        child: LoginForm(),
                       ),
                     ],
                   ),
                 ),
               ],
             ),
-            mobile: const MobileWelcomeScreen(),
           ),
         ),
       ),
@@ -40,8 +40,8 @@ class WelcomeScreen extends StatelessWidget {
   }
 }
 
-class MobileWelcomeScreen extends StatelessWidget {
-  const MobileWelcomeScreen({
+class MobileLoginScreen extends StatelessWidget {
+  const MobileLoginScreen({
     Key? key,
   }) : super(key: key);
 
@@ -50,17 +50,18 @@ class MobileWelcomeScreen extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        const WelcomeImage(),
+        const LoginScreenTopImage(),
         Row(
-          children: const [
+          children:  [
             Spacer(),
             Expanded(
               flex: 8,
-              child: LoginAndSignupBtn(),
+              child: LoginForm(),
             ),
             Spacer(),
           ],
         ),
+        const SocalSignUp()
       ],
     );
   }

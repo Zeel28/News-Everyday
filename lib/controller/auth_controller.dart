@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:news_everyday/ui/Screens/authentication_pages/Signup/signup_screen.dart';
 import '../ui/Screens/authentication_pages/Login/login_screen.dart';
 import '../ui/Screens/authentication_pages/Signup/email_verification.dart';
 import '../ui/Screens/authentication_pages/phonenumber/verifty_otp.dart';
@@ -31,16 +32,28 @@ class AuthController extends GetxController {
       Get.offAll(() => const OnBoardingScreen());
     } else {
       if (!user.emailVerified) {
-        Get.offAll(() => EmailVerificationScreen());
+        String providerId = '';
+        List<UserInfo> providerData = user.providerData;
+        for (UserInfo userInfo in providerData) {
+          providerId = userInfo.providerId;
+        }
+        if (providerId == "password") {
+          Get.offAll(() => const EmailVerificationScreen());
+        } else if (providerId == "phone") {
+          Get.offAll(() => const Dashboard());
+          await addUserToFireStore(user);
+        } else {
+          Get.offAll(() => const SignUpScreen());
+        }
       } else {
         Get.offAll(() => const Dashboard());
-        await addUserToFireStore(user, password2);
+        await addUserToFireStore(user);
       }
     }
   }
 
   //TODO: Add User to Fire store
-  Future<void> addUserToFireStore(User user, String password) async {
+  Future<void> addUserToFireStore(User user) async {
     String providerId = '';
     try {
       List<UserInfo> providerData = user.providerData;
@@ -54,8 +67,7 @@ class AuthController extends GetxController {
         'id': user.uid,
         'name': user.displayName ?? '-',
         'email': user.email ?? '-',
-        'emailVerified': user.emailVerified ,
-        'password': password,
+        'emailVerified': user.emailVerified,
         'phone': user.phoneNumber ?? '-',
         'photoURL': user.photoURL ??
             'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png',
@@ -102,6 +114,7 @@ class AuthController extends GetxController {
       await user.sendEmailVerification();
     }
   }
+
   void verifyEmail() async {
     final user = _auth.currentUser;
     if (user != null) {
@@ -158,7 +171,7 @@ class AuthController extends GetxController {
               "Login",
               disMissible: false,
               () {
-                Get.off(() => LoginScreen());
+                Get.off(() => const LoginScreen());
               },
             ),
           )

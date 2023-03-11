@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:news_everyday/ui/widgets/list_title/vertical_list_title.dart';
-import '../../../../model/article_model.dart';
+import '../../../../models/article_model.dart';
 import '../../../../services/api_service.dart';
 
 class DiscoverNews extends StatefulWidget {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../model/article_model.dart';
+import '../../../models/article_model.dart';
 import '../../Screens/article_screen/article_screen.dart';
 import '../image_container.dart';
 

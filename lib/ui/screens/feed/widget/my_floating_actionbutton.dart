@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:share_plus/share_plus.dart';
 import '../../../../../controller/favourites_controller.dart';
 import '../../../../../utils/message.dart';
-import '../../../../model/article_model.dart';
+import '../../../../models/article_model.dart';
 import '../../webview/web_view.dart';
 
 class MyFloatingActionButton extends StatefulWidget {
