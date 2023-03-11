@@ -59,32 +59,32 @@ class _CategoryScreenState extends State<CategoryScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: mainBackgroundColor,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        leading: IconButton(
-            onPressed: () => Get.back(),
-            icon: const Icon(
-              Icons.arrow_back_ios,
-              color: primaryColor,
-            )),
-        centerTitle: true,
-        title: Text(widget.title,
-            style: TextStyle(color: primaryColor, letterSpacing: 1)),
-      ),
-      body: _isLoading
-          ? Center(child: MessageDialog().progressIndicator(context))
-          : _errorMessage != null
-              ? Center(child: Text(_errorMessage!))
-              : ListView.builder(
-                  physics: const BouncingScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: categoryArticles.length,
-                  itemBuilder: (context, index) {
-                    return VListTitle(demo: categoryArticles[index]);
-                  },
-                ),
-    );
+        backgroundColor: mainBackgroundColor,
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          leading: IconButton(
+              onPressed: () => Get.back(),
+              icon: const Icon(
+                Icons.arrow_back_ios,
+                color: primaryColor,
+              )),
+          centerTitle: true,
+          title: Text(widget.title,
+              style: TextStyle(color: primaryColor, letterSpacing: 1)),
+        ),
+        body: _isLoading
+            ? Center(child: MessageDialog().progressIndicator(context))
+            : _errorMessage != null
+                ? Center(child: Text(_errorMessage!))
+                : categoryArticles.isEmpty
+                    ? MessageDialog().noDataFound()
+                    : ListView.builder(
+                        physics: const BouncingScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: categoryArticles.length,
+                        itemBuilder: (context, index) {
+                          return VListTitle(article: categoryArticles[index]);
+                        }));
   }
 }

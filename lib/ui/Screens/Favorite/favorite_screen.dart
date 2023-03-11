@@ -81,7 +81,7 @@ class FavoriteNewsScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                    child: VListTitle(demo: favoriteNews[index]),
+                    child: VListTitle(article: favoriteNews[index]),
                   );
                 },
               );

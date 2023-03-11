@@ -7,10 +7,10 @@ import '../image_container.dart';
 class VListTitle extends StatelessWidget {
   const VListTitle({
     super.key,
-    required this.demo,
+    required this.article,
   });
 
-  final Articles demo;
+  final Articles article;
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class VListTitle extends StatelessWidget {
       onTap: () {
         Get.to(
             () => ArticleScreen(
-                  article: demo,
+                  article: article,
                 ),
             duration: const Duration(milliseconds: 500),
             transition: Transition.cupertinoDialog);
@@ -30,14 +30,14 @@ class VListTitle extends StatelessWidget {
               height: 80,
               margin: const EdgeInsets.all(10.0),
               boarderRadius: 5,
-              imageUrl: demo.urlToImage),
+              imageUrl: article.urlToImage),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  demo.title,
+                  article.title,
                   maxLines: 2,
                   overflow: TextOverflow.clip,
                   style: Theme.of(context)

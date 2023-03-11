@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 import '../ui/theme/colors.dart';
 
 class MessageDialog {
@@ -37,6 +38,22 @@ class MessageDialog {
                 color: primaryColor,
                 backgroundColor: primaryLightColor),
           ),
+        ],
+      ),
+    );
+  }
+  //TODO: No Data Found
+  Widget noDataFound(){
+    return Container(
+      alignment: Alignment.center,
+      padding: const EdgeInsets.all(20),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Lottie.asset("assets/lottiefile/search_empty.json",
+              fit: BoxFit.fill),
+          const SizedBox(height: 50,),
+          const Text("No Data Found",style: TextStyle(color: primaryColor,fontSize: 22,fontWeight: FontWeight.w600),)
         ],
       ),
     );

@@ -5,8 +5,14 @@ import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 import 'package:news_everyday/ui/Screens/home_screen/components/channels.dart';
 import 'package:news_everyday/ui/Screens/notifications.dart';
 import '../../../controller/userdata_controller.dart';
+import '../../../model/article_model.dart';
+import '../../../services/api_service.dart';
 import '../../../utils/message.dart';
 import '../../theme/colors.dart';
+import '../../widgets/custom_tag.dart';
+import '../../widgets/list_title/vertical_list_title.dart';
+import '../article_screen/article_screen.dart';
+import '../details_page/category_screen.dart';
 import 'components/breakingnews.dart';
 import 'components/header_slider.dart';
 
@@ -93,12 +99,91 @@ class HomeScreen extends StatelessWidget {
         animSpeedFactor: 2,
         backgroundColor: primaryLightColor,
         showChildOpacityTransition: false,
-        child: ListView(
-          physics: const BouncingScrollPhysics(),
+        child: Container(
+          child: ListView(
+            physics: const BouncingScrollPhysics(),
+            children: [
+              HeaderSlider(imgList: imgList, nameList: nameList),
+              BreakingNews(),
+              Channels(),
+              RecommendedNews(),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+class RecommendedNewsController extends GetxController {
+  var finalArticles = <Articles>[].obs;
+  var isLoading = true.obs;
+  var errorMessage = RxnString();
+
+  final queryParameters = {
+    'q': "google-news",
+    'sortBy': "popularity,publishedAt",
+    'language': 'en',
+    'apiKey': '3f1a0e1381c74be2ab644cf747bfad83',
+  };
+
+  @override
+  void onInit() {
+    super.onInit();
+    _loadNews();
+  }
+
+  Future<void> _loadNews() async {
+    try {
+      final article = await ApiService.searchNews(queryParameters);
+      finalArticles.assignAll(article);
+      isLoading.value = false;
+      errorMessage.value = null;
+    } catch (e) {
+      finalArticles.clear();
+      isLoading.value = false;
+      errorMessage.value = e.toString();
+    }
+  }
+}
+class RecommendedNews extends StatelessWidget {
+  final recommendedNewsController = Get.put(RecommendedNewsController());
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      physics: const BouncingScrollPhysics(),
+      child: Padding(
+        padding: const EdgeInsets.all(14.0),
+        child: Column(
           children: [
-            HeaderSlider(imgList: imgList, nameList: nameList),
-            BreakingNews(),
-            Channels(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text('Recommended News',
+                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
+              ],
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Obx(() {
+              if (recommendedNewsController.isLoading.value) {
+                return CircularProgressIndicator();
+              } else if (recommendedNewsController.errorMessage.value != null) {
+                return Text('Error loading news');
+              } else {
+                return SizedBox(
+                  height: double.maxFinite,
+                  child: ListView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: recommendedNewsController.finalArticles.length,
+                    itemBuilder: (context, index) {
+                      return VListTitle(article: recommendedNewsController.finalArticles[index]);
+                    },
+                  ),
+                );
+              }
+            }),
           ],
         ),
       ),

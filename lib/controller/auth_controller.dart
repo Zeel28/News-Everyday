@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -56,7 +54,7 @@ class AuthController extends GetxController {
         'id': user.uid,
         'name': user.displayName ?? '-',
         'email': user.email ?? '-',
-        'emailVerified': user.emailVerified ?? '-',
+        'emailVerified': user.emailVerified ,
         'password': password,
         'phone': user.phoneNumber ?? '-',
         'photoURL': user.photoURL ??

@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:news_everyday/ui/theme/colors.dart';
 import 'package:news_everyday/ui/widgets/custom_tag.dart';
+import 'package:news_everyday/ui/widgets/list_title/vertical_list_title.dart';
+import 'package:news_everyday/utils/message.dart';
 import '../../../../model/article_model.dart';
 import '../../../../services/api_service.dart';
 import '../../article_screen/article_screen.dart';
@@ -18,15 +20,16 @@ class DiscoverNews extends StatefulWidget {
 class _DiscoverNewsState extends State<DiscoverNews> {
   final TextEditingController _searchWord = TextEditingController();
   List<Articles> _articles = [];
+
   void _searchNews(String query) async {
-  final queryParameters = {
-    'q' : query,
-    'sortBy': "relevancy",
-    'sortBy': 'popularity',
-    'sortBy': 'publishedAt',
-    'language': 'en',
-    'apiKey': '459f208e91ae40e3a7f6477321f9e61e',
-  };
+    final queryParameters = {
+      'q': query,
+      'sortBy': "relevancy",
+      'sortBy': 'popularity',
+      'sortBy': 'publishedAt',
+      'language': 'en',
+      'apiKey': '459f208e91ae40e3a7f6477321f9e61e',
+    };
     final articles = await ApiService.searchNews(queryParameters);
     setState(() {
       _articles = articles;
@@ -36,7 +39,7 @@ class _DiscoverNewsState extends State<DiscoverNews> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      physics:  const BouncingScrollPhysics(),
+      physics: const BouncingScrollPhysics(),
       child: Column(
         children: [
           SizedBox(
@@ -56,7 +59,6 @@ class _DiscoverNewsState extends State<DiscoverNews> {
                 const SizedBox(height: 20.0),
                 TextFormField(
                   controller: _searchWord,
-
                   onFieldSubmitted: (value) {
                     _searchNews(value);
                   },
@@ -82,91 +84,12 @@ class _DiscoverNewsState extends State<DiscoverNews> {
               physics: const NeverScrollableScrollPhysics(),
               itemCount: _articles.length,
               itemBuilder: (context, index) {
-                final article = _articles[index];
-                return Container(
-                  margin:
-                      const EdgeInsets.symmetric(horizontal: 5, vertical: 8),
-                  padding: EdgeInsets.all(5),
-                  height: 120,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.white,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.shade200,
-                        blurRadius: 2.0,
-                        spreadRadius: 2.0,
-                        offset: const Offset(
-                          5.0,
-                          5.0,
-                        ),
-                      )
-                    ],
-                  ),
-                  child: InkWell(
-                    onTap: () => Get.to(
-                        () => ArticleScreen(
-                              article: _articles[index],
-                            ),
-                        duration: const Duration(milliseconds: 500),
-                        transition: Transition.cupertinoDialog),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Container(
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                image: DecorationImage(
-                                    image: NetworkImage(article.urlToImage),
-                                    fit: BoxFit.fill)),
-                          ),
-                        ),
-                        Expanded(
-                          flex: 2,
-                          child: Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 10.0),
-                            child: Column(
-                              children: [
-                                Text("${article.title}..",
-                                    maxLines: 3,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodyLarge!
-                                        .copyWith(
-                                            fontWeight: FontWeight.bold,
-                                            height: 1.5)),
-                                SizedBox(height: 10,),
-                                Row(
-                                  children: [
-                                    CustomTag(backgroundColor: primaryLightBackgroundColor, children: [
-                                      const Icon(
-                                        Icons.timer_sharp,
-                                        color: primaryColor,
-                                        size: 18,
-                                      ),
-                                      const SizedBox(width: 5,),
-                                      Text(article.publishedAt,
-                                          style: const TextStyle(fontSize: 12,color: primaryColor)),
-                                    ]),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                );
+                return VListTitle(article: _articles[index]);
               },
-            )
+            ),
           )
         ],
       ),
     );
   }
 }
-
-
