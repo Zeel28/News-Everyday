@@ -89,10 +89,10 @@ class _ChannelsState extends State<Channels> {
                       ),
                       Text(
                         "${channel[index]}",
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontSize: 14, fontWeight: FontWeight.w400),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 12,
                       )
                     ],
@@ -153,10 +153,10 @@ class ChannelsScreen extends StatelessWidget {
                     ),
                     Text(
                       "${channelList[index]}",
-                      style: TextStyle(
+                      style: const TextStyle(
                           fontSize: 14, fontWeight: FontWeight.w400),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 12,
                     )
                   ],

@@ -1,12 +1,7 @@
-import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-import 'package:news_everyday/ui/theme/colors.dart';
-import 'package:news_everyday/ui/widgets/custom_tag.dart';
 import 'package:news_everyday/ui/widgets/list_title/vertical_list_title.dart';
-import 'package:news_everyday/utils/message.dart';
 import '../../../../model/article_model.dart';
 import '../../../../services/api_service.dart';
-import '../../article_screen/article_screen.dart';
 
 class DiscoverNews extends StatefulWidget {
   const DiscoverNews({

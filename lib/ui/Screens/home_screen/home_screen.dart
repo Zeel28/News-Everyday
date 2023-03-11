@@ -9,10 +9,7 @@ import '../../../model/article_model.dart';
 import '../../../services/api_service.dart';
 import '../../../utils/message.dart';
 import '../../theme/colors.dart';
-import '../../widgets/custom_tag.dart';
 import '../../widgets/list_title/vertical_list_title.dart';
-import '../article_screen/article_screen.dart';
-import '../details_page/category_screen.dart';
 import 'components/breakingnews.dart';
 import 'components/header_slider.dart';
 
@@ -99,16 +96,14 @@ class HomeScreen extends StatelessWidget {
         animSpeedFactor: 2,
         backgroundColor: primaryLightColor,
         showChildOpacityTransition: false,
-        child: Container(
-          child: ListView(
-            physics: const BouncingScrollPhysics(),
-            children: [
-              HeaderSlider(imgList: imgList, nameList: nameList),
-              BreakingNews(),
-              Channels(),
-              RecommendedNews(),
-            ],
-          ),
+        child: ListView(
+          physics: const BouncingScrollPhysics(),
+          children: [
+            HeaderSlider(imgList: imgList, nameList: nameList),
+            BreakingNews(),
+            Channels(),
+            RecommendedNews(),
+          ],
         ),
       ),
     );
@@ -120,8 +115,8 @@ class RecommendedNewsController extends GetxController {
   var errorMessage = RxnString();
 
   final queryParameters = {
-    'q': "google-news",
-    'sortBy': "popularity,publishedAt",
+    'q': "news",
+    'sortBy': "popularity",
     'language': 'en',
     'apiKey': '3f1a0e1381c74be2ab644cf747bfad83',
   };

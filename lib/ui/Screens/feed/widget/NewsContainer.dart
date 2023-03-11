@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:news_everyday/model/article_model.dart';
 
-import 'my_floating_actionbutton.dart';
-
 class NewsContainer extends StatelessWidget {
   Articles article;
 

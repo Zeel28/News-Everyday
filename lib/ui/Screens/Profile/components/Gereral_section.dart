@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:news_everyday/ui/Screens/Profile/components/screen.dart';
-import '../../../../utils/message.dart';
 import '../../../theme/colors.dart';
 import '../../notifications.dart';
 import '../pages/about_page.dart';
