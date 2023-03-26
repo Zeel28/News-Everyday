@@ -17,7 +17,7 @@ This simple Flutter News Application uses GetX State Management for efficient st
 * Display articles with images and clickable links
 * Favorite news features and access any device way Firebase FireStore
 * My Feed – A feed of latest stories and other content personalised only for you!
-• News-Everyday intelligently learns your preferences as you swipe, and displays stories personalized for you in ‘Feed’
+* News-Everyday intelligently learns your preferences as you swipe, and displays stories personalized for you in ‘Feed’
 * Share News : Facebook, WhatsApp, Reddit, Hike, e-mail and other social platforms are supported
 * More news in WebView
 * Authentication : 
@@ -36,7 +36,7 @@ This simple Flutter News Application uses GetX State Management for efficient st
 
 ## Getting Started
 
-To get started with this application, follow these steps:
+To get started with this application, follow these steps :
 
 1. Clone this repository:
 ```bash
