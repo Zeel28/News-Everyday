@@ -24,8 +24,9 @@ class MessageDialog {
 
   progressIndicator(context) {
     return  AlertDialog(
+
       shape: const CircleBorder(),
-      shadowColor: primaryColor,
+      shadowColor: Colors.deepPurpleAccent.shade100,
       backgroundColor: primaryLightColor,
       content: Column(
         mainAxisAlignment: MainAxisAlignment.center,

@@ -62,7 +62,7 @@ class _DashboardState extends State<Dashboard> {
             ),
             GButton(
               icon: Icons.favorite_outline_sharp,
-              text: "Favorite",
+              text: "Favourite",
             ),
             GButton(
               icon: Icons.person,

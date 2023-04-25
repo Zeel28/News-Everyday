@@ -12,21 +12,18 @@ class GeneralMenuList extends StatelessWidget {
 
   final List<String> menu = <String>[
     'Notification',
-    'Dark Mode',
-    'PrivacyPolicy',
+    'Privacy Policy',
     'Security',
     'About'
   ];
   final List<String> leadingIcon = <String>[
     'notification.png',
-    'dark-mode.png',
     'privacy-policy.png',
     'security.png',
     'about.png'
   ];
   final List<Widget> action = <Widget>[
     const NotificationScreen(),
-    NotificationScreen(),
     const PrivacyPolicy(),
     NotificationScreen(),
     const AboutScreen(),

@@ -57,20 +57,12 @@ class VListTitle extends StatelessWidget {
                     const SizedBox(
                       width: 5,
                     ),
-                    Text("2 hours ago",
+                    Text(article.publishedAt,
                         maxLines: 2,
                         style: Theme.of(context).textTheme.bodySmall!),
                     const SizedBox(
                       width: 20,
                     ),
-                    const Icon(
-                      Icons.visibility,
-                      size: 18,
-                    ),
-                    const SizedBox(
-                      width: 5,
-                    ),
-                    Text("100 views", style: TextStyle(fontSize: 12)),
                   ],
                 )
               ],

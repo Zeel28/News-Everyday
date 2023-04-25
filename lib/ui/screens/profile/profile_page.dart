@@ -34,7 +34,7 @@ class ProfileScreen extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 8.0),
                           child: Text(
-                            "Gereral".toUpperCase(),
+                            "General".toUpperCase(),
                             style: const TextStyle(
                                 color: primaryColor,
                                 letterSpacing: 5,

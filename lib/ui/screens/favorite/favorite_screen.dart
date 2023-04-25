@@ -17,7 +17,7 @@ class FavoriteNewsScreen extends StatelessWidget {
         backgroundColor: Colors.transparent,
         elevation: 0,
         centerTitle: true,
-        title: const Text("Favorite News",
+        title: const Text("Favourite News",
             style: TextStyle(color: primaryColor, letterSpacing: 1)),
       ),
       body: StreamBuilder<List<Articles>>(

@@ -75,7 +75,7 @@ class _HeaderSliderState extends State<HeaderSlider> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Text(
-              'Today News',
+              "Today\'s News",
               style: TextStyle(fontSize: 22,fontWeight: FontWeight.bold)
             ),
             Text(
